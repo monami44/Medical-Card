@@ -13,6 +13,7 @@ datasource db {
 model User {
   id          BigInt   @id @default(autoincrement()) @db.BigInt
   email       String   @unique
+  gmailAccessToken String @unique   // New field for storing the Gmail access token
   firstName   String?  // Ensure this is optional in your DB
   lastName    String?  // Ensure this is optional in your DB
   imageUrl    String?  // Ensure this is optional in your DB

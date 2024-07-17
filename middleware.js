@@ -8,7 +8,8 @@ export default authMiddleware({
     '/api/webhooks/clerk', 
     '/api/test-insert', 
     '/api/hello',
-    '/api/users',  // Add this line
+    '/api/users',
+    '/api/gmail',  // Add this line
   ],
 });
 

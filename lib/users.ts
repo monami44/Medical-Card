@@ -1,12 +1,27 @@
 import prisma from 'lib/prisma'
 import { User } from '@prisma/client'
 
-export async function createUser(data: User) {
+const serializeUser = (user) => {
+  return {
+    ...user,
+    id: user.id.toString(), // Convert BigInt to string
+  };
+};
+
+export async function createUser(data: Partial<User>) {
   try {
-    const user = await prisma.user.create({ data })
-    return { user }
+    console.log('Creating user with data:', data);
+    const user = await prisma.user.create({ 
+      data: {
+        ...data,
+        gmailAccessToken: data.gmailAccessToken || null, // Ensure gmailAccessToken is included
+      } as User 
+    });
+    console.log('User created:', serializeUser(user));
+    return serializeUser(user);
   } catch (error) {
-    return { error }
+    console.error('Error creating user:', error);
+    throw error;
   }
 }
 
@@ -22,29 +37,33 @@ export async function getUserById({
       throw new Error('id or clerkUserId is required')
     }
 
-    const query = id ? { id } : { clerkUserId }
+    const query = id ? { id: BigInt(id) } : { clerkUserId }
 
-    const user = await prisma.user.findFirst({
-      where: {
-        ...query,
-        deletedAt: null // Only fetch non-deleted users
-      }
+    const user = await prisma.user.findUnique({
+      where: query
     })
-    return { user }
+    return { user: user ? serializeUser(user) : null }
   } catch (error) {
-    return { error }
+    console.error('Error fetching user:', error)
+    return { error: error instanceof Error ? error : new Error('Unknown error occurred') }
   }
 }
 
-export async function UpdateUser(id: string, data: Partial<User>) {
+export async function updateUser(clerkUserId: string, data: Partial<User>) {
   try {
+    console.log(`Attempting to update user with clerkUserId: ${clerkUserId}`);
+    console.log('Update data:', data);
+
     const user = await prisma.user.update({
-      where: { id },
+      where: { clerkUserId },
       data
-    })
-    return { user }
+    });
+
+    console.log('User updated successfully:', user);
+    return { user: serializeUser(user) };
   } catch (error) {
-    return { error }
+    console.error('Error updating user:', error);
+    return { error: error instanceof Error ? error : new Error('Unknown error occurred') };
   }
 }
 
@@ -54,7 +73,7 @@ export async function softDeleteUser(clerkUserId: string) {
       where: { clerkUserId },
       data: { deletedAt: new Date() }
     })
-    return { user }
+    return { user: serializeUser(user) }
   } catch (error) {
     return { error }
   }
