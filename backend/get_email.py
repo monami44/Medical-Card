@@ -1,13 +1,13 @@
+import os
+from dotenv import load_dotenv
 from supabase import create_client, Client
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from base64 import urlsafe_b64decode
-import os
-from dotenv import load_dotenv
 import fitz  # PyMuPDF
-from openai import OpenAI
 from models import BloodTestResults
-from data_fetching import process_blood_test_results
+from langchain_openai import ChatOpenAI
+import concurrent.futures
 
 # Load environment variables
 load_dotenv()
@@ -16,6 +16,9 @@ load_dotenv()
 url = os.getenv("NEXT_PUBLIC_SUPABASE_URL")
 key = os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY")
 supabase: Client = create_client(url, key)
+
+# Initialize the language model
+llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
 
 def fetch_gmail_token():
     try:
@@ -34,6 +37,36 @@ def search_emails(token):
     results = service.users().messages().list(userId='me', q=query).execute()
     return results.get('messages', [])
 
+def process_pdf(path):
+    try:
+        document = fitz.open(path)
+        text = ""
+        for page in document:
+            text += page.get_text()
+
+        print(f"Extracted text from PDF: {text}")
+
+        # Create a prompt for the LLM
+        prompt = f"""
+        The following is a block of text extracted from a blood test report. Extract the relevant blood test results and structure them according to the following schema:
+
+        {BloodTestResults.schema_json(indent=2)}
+
+        Text:
+        {text}
+
+        Structured Results:
+        """
+
+        # Invoke the LLM to process the extracted text
+        response = llm.invoke(prompt)
+        print(f"Processed results for {path}:")
+        print(response.content)  # Access the content attribute directly
+
+        # Here you can add logic to save the processed results to your database or perform further actions
+    except Exception as e:
+        print(f"An error occurred while processing the PDF {path}: {e}")
+
 def get_email_details(service, message_id, download_folder):
     try:
         message = service.users().messages().get(userId='me', id=message_id, format='full').execute()
@@ -51,27 +84,30 @@ def get_email_details(service, message_id, download_folder):
                     f.write(file_data)
                 print(f'Attachment {part["filename"]} saved to {path}')
                 if part['filename'].endswith('.pdf'):
-                    document = fitz.open(path)
-                    text = ""
-                    for page in document:
-                        text += page.get_text()
-                    results = process_blood_test_results(text)
-                    print(results)
+                    return path
     except Exception as e:
         print(f"An error occurred while retrieving the email details: {e}")
+    return None
 
 def search_and_retrieve_emails(token, download_folder):
     credentials = Credentials(token=token)
     service = build('gmail', 'v1', credentials=credentials)
     messages = search_emails(token)
+    pdf_paths = []
     for message in messages:
         print("Retrieving details for Message ID:", message['id'])
-        get_email_details(service, message['id'], download_folder)
+        path = get_email_details(service, message['id'], download_folder)
+        if path:
+            pdf_paths.append(path)
+    return pdf_paths
 
 # Main execution
-download_folder = '/Users/maksymliamin/medical-card/backend/attachments'
-token = fetch_gmail_token()
-if token:
-    search_and_retrieve_emails(token, download_folder)
-else:
-    print("No valid token available.")
+if __name__ == "__main__":
+    download_folder = '/Users/maksymliamin/medical-card/backend/attachments'
+    token = fetch_gmail_token()
+    if token:
+        pdf_paths = search_and_retrieve_emails(token, download_folder)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            executor.map(process_pdf, pdf_paths)
+    else:
+        print("No valid token available.")

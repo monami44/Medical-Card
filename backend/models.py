@@ -1,4 +1,4 @@
-from backend.models import BaseModel
+from pydantic import BaseModel
 from typing import Optional
 
 class BloodTestResults(BaseModel):
