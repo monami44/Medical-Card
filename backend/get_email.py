@@ -8,6 +8,7 @@ import fitz  # PyMuPDF
 from models import BloodTestResults
 from langchain_openai import ChatOpenAI
 import concurrent.futures
+import pandas as pd
 
 # Load environment variables
 load_dotenv()
@@ -18,7 +19,7 @@ key = os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY")
 supabase: Client = create_client(url, key)
 
 # Initialize the language model
-llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
+llm = ChatOpenAI(temperature=0, model="gpt-4")
 
 def fetch_gmail_token():
     try:
@@ -48,7 +49,7 @@ def process_pdf(path):
 
         # Create a prompt for the LLM
         prompt = f"""
-        The following is a block of text extracted from a blood test report. Extract the relevant blood test results and structure them according to the following schema:
+        The following is a block of text extracted from a blood test report. Extract the relevant blood test results and the date of the report. Structure them according to the following schema:
 
         {BloodTestResults.schema_json(indent=2)}
 
@@ -63,9 +64,11 @@ def process_pdf(path):
         print(f"Processed results for {path}:")
         print(response.content)  # Access the content attribute directly
 
-        # Here you can add logic to save the processed results to your database or perform further actions
+        # Convert the response to a dictionary and return it
+        return response.content
     except Exception as e:
         print(f"An error occurred while processing the PDF {path}: {e}")
+        return None
 
 def get_email_details(service, message_id, download_folder):
     try:
@@ -101,13 +104,24 @@ def search_and_retrieve_emails(token, download_folder):
             pdf_paths.append(path)
     return pdf_paths
 
+def save_to_csv(data, csv_path):
+    df = pd.DataFrame(data)
+    df.to_csv(csv_path, index=False)
+    print(f"Data saved to {csv_path}")
+
 # Main execution
 if __name__ == "__main__":
     download_folder = '/Users/maksymliamin/medical-card/backend/attachments'
     token = fetch_gmail_token()
     if token:
         pdf_paths = search_and_retrieve_emails(token, download_folder)
+        results = []
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            executor.map(process_pdf, pdf_paths)
+            futures = [executor.submit(process_pdf, path) for path in pdf_paths]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result:
+                    results.append(result)
+        save_to_csv(results, 'blood_test_results.csv')
     else:
         print("No valid token available.")

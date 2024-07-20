@@ -1,7 +1,9 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 class BloodTestResults(BaseModel):
+    report_date: Optional[datetime] = None
     WBC: Optional[float]  # White Blood Cell count
     RBC: Optional[float]  # Red Blood Cell count
     HGB: Optional[float]  # Hemoglobin
