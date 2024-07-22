@@ -9,8 +9,8 @@ export default authMiddleware({
     '/api/test-insert', 
     '/api/hello',
     '/api/users',
-    '/api/gmail',  // Add this line
-  ],
+    '/api/gmail',
+  ] as const,
 });
 
 export const config = {

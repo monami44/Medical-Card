@@ -1,3 +1,4 @@
+import React from 'react';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
@@ -11,7 +12,11 @@ export const metadata = {
   description: 'Medical Card Early Access',
 };
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider
       appearance={{

@@ -1,12 +1,12 @@
 'use client';
 
+import React, { useEffect } from 'react';
 import { UserProfile } from '@clerk/nextjs';
-import { useEffect } from 'react';
 import { fetchAndStoreGmailToken } from '../utils/fetchGmailToken';
 
-const ProfilePage = () => {
+const ProfilePage: React.FC = () => {
   useEffect(() => {
-    const fetchToken = async () => {
+    const fetchToken = async (): Promise<void> => {
       try {
         await fetchAndStoreGmailToken();
       } catch (error) {

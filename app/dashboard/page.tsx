@@ -1,4 +1,6 @@
-const Dashboard = () => {
+import React from 'react';
+
+const Dashboard: React.FC = () => {
   return (
     <>
       <h1 className='text-2xl font-bold mb-5'>Dashboard</h1>

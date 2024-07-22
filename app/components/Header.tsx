@@ -1,9 +1,10 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { UserButton, auth } from '@clerk/nextjs';
 
-const Header = async () => {
-  const { userId } = auth();
+const Header: React.FC = async () => {
+  const { userId } = await auth();
 
   return (
     <header className="p-5 flex justify-between items-center bg-white shadow-sm">

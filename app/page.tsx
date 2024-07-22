@@ -1,4 +1,6 @@
-export default function Home() {
+import React from 'react';
+
+const Home: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start pt-0" style={{ marginTop: '-30px' }}>
       <header className="text-center mt-0 mb-6" style={{ marginTop: '-30px' }}>
@@ -23,4 +25,6 @@ export default function Home() {
       </form>
     </div>
   );
-}
+};
+
+export default Home;
