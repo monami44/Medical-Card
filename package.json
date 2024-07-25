@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^4.31.3",
     "@clerk/themes": "^1.7.17",
     "@prisma/client": "^5.16.2",
+    "@radix-ui/react-select": "^2.1.1",
     "@supabase/supabase-js": "^2.44.3",
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.7.0",

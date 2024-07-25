@@ -32,7 +32,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Header />
           <main className='container mx-auto'>
             <div className='flex items-start justify-center min-h-screen'>
-              <div className='mt-20'>{children}</div>
+              <div className='mt-0'>{children}</div>
             </div>
           </main>
         </body>

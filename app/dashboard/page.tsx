@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { TrendingUp, TrendingDown } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { TrendingUp, TrendingDown, ChevronDown } from "lucide-react"
 import { Area, Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts"
 import Papa from "papaparse"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const CustomDot = (props: any) => {
   const { cx, cy, value, parameter, range, isActive } = props;
@@ -137,7 +138,10 @@ export default function Dashboard() {
   const [data, setData] = useState<BloodTestResult[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [patientType, setPatientType] = useState("Women") // Hardcoded for now, can be made dynamic later
+  const [patientType, setPatientType] = useState("Women")
+  const [selectedParameter, setSelectedParameter] = useState<keyof BloodTestResult>("RBC")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     fetchData()
@@ -152,6 +156,19 @@ export default function Dashboard() {
         setLoading(false)
       })
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [dropdownRef])
 
   const parameters: (keyof BloodTestResult)[] = [
     "WBC", "RBC", "HGB", "HCT", "MCV", "MCH"
@@ -178,100 +195,123 @@ export default function Dashboard() {
     return [domainMin - padding, domainMax + padding];
   }
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
+  if (loading) return <div className="w-screen h-screen flex items-center justify-center">Loading...</div>
+  if (error) return <div className="w-screen h-screen flex items-center justify-center text-red-500">Error: {error}</div>
+
+  const range = normalRanges[selectedParameter][patientType] || normalRanges[selectedParameter].Adults;
+  const unit = normalRanges[selectedParameter].unit;
+  const middle = calculateMiddle(range.min, range.max);
+  const domain = calculateDomain(data, selectedParameter, range);
 
   return (
-    <div className="flex flex-col gap-24 w-screen px-5">
-      {parameters.map(parameter => {
-        const range = normalRanges[parameter][patientType] || normalRanges[parameter].Adults;
-        const unit = normalRanges[parameter].unit;
-        const middle = calculateMiddle(range.min, range.max);
-        const domain = calculateDomain(data, parameter, range);
-
-        return (
-          <div key={parameter} className="w-full">
-            <h2 className="text-2xl font-bold mb-1">{parameter} Levels Over Time</h2>
-            <div className="h-[350px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={data}
-                  margin={{
-                    top: 40, right: 30, left: 70, bottom: 30,
+    <div className="w-screen min-h-screen bg-gray-100 flex justify-center items-start pt-10">
+      <Card className="w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+        <CardHeader className="flex flex-row items-center justify-between px-6 py-4">
+          <CardTitle className="text-2xl font-bold">{selectedParameter} Over Time</CardTitle>
+          <div className="relative" ref={dropdownRef}>
+            <button
+              className={`flex items-center justify-between w-32 px-3 py-2 text-sm font-medium text-gray-700 bg-white border ${isDropdownOpen ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm hover:bg-gray-50 focus:outline-none ${isDropdownOpen ? 'focus:ring-2 focus:ring-red-500 focus:ring-offset-2' : ''}`}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              {selectedParameter}
+              <ChevronDown className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 w-32 py-1 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-10">
+                {parameters.map((param) => (
+                  <a
+                    key={param}
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    style={{ color: param === selectedParameter ? '#fe302f' : undefined }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedParameter(param);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {param}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="px-6 pt-0 pb-6">
+          <div style={{ width: '100%', height: '400px' }}>
+            <ResponsiveContainer key={selectedParameter} width="100%" height="100%">
+              <LineChart
+                data={data}
+                margin={{
+                  top: 5, right: 30, left: 20, bottom: 25,
+                }}
+              >
+                <XAxis 
+                  dataKey="Date & Time" 
+                  tickFormatter={formatDate}
+                  angle={-45}
+                  textAnchor="end"
+                  height={60}
+                  interval={0}
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis 
+                  domain={domain}
+                  ticks={[range.min, middle, range.max]}
+                  tickFormatter={(value) => value.toFixed(2)}
+                  tick={{ fontSize: 12 }}
+                  label={{ 
+                    value: unit, 
+                    angle: -90,
+                    position: 'insideLeft',
+                    style: { textAnchor: 'middle', fill: '#666' }
                   }}
-                >
-                  <XAxis 
-                    dataKey="Date & Time" 
-                    tickFormatter={formatDate}
-                    angle={-60}
-                    textAnchor="end"
-                    height={80}
-                    interval={0}
-                    tick={{ fontSize: 12 }}
-                  />
-                  <YAxis 
-                    domain={domain}
-                    ticks={[range.min, middle, range.max]}
-                    tickFormatter={(value) => value.toFixed(2)}
-                    tick={{ fontSize: 12 }}
-                    label={{ 
-                      value: unit, 
-                      angle: 0,
-                      position: 'insideTopLeft',
-                      offset: parameter === 'RBC' ? -20 : -10,
-                      style: { textAnchor: 'start', fill: '#666' }
-                    }}
-                    width={60}
-                  />
-                  <Tooltip 
-                    labelFormatter={formatDate}
-                    formatter={(value: number, name: string) => {
-                      const quantile = calculateQuantile(value, range.min, range.max);
-                      return [
-                        <span>
-                          {value.toFixed(2)} {unit}
-                          <br />
-                          <span style={{ color: 'black' }}>
-                            Quantile: {quantile.toFixed(2).replace('.', ',')}%
-                          </span>
-                        </span>,
-                        parameter
-                      ];
-                    }}
-                  />
-                  <ReferenceLine y={range.min} stroke="red" strokeDasharray="3 3" />
-                  <ReferenceLine y={range.max} stroke="red" strokeDasharray="3 3" />
-                  <Area
-                    type="monotone"
-                    dataKey={parameter}
-                    fill="rgba(255, 0, 0, 0.2)"
-                    stroke="transparent"
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey={parameter}
-                    stroke="#ff0000"
-                    strokeWidth={2}
-                    dot={<CustomDot parameter={parameter} range={range} />}
-                    activeDot={<CustomDot parameter={parameter} range={range} isActive={true} />}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+                />
+                <Tooltip 
+                  labelFormatter={formatDate}
+                  formatter={(value: number, name: string) => {
+                    const quantile = calculateQuantile(value, range.min, range.max);
+                    return [
+                      <span>
+                        {value.toFixed(2)} {unit}
+                        <br />
+                        <span style={{ color: 'black' }}>
+                          Quantile: {quantile.toFixed(2).replace('.', ',')}%
+                        </span>
+                      </span>,
+                      selectedParameter
+                    ];
+                  }}
+                />
+                <ReferenceLine y={range.min} stroke="red" strokeDasharray="3 3" />
+                <ReferenceLine y={range.max} stroke="red" strokeDasharray="3 3" />
+                <Area
+                  type="monotone"
+                  dataKey={selectedParameter}
+                  fill="rgba(255, 0, 0, 0.2)"
+                  stroke="transparent"
+                />
+                <Line
+                  type="monotone"
+                  dataKey={selectedParameter}
+                  stroke="#ff0000"
+                  strokeWidth={2}
+                  dot={<CustomDot parameter={selectedParameter} range={range} />}
+                  activeDot={<CustomDot parameter={selectedParameter} range={range} isActive={true} />}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="mt-4 text-sm">
+            <div className="flex items-center gap-2 font-medium">
+              Trending Analysis {calculateTrend(selectedParameter) > 0 ? <TrendingUp className="h-5 w-5 text-green-500" /> : <TrendingDown className="h-5 w-5 text-red-500" />}
             </div>
-            <div className="-mt-5 text-sm">
-              <div className="flex gap-2 font-medium">
-                Trending Analysis {calculateTrend(parameter) > 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-              </div>
-              <div className="text-gray-600">
-                Trending {calculateTrend(parameter) > 0 ? 'up' : 'down'} by {Math.abs(calculateTrend(parameter)).toFixed(1)}% this month
-              </div>
-              <div className="text-gray-600">
-                Normal range for {patientType}: {range.min.toFixed(2)} - {range.max.toFixed(2)} {unit}
-              </div>
+            <div className="text-gray-600">
+              Trending {calculateTrend(selectedParameter) > 0 ? 'up' : 'down'} by {Math.abs(calculateTrend(selectedParameter)).toFixed(1)}% this month
             </div>
           </div>
-        )
-      })}
+        </CardContent>
+      </Card>
     </div>
   )
 }
