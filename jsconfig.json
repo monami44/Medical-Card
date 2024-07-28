@@ -4,7 +4,10 @@
       "@/*": ["./*"],
       "@/components/*": ["./app/components/*"],
       "@/utils/*": ["./app/utils/*"],
-      "@/hooks/*": ["./app/hooks/*"]
+      "@/hooks/*": ["./app/hooks/*"],
+      "@/data/*": ["./app/data/*"],
+      "@/types/*": ["./app/types/*"],
+      "@/lib/*": ["./app/lib/*"]
     }
   }
 }

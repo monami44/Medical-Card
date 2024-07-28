@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react"
 import { TrendingUp, TrendingDown } from "lucide-react"
 import { LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, Line, Area } from "recharts"
-import Papa from "papaparse"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/lib/components/ui/card"
 import { BloodTestResult } from '@/types/BloodTestResult'
 import { normalRanges, NormalRangeKey } from '@/data/normalRanges'
