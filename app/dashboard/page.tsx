@@ -11,35 +11,11 @@ import ParameterDropdown from '@/components/ParameterDropdown'
 import RadarChartComponent from '@/components/RadarChartComponent'
 import DateDropdown from '@/components/DateDropdown'
 import { fetchData } from '@/utils/chartUtils'
+import CustomDot from '@/components/CustomDot'
 
 
 
-interface CustomDotProps {
-  cx: number;
-  cy: number;
-  value: number;
-  payload: any;  // Add this line
-  parameter: NormalRangeKey;
-  range: { min: number; max: number };
-  isActive?: boolean;
-}
 
-const CustomDot: React.FC<CustomDotProps> = ({ cx, cy, value, payload, parameter, range, isActive }) => {
-  const isOutOfRange = value < range.min || value > range.max;
-  const fill = isOutOfRange ? "#fece00" : "#fe302f";
-  const normalRadius = 4;
-  const activeRadius = 6;
-  const radius = isActive ? activeRadius : normalRadius;
-  
-  return (
-    <g>
-      {isOutOfRange && (
-        <circle cx={cx} cy={cy} r={radius} fill="none" stroke="#fe302f" strokeWidth={1} />
-      )}
-      <circle cx={cx} cy={cy} r={radius} fill={fill} />
-    </g>
-  );
-};
 
 export default function Dashboard() {
   const [data, setData] = useState<BloodTestResult[]>([])
