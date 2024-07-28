@@ -10,6 +10,7 @@ from langchain_openai import ChatOpenAI
 import concurrent.futures
 import pandas as pd
 import json
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
@@ -127,16 +128,42 @@ def search_and_retrieve_emails(token, download_folder):
             pdf_paths.extend(paths)
     return pdf_paths
 
+def format_date(date_string):
+    if not date_string:
+        print(f"Empty date string received")
+        return None
+    try:
+        # Parse the ISO format date and ignore the time component
+        date = datetime.fromisoformat(date_string.split('T')[0])
+        return date.strftime('%d/%m/%y')  # Changed to lowercase 'y' for two-digit year
+    except ValueError:
+        print(f"Invalid date format: {date_string}")
+        return None
+    except Exception as e:
+        print(f"Unexpected error in format_date: {e}")
+        return None
+
 def transform_results_to_dataframe(results):
     processed_data = []
-    for result in results:
+    for i, result in enumerate(results):
         try:
             # Clean up the input string to make it a valid JSON
             clean_result = result.replace("```json\n", "").replace("\n```", "").strip()
             result_dict = json.loads(clean_result)
+            
+            # Check if 'report_date' exists in the result_dict
+            if 'report_date' not in result_dict:
+                print(f"Warning: 'report_date' missing in result {i}")
+                continue
+
+            formatted_date = format_date(result_dict['report_date'])
+            if formatted_date is None:
+                print(f"Warning: Invalid date in result {i}")
+                continue
+
             # Dynamically create a DataFrame row
             row = {
-                'Date & Time': pd.to_datetime(result_dict['report_date']).strftime('%d.%m.%Y %H:%M'),
+                'Date': formatted_date,  # Changed from 'Date & Time' to just 'Date'
                 'WBC': result_dict.get('WBC', None),
                 'RBC': result_dict.get('RBC', None),
                 'HGB': result_dict.get('HGB', None),
@@ -160,11 +187,35 @@ def transform_results_to_dataframe(results):
             }
             processed_data.append(row)
         except json.JSONDecodeError as e:
-            print(f"Error decoding JSON: {e}")
-    return pd.DataFrame(processed_data)
+            print(f"Error decoding JSON in result {i}: {e}")
+        except Exception as e:
+            print(f"Unexpected error processing result {i}: {e}")
+    
+    if not processed_data:
+        print("Warning: No valid data to create DataFrame")
+        return pd.DataFrame()
+
+    df = pd.DataFrame(processed_data)
+    
+    print(f"DataFrame created with {len(df)} rows")
+    print(f"Columns: {df.columns.tolist()}")
+    
+    if 'Date' not in df.columns:
+        print("Warning: 'Date' column is missing")
+        return df
+
+    # Sort the DataFrame by date
+    df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%y', errors='coerce')
+    df = df.sort_values('Date').reset_index(drop=True)
+    df['Date'] = df['Date'].dt.strftime('%d/%m/%y')
+    
+    return df
 
 def save_to_csv(data, csv_path):
     df = transform_results_to_dataframe(data)
+    if df.empty:
+        print("Error: No data to save")
+        return
     df.to_csv(csv_path, index=False)
     print(f"Data saved to {csv_path}")
 
@@ -181,6 +232,6 @@ if __name__ == "__main__":
                 result = future.result()
                 if result:
                     results.append(result)
-        save_to_csv(results, 'blood_test_results.csv')
+        save_to_csv(results, 'public/blood_test_results.csv')
     else:
         print("No valid token available.")
