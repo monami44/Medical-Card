@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { getUserById } from 'lib/users';
+import redis from 'lib/redis';
 
 export async function GET(req: Request) {
   const { userId } = auth();
@@ -10,6 +11,12 @@ export async function GET(req: Request) {
   }
 
   try {
+    // Check Redis cache first
+    const cachedUser = await redis.get(`user:${userId}`);
+    if (typeof cachedUser === 'string') {
+      return NextResponse.json({ user: JSON.parse(cachedUser) });
+    }
+
     const { user, error } = await getUserById({ clerkUserId: userId });
 
     if (error) {
@@ -20,6 +27,9 @@ export async function GET(req: Request) {
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
+
+    // Cache the user data in Redis
+    await redis.set(`user:${userId}`, JSON.stringify(user), { ex: 3600 }); // Cache for 1 hour
 
     return NextResponse.json({ user });
   } catch (error) {

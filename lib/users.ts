@@ -11,16 +11,21 @@ const serializeUser = (user) => {
 export async function createUser(data: Partial<User>) {
   try {
     console.log('Creating user with data:', data);
-    const user = await prisma.user.create({ 
-      data: {
+    const user = await prisma.user.upsert({
+      where: { email: data.email },
+      update: {
         ...data,
-        gmailAccessToken: data.gmailAccessToken || null, // Ensure gmailAccessToken is included
-      } as User 
+        gmailAccessToken: data.gmailAccessToken || undefined,
+      },
+      create: {
+        ...data,
+        gmailAccessToken: data.gmailAccessToken || null,
+      } as User
     });
-    console.log('User created:', serializeUser(user));
+    console.log('User created or updated:', serializeUser(user));
     return serializeUser(user);
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('Error creating or updating user:', error);
     throw error;
   }
 }

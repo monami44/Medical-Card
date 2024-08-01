@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from "lucide-react";
-import { formatDate } from '@/utils/chartUtils';
 
 interface DateDropdownProps {
   selectedDate: string | null;
@@ -35,7 +34,7 @@ const DateDropdown: React.FC<DateDropdownProps> = ({
         className={`flex items-center justify-between w-32 px-3 py-2 text-sm font-medium text-gray-700 bg-white border ${isOpen ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm hover:bg-gray-50 focus:outline-none ${isOpen ? 'focus:ring-2 focus:ring-red-500 focus:ring-offset-2' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {selectedDate ? formatDate(selectedDate) : 'Select Date'}
+        {selectedDate || 'Select Date'}
         <ChevronDown className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
       </button>
       {isOpen && (
@@ -52,7 +51,7 @@ const DateDropdown: React.FC<DateDropdownProps> = ({
                 setIsOpen(false);
               }}
             >
-              {formatDate(date)}
+              {date}
             </a>
           ))}
         </div>

@@ -11,6 +11,8 @@ import concurrent.futures
 import pandas as pd
 import json
 from datetime import datetime
+from cryptography.fernet import Fernet
+import sys
 
 # Load environment variables
 load_dotenv()
@@ -116,14 +118,14 @@ def get_email_details(service, message_id, download_folder):
         print(f"An error occurred while retrieving the email details: {e}")
         return None
 
-def search_and_retrieve_emails(token, download_folder):
+def search_and_retrieve_emails(token):
     credentials = Credentials(token=token)
     service = build('gmail', 'v1', credentials=credentials)
     messages = search_emails(token)
     pdf_paths = []
     for message in messages:
         print("Retrieving details for Message ID:", message['id'])
-        paths = get_email_details(service, message['id'], download_folder)
+        paths = get_email_details(service, message['id'], '')
         if paths:
             pdf_paths.extend(paths)
     return pdf_paths
@@ -211,20 +213,27 @@ def transform_results_to_dataframe(results):
     
     return df
 
-def save_to_csv(data, csv_path):
+def prepare_data(data):
     df = transform_results_to_dataframe(data)
     if df.empty:
-        print("Error: No data to save")
-        return
-    df.to_csv(csv_path, index=False)
-    print(f"Data saved to {csv_path}")
+        print("Error: No data to prepare")
+        return None
+    return df.to_dict(orient='records')
+
+def encrypt_data(data):
+    return fernet.encrypt(json.dumps(data).encode())
 
 # Main execution
 if __name__ == "__main__":
-    download_folder = '/Users/maksymliamin/medical-card/backend/attachments'
     token = fetch_gmail_token()
+    user_key = os.getenv("USER_ENCRYPTION_KEY")
+    if not user_key:
+        print("Error: User encryption key not provided.")
+        sys.exit(1)
+    fernet = Fernet(user_key)
+
     if token:
-        pdf_paths = search_and_retrieve_emails(token, download_folder)
+        pdf_paths = search_and_retrieve_emails(token)
         results = []
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = [executor.submit(process_pdf, path) for path in pdf_paths]
@@ -232,6 +241,9 @@ if __name__ == "__main__":
                 result = future.result()
                 if result:
                     results.append(result)
-        save_to_csv(results, 'public/blood_test_results.csv')
+        processed_data = prepare_data(results)
+        if processed_data:
+            encrypted_data = encrypt_data(processed_data)
+            print(encrypted_data.decode())  # Print the encrypted data as a string
     else:
         print("No valid token available.")

@@ -20,7 +20,7 @@
     "baseUrl": ".", // Set the base URL to the root of your project
     "paths": {
       
-      "@/lib*": ["./lib/*"], // Correctly map all modules starting with '@' to the lib directory
+      "@/lib*": ["./lib/*"], 
       "@/utils/*": ["./app/utils/*"],
       "@/hooks/*": ["./app/hooks/*"],
       "@/types/*": ["./app/types/*"],

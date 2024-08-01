@@ -17,7 +17,7 @@ const RadarChartComponent: React.FC<RadarChartComponentProps> = ({ data, selecte
   ];
 
   const radarData = parameters.map((param) => {
-    const value = data.find(item => item["Date & Time"] === selectedDate)?.[param] as number ?? 0;
+    const value = data.find(item => item.Date === selectedDate)?.[param] as number ?? 0;
     const range = normalRanges[param] && (normalRanges[param][patientType] || normalRanges[param]['Adults']);
     const normalizedValue = range ? normalizeValue(value, range.min, range.max) : 50;
     const normalizedMin = range ? normalizeValue(range.min, range.min, range.max) : 0;

@@ -1,5 +1,6 @@
 export interface BloodTestResult {
-  "Date & Time": string;
+  id?: number;
+  Date: any;
   WBC?: number;
   RBC?: number;
   HGB?: number;
@@ -20,4 +21,6 @@ export interface BloodTestResult {
   MPV?: number;
   "P-LCR"?: number;
   PCT?: number;
+  encryptedData: string;
+  iv: string;
 }

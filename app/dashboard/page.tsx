@@ -6,16 +6,12 @@ import { LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, L
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/lib/components/ui/card"
 import { BloodTestResult } from '@/types/BloodTestResult'
 import { normalRanges, NormalRangeKey } from '@/data/normalRanges'
-import { formatDate, sortByDate, calculateMiddle, calculateDomain, calculateTrend } from '@/utils/chartUtils'
-import ParameterDropdown from '@/components/ParameterDropdown'
-import RadarChartComponent from '@/components/RadarChartComponent'
-import DateDropdown from '@/components/DateDropdown'
-import { fetchData } from '@/utils/chartUtils'
-import CustomDot from '@/components/CustomDot'
-
-
-
-
+import { sortByDate, calculateMiddle, calculateDomain, calculateTrend, fetchData, fetchAndEncryptData } from '@/utils/chartUtils'
+import { storeFile, retrieveFile, getAllFiles } from '@/utils/fileUtils'
+import { CustomDot, DateDropdown, ParameterDropdown, RadarChartComponent } from '@/components/index'
+import { EncryptedFile } from "@/types/EncryptedFile"
+import { useUser } from "@clerk/nextjs";
+import { getStoredKey } from "@/utils/encryption"
 
 export default function Dashboard() {
   const [data, setData] = useState<BloodTestResult[]>([])
@@ -25,27 +21,157 @@ export default function Dashboard() {
   const [selectedParameter, setSelectedParameter] = useState<NormalRangeKey>("RBC")
   const [isParameterDropdownOpen, setIsParameterDropdownOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
+  const [files, setFiles] = useState<EncryptedFile[]>([]);
+  const [encryptionPassword, setEncryptionPassword] = useState<string>('');
+  const [isDecrypted, setIsDecrypted] = useState(false);
+  const [encryptionPasswordSetup, setEncryptionPasswordSetup] = useState(false);
+  const [newEncryptionPassword, setNewEncryptionPassword] = useState('');
+
+  const { user } = useUser();
+
+  const handleDecrypt = async () => {
+    try {
+      if (!user) throw new Error("User not authenticated");
+      console.log("Attempting to decrypt data for user:", user.id);
+      const key = await getStoredKey(user.id, encryptionPassword);
+      console.log("Key retrieved successfully");
+      const decryptedData = await fetchData(user.id, encryptionPassword);
+      console.log("Data decrypted successfully:", decryptedData.length, "items");
+      const uniqueDates = new Set(decryptedData.map(item => item.Date));
+      const sortedData = sortByDate(decryptedData.filter((item, index) => 
+        index === decryptedData.findIndex(t => t.Date === item.Date)
+      ));
+      setData(sortedData);
+      setSelectedDate(sortedData[sortedData.length - 1]?.Date || null);
+      setIsDecrypted(true);
+      setLoading(false);
+    } catch (error) {
+      console.error("Decryption failed:", error);
+      setError(`Failed to decrypt data: ${error.message}`);
+      setLoading(false);
+    }
+  };
+
+  const handleEncryptionPasswordSetup = async () => {
+    if (!user || !newEncryptionPassword) return;
+    try {
+      const salt = window.crypto.getRandomValues(new Uint8Array(16));
+      console.log('Generated salt:', salt);
+      
+      const response = await fetch('/api/setup-encryption', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ salt: Array.from(salt), password: newEncryptionPassword }),
+      });
+      
+      const responseData = await response.json();
+      
+      if (!response.ok) {
+        console.error('API error:', responseData);
+        throw new Error(responseData.error || 'Failed to set up encryption');
+      }
+      
+      console.log('Encryption setup successful:', responseData);
+      setEncryptionPassword(newEncryptionPassword);
+      setEncryptionPasswordSetup(true);
+
+      // Fetch and encrypt data
+      await fetchAndEncryptData(user.id, newEncryptionPassword);
+      setIsDecrypted(true);
+    } catch (error) {
+      console.error('Error setting up encryption password:', error);
+      setError(`Failed to set up encryption password. ${error.message}`);
+    }
+  };
 
   useEffect(() => {
-    fetchData()
-      .then(fetchedData => {
-        const sortedData = sortByDate(fetchedData)
-        setData(sortedData)
-        setSelectedDate(sortedData[sortedData.length - 1]["Date & Time"])
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error("Error in useEffect:", err)
-        setError(`Failed to load data: ${err.message}`)
-        setLoading(false)
-      })
-  }, [])
+    if (user && encryptionPassword && !isDecrypted) {
+      fetchAndEncryptData(user.id, encryptionPassword)
+        .then(() => handleDecrypt())
+        .catch(error => {
+          console.error('Error fetching and encrypting data:', error);
+          setError(`Failed to fetch and encrypt data. ${error.message}`);
+        });
+    }
+  }, [user, encryptionPassword, isDecrypted]);
+
+  useEffect(() => {
+    loadFiles();
+  }, []);
+
+  const loadFiles = async () => {
+    const allFiles = await getAllFiles();
+    setFiles(allFiles);
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && user) {
+      await storeFile(file, user.id, encryptionPassword);
+      await loadFiles();
+    }
+  };
+
+  const handleFileDownload = async (id: number) => {
+    if (!user) return;
+    const file = await retrieveFile(id, user.id, encryptionPassword);
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const parameters: NormalRangeKey[] = [
     "WBC", "RBC", "HGB", "HCT", "MCV", "MCH"
   ]
 
-  const dates = data.map(item => item["Date & Time"]).reverse()
+  const dates = data.map(item => item.Date).reverse()
+
+  if (!encryptionPasswordSetup) {
+    return (
+      <div className="w-screen h-screen flex flex-col items-center justify-center">
+        <input
+          type="password"
+          value={newEncryptionPassword}
+          onChange={(e) => setNewEncryptionPassword(e.target.value)}
+          placeholder="Set your encryption password"
+          className="mb-4 p-2 border rounded"
+        />
+        <button
+          onClick={handleEncryptionPasswordSetup}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Set Encryption Password
+        </button>
+        {error && <p className="mt-2 text-red-500">{error}</p>}
+      </div>
+    );
+  }
+
+  if (!isDecrypted) {
+    return (
+      <div className="w-screen h-screen flex flex-col items-center justify-center">
+        <input
+          type="password"
+          value={encryptionPassword}
+          onChange={(e) => setEncryptionPassword(e.target.value)}
+          placeholder="Enter encryption password"
+          className="mb-4 p-2 border rounded"
+        />
+        <button
+          onClick={handleDecrypt}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Decrypt Data
+        </button>
+        {error && <p className="mt-2 text-red-500">{error}</p>}
+      </div>
+    );
+  }
 
   if (loading) return <div className="w-screen h-screen flex items-center justify-center">Loading...</div>
   if (error) return <div className="w-screen h-screen flex items-center justify-center text-red-500">Error: {error}</div>
@@ -56,18 +182,20 @@ export default function Dashboard() {
   const domain = calculateDomain(data, selectedParameter, range);
 
   return (
-    <div className="w-screen min-h-screen bg-gray-100 flex justify-center items-start pt-10">
-      <div className="flex w-full max-w-6xl space-x-4">
-        <Card className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between px-6 py-4">
-            <CardTitle className="text-2xl font-bold">{selectedParameter} Over Time</CardTitle>
-            <ParameterDropdown
-              selectedParameter={selectedParameter}
-              isOpen={isParameterDropdownOpen}
-              setIsOpen={setIsParameterDropdownOpen}
-              setSelectedParameter={setSelectedParameter}
-              parameters={parameters}
-            />
+    <div className="w-screen min-h-screen bg-gray-100 p-6">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-start gap-6">
+        <Card className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+          <CardHeader className="px-6 py-4">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-2xl font-bold">{selectedParameter} Over Time</CardTitle>
+              <ParameterDropdown
+                selectedParameter={selectedParameter}
+                isOpen={isParameterDropdownOpen}
+                setIsOpen={setIsParameterDropdownOpen}
+                setSelectedParameter={setSelectedParameter}
+                parameters={parameters}
+              />
+            </div>
           </CardHeader>
           <CardContent className="px-6 pt-0 pb-6">
             <div style={{ width: '100%', height: '400px' }}>
@@ -79,13 +207,13 @@ export default function Dashboard() {
                   }}
                 >
                   <XAxis 
-                    dataKey="Date & Time" 
-                    tickFormatter={formatDate}
+                    dataKey="Date" 
                     angle={-45}
                     textAnchor="end"
                     height={60}
-                    interval={0}
+                    interval="preserveStartEnd"
                     tick={{ fontSize: 12 }}
+                    tickFormatter={(value) => new Date(value).toLocaleDateString()}
                   />
                   <YAxis 
                     domain={domain}
@@ -100,7 +228,7 @@ export default function Dashboard() {
                     }}
                   />
                   <Tooltip 
-                    labelFormatter={formatDate}
+                    labelFormatter={(value) => value}
                     formatter={(value: number, name: string, props: any) => {
                       const paramRange = normalRanges[selectedParameter][patientType] || (normalRanges[selectedParameter] as any).Adults;
                       const quantile = ((value - paramRange.min) / (paramRange.max - paramRange.min)) * 100;
@@ -152,8 +280,8 @@ export default function Dashboard() {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-4 text-sm">
-              <div className="flex items-center gap-2 font-medium">
+            <div className="mt-4">
+            <div className="flex items-center gap-2 font-medium">
                 Trending Analysis {calculateTrend(data, selectedParameter) > 0 ? <TrendingUp className="h-5 w-5 text-green-500" /> : <TrendingDown className="h-5 w-5 text-red-500" />}
               </div>
               <div className="text-gray-600">
@@ -162,17 +290,19 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
-        <Card className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between px-6 py-4">
-            <CardTitle className="text-2xl font-bold">Radar Chart</CardTitle>
-            <DateDropdown
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-              dates={dates}
-            />
+        <Card className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+          <CardHeader className="px-6 py-4">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-2xl font-bold">Radar Chart</CardTitle>
+              <DateDropdown
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                dates={dates}
+              />
+            </div>
           </CardHeader>
-          <CardContent className="pb-0">
-            <div className="mx-auto aspect-square max-h-[400px]">
+          <CardContent className="px-6 pt-0 pb-6">
+            <div style={{ width: '100%', height: '400px' }}>
               <RadarChartComponent 
                 data={data} 
                 selectedDate={selectedDate} 
@@ -180,12 +310,10 @@ export default function Dashboard() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Data as of {formatDate(selectedDate)}
-            </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              Updated regularly
+          <CardFooter className="px-6 py-4">
+            <div className="text-sm">
+              <div className="font-medium">Data as of {selectedDate}</div>
+              <div className="text-gray-600">Updated regularly</div>
             </div>
           </CardFooter>
         </Card>

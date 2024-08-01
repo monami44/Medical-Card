@@ -1,10 +1,12 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-import { createUser, softDeleteUser } from 'lib/users'
+import { createUser, softDeleteUser } from '@/lib/users'
 import { User } from '@prisma/client'
 import { NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
+
+
 
 const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET
 
@@ -17,6 +19,10 @@ async function fetchGmailToken(userId: string) {
     }
     return oauthTokens[0].token;
   } catch (error) {
+    if (error.status === 404) {
+      console.log('User has not connected their Google account');
+      return null;
+    }
     console.error('Error fetching Gmail token:', error);
     return null;
   }
