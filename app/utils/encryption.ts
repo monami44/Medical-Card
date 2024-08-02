@@ -156,12 +156,3 @@ export async function decryptData(encryptedData: string, key: CryptoKey, iv: str
     throw new Error(`Decryption failed: ${error.message}`);
   }
 }
-
-export async function encryptAndStoreData(userId: string, password: string, data: ArrayBuffer): Promise<string> {
-  const { key, salt } = await generateKey(password);
-  const { encryptedData, iv } = await encryptData(data, key);
-  
-  await storeSaltInSupabase(userId, salt);
-  
-  return encryptedData;
-}

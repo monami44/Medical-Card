@@ -1,7 +1,10 @@
-export interface EncryptedFile {
-  id?: number;
+export type EncryptedFile = {
+  id?: string;
   name: string;
   userId: string;
-  encryptedData: string;
-  iv: string;
-}
+  encryptedOriginal: string;
+  ivOriginal: string;
+  testDate: string;
+  uploadDate: string;
+  source: 'manual' | 'email';
+};

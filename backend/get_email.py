@@ -13,6 +13,9 @@ import json
 from datetime import datetime
 from cryptography.fernet import Fernet
 import sys
+import base64
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 # Load environment variables
 load_dotenv()
@@ -69,10 +72,32 @@ def process_pdf(path):
         print(response.content)  # Access the content attribute directly
 
         # Convert the response to a dictionary and return it
-        return response.content
+        extracted_data = json.loads(response.content)
+        
+        # Convert any bytes objects to strings
+        for key, value in extracted_data.items():
+            if isinstance(value, bytes):
+                extracted_data[key] = value.decode('utf-8', errors='replace')
+
+        return extracted_data
     except Exception as e:
         print(f"An error occurred while processing the PDF {path}: {e}")
         return None
+
+def log(message):
+    print(message, file=sys.stderr, flush=True)
+
+def search_and_retrieve_emails(token):
+    credentials = Credentials(token=token)
+    service = build('gmail', 'v1', credentials=credentials)
+    messages = search_emails(token)
+    pdf_paths = []
+    for message in messages:
+        log(f"Retrieving details for Message ID: {message['id']}")
+        paths = get_email_details(service, message['id'], '')
+        if paths:
+            pdf_paths.extend(paths)
+    return pdf_paths
 
 def get_email_details(service, message_id, download_folder):
     try:
@@ -105,8 +130,7 @@ def get_email_details(service, message_id, download_folder):
                 with open(path, 'wb') as f:
                     f.write(file_data)
                 
-                # Print a message indicating where the attachment was saved
-                print(f'Attachment {part["filename"]} saved to {path}')
+                log(f'Attachment {part["filename"]} saved to {path}')
                 
                 # Append the saved path to the list
                 saved_attachments.append(path)
@@ -117,18 +141,6 @@ def get_email_details(service, message_id, download_folder):
     except Exception as e:
         print(f"An error occurred while retrieving the email details: {e}")
         return None
-
-def search_and_retrieve_emails(token):
-    credentials = Credentials(token=token)
-    service = build('gmail', 'v1', credentials=credentials)
-    messages = search_emails(token)
-    pdf_paths = []
-    for message in messages:
-        print("Retrieving details for Message ID:", message['id'])
-        paths = get_email_details(service, message['id'], '')
-        if paths:
-            pdf_paths.extend(paths)
-    return pdf_paths
 
 def format_date(date_string):
     if not date_string:
@@ -213,37 +225,61 @@ def transform_results_to_dataframe(results):
     
     return df
 
-def prepare_data(data):
-    df = transform_results_to_dataframe(data)
+def prepare_data(results):
+    df = transform_results_to_dataframe(results)
     if df.empty:
         print("Error: No data to prepare")
         return None
-    return df.to_dict(orient='records')
+    processed_data = df.to_dict(orient='records')
+    return processed_data
+
+def derive_key(password: str, salt: bytes) -> bytes:
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+    )
+    key = base64.urlsafe_b64encode(kdf.derive(password.encode()))
+    return key
 
 def encrypt_data(data):
-    return fernet.encrypt(json.dumps(data).encode())
+    serialized_data = json.dumps(data, default=lambda x: base64.b64encode(x).decode('utf-8') if isinstance(x, bytes) else str(x))
+    return fernet.encrypt(serialized_data.encode())
 
 # Main execution
 if __name__ == "__main__":
-    token = fetch_gmail_token()
-    user_key = os.getenv("USER_ENCRYPTION_KEY")
-    if not user_key:
-        print("Error: User encryption key not provided.")
-        sys.exit(1)
-    fernet = Fernet(user_key)
+    try:
+        token = fetch_gmail_token()
+        user_id = sys.argv[1]
+        password = sys.argv[2]
 
-    if token:
-        pdf_paths = search_and_retrieve_emails(token)
-        results = []
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(process_pdf, path) for path in pdf_paths]
-            for future in concurrent.futures.as_completed(futures):
-                result = future.result()
-                if result:
-                    results.append(result)
-        processed_data = prepare_data(results)
-        if processed_data:
-            encrypted_data = encrypt_data(processed_data)
-            print(encrypted_data.decode())  # Print the encrypted data as a string
-    else:
-        print("No valid token available.")
+        # Fetch the salt from Supabase
+        salt_response = supabase.table("UserEncryption").select("salt").eq("userId", user_id).execute()
+        if salt_response.data:
+            salt = base64.b64decode(salt_response.data[0]['salt'])
+        else:
+            raise Exception("Error: Salt not found for user")
+
+        derived_key = derive_key(password, salt)
+        fernet = Fernet(derived_key)
+
+        if token:
+            pdf_paths = search_and_retrieve_emails(token)
+            original_files = []
+            for path in pdf_paths:
+                with open(path, 'rb') as file:
+                    original_files.append({
+                        'filename': os.path.basename(path),
+                        'data': base64.b64encode(file.read()).decode('utf-8')
+                    })
+            print(json.dumps({
+                'originals': original_files
+            }))
+        else:
+            raise Exception("No valid token available.")
+    except Exception as e:
+        log(f"Error: {str(e)}")
+        print(json.dumps({
+            'error': str(e)
+        }))

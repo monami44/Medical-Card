@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState, useEffect } from "react"
 import { TrendingUp, TrendingDown } from "lucide-react"
 import { LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, Line, Area } from "recharts"
@@ -29,6 +28,17 @@ export default function Dashboard() {
 
   const { user } = useUser();
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return dateString;
+    }
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   const handleDecrypt = async () => {
     try {
       if (!user) throw new Error("User not authenticated");
@@ -37,12 +47,12 @@ export default function Dashboard() {
       console.log("Key retrieved successfully");
       const decryptedData = await fetchData(user.id, encryptionPassword);
       console.log("Data decrypted successfully:", decryptedData.length, "items");
-      const uniqueDates = new Set(decryptedData.map(item => item.Date));
+      const uniqueDates = new Set(decryptedData.map(item => formatDate(item.Date)));
       const sortedData = sortByDate(decryptedData.filter((item, index) => 
-        index === decryptedData.findIndex(t => t.Date === item.Date)
+        index === decryptedData.findIndex(t => formatDate(t.Date) === formatDate(item.Date))
       ));
-      setData(sortedData);
-      setSelectedDate(sortedData[sortedData.length - 1]?.Date || null);
+      setData(sortedData.map(item => ({...item, Date: formatDate(item.Date)})));
+      setSelectedDate(formatDate(sortedData[sortedData.length - 1]?.Date) || null);
       setIsDecrypted(true);
       setLoading(false);
     } catch (error) {
@@ -75,7 +85,6 @@ export default function Dashboard() {
       setEncryptionPassword(newEncryptionPassword);
       setEncryptionPasswordSetup(true);
 
-      // Fetch and encrypt data
       await fetchAndEncryptData(user.id, newEncryptionPassword);
       setIsDecrypted(true);
     } catch (error) {
@@ -112,7 +121,7 @@ export default function Dashboard() {
     }
   };
 
-  const handleFileDownload = async (id: number) => {
+  const handleFileDownload = async (id: number, type: 'original' | 'processed') => {
     if (!user) return;
     const file = await retrieveFile(id, user.id, encryptionPassword);
     const url = URL.createObjectURL(file);
@@ -183,8 +192,8 @@ export default function Dashboard() {
 
   return (
     <div className="w-screen min-h-screen bg-gray-100 p-6">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-start gap-6">
-        <Card className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-stretch gap-6">
+        <Card className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
           <CardHeader className="px-6 py-4">
             <div className="flex justify-between items-center">
               <CardTitle className="text-2xl font-bold">{selectedParameter} Over Time</CardTitle>
@@ -213,7 +222,6 @@ export default function Dashboard() {
                     height={60}
                     interval="preserveStartEnd"
                     tick={{ fontSize: 12 }}
-                    tickFormatter={(value) => new Date(value).toLocaleDateString()}
                   />
                   <YAxis 
                     domain={domain}
@@ -290,7 +298,7 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
-        <Card className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+        <Card className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
           <CardHeader className="px-6 py-4">
             <div className="flex justify-between items-center">
               <CardTitle className="text-2xl font-bold">Radar Chart</CardTitle>
@@ -301,13 +309,15 @@ export default function Dashboard() {
               />
             </div>
           </CardHeader>
-          <CardContent className="px-6 pt-0 pb-6">
-            <div style={{ width: '100%', height: '400px' }}>
-              <RadarChartComponent 
-                data={data} 
-                selectedDate={selectedDate} 
-                patientType={patientType}
-              />
+          <CardContent className="px-6 pt-0 pb-6 flex-grow">
+            <div className="h-full" style={{ minHeight: '400px' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChartComponent 
+                  data={data} 
+                  selectedDate={selectedDate} 
+                  patientType={patientType}
+                />
+              </ResponsiveContainer>
             </div>
           </CardContent>
           <CardFooter className="px-6 py-4">

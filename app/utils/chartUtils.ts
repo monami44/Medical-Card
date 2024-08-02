@@ -5,7 +5,11 @@ import { db } from './db';
 import { getStoredKey, encryptData, decryptData } from './encryption';
 import { supabaseClient } from '../../utils/supabaseClient';
 
-type EncryptedBloodTestResult = Omit<BloodTestResult, keyof BloodTestResult> & { Date: string; encryptedData: string; iv: string };
+type EncryptedBloodTestResult = {
+  Date: string;
+  encryptedData: string;
+  iv: string;
+};
 
 export const fetchData = async (userId: string, password: string): Promise<BloodTestResult[]> => {
   try {
@@ -119,7 +123,10 @@ export const fetchAndEncryptData = async (userId: string, password: string): Pro
       };
     }));
     
-    await db.bloodTestResults.bulkAdd(encryptedData);
+    await db.bloodTestResults.bulkAdd(encryptedData.map((item, index) => ({
+      ...item,
+      index
+    })));
     console.log('Data fetched, encrypted, and stored successfully');
   } catch (error) {
     console.error("Error fetching, encrypting, or storing data:", error);

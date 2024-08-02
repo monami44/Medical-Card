@@ -8,9 +8,9 @@ export class MyDatabase extends Dexie {
 
   constructor() {
     super('MyDatabase');
-    this.version(3).stores({
+    this.version(5).stores({
       bloodTestResults: '++id, date, encryptedData, iv',
-      files: '++id, name, userId, encryptedData, iv'
+      files: '++id, name, userId, encryptedOriginal, ivOriginal, testDate, uploadDate, source'
     });
   }
 }
