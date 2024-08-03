@@ -6,13 +6,20 @@ const execAsync = promisify(exec);
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, password } = await req.json();
+    const { userId, password, file, source } = await req.json();
 
     if (!userId || !password) {
       return NextResponse.json({ error: 'Missing userId or password' }, { status: 400 });
     }
 
-    const { stdout, stderr } = await execAsync(`python backend/get_email.py ${userId} ${password}`);
+    let pythonCommand = `python backend/get_email.py ${userId} ${password}`;
+
+    if (file && source) {
+      // Handle manually uploaded file
+      pythonCommand += ` "${file.name}" ${source}`;
+    }
+
+    const { stdout, stderr } = await execAsync(pythonCommand);
     
     if (stderr) {
       console.log('Python script output:', stderr);

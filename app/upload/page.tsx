@@ -10,6 +10,7 @@ import { Calendar, Upload as UploadIcon, Download } from "lucide-react"
 import { fetchData, decryptBloodTestResult } from '@/utils/chartUtils'
 import { BloodTestResult } from '@/types/BloodTestResult'
 import { getStoredKey } from '@/utils/encryption'
+import {format} from 'date-fns';
 
 export default function Upload() {
   const [bloodTestResults, setBloodTestResults] = useState<BloodTestResult[]>([])
@@ -35,15 +36,28 @@ export default function Upload() {
         let emailAttachments: EncryptedFile[] = [];
         try {
           emailAttachments = await fetchEmailAttachments(user.id, verifiedEncryptionPassword);
+          console.log(`Fetched ${emailAttachments.length} email attachments`);
         } catch (error) {
           console.error("Error fetching email attachments:", error);
         }
         const manuallyUploadedFiles = await getAllFiles();
+        console.log(`Fetched ${manuallyUploadedFiles.length} manually uploaded files`);
+
+        // Combine files and remove duplicates
         const allFiles = [...manuallyUploadedFiles, ...emailAttachments];
-        setEncryptedFiles(allFiles);
+        const uniqueFiles = allFiles.reduce((acc, current) => {
+          const x = acc.find(item => item.id === current.id);
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc;
+          }
+        }, [] as EncryptedFile[]);
+
+        setEncryptedFiles(uniqueFiles);
         const results = await fetchData(user.id, verifiedEncryptionPassword);
         setBloodTestResults(results);
-        console.log("Loaded files:", allFiles.length);
+        console.log("Loaded unique files:", uniqueFiles.length);
       } catch (error) {
         console.error("Error loading files:", error);
         setError("Failed to load files. Please try again.");
@@ -85,10 +99,17 @@ export default function Upload() {
     }
   }
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string): string => {
     if (!dateString) return 'Unknown Date';
+    
     const date = new Date(dateString);
-    return isNaN(date.getTime()) ? dateString : date.toISOString().split('T')[0];
+    
+    if (isNaN(date.getTime())) {
+      console.warn(`Invalid date format: ${dateString}`);
+      return dateString;
+    }
+    
+    return format(date, 'dd/MM/yyyy');
   }
 
   const verifyEncryptionPassword = async (password: string) => {
@@ -145,9 +166,13 @@ export default function Upload() {
       
       {verifiedEncryptionPassword && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {encryptedFiles.map((file) => {
-            const bloodTestResult = bloodTestResults.find(r => formatDate(r.Date) === formatDate(file.testDate));
-            return (
+          {encryptedFiles
+            .sort((a, b) => {
+              const dateA = new Date(a.testDate.split('/').reverse().join('-'));
+              const dateB = new Date(b.testDate.split('/').reverse().join('-'));
+              return dateB.getTime() - dateA.getTime(); // Most recent first
+            })
+            .map((file) => (
               <Card key={file.id} className="flex flex-col">
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold truncate">{file.name}</CardTitle>
@@ -155,33 +180,28 @@ export default function Upload() {
                 <CardContent className="flex-grow">
                   <div className="flex items-center text-sm text-gray-500 mb-2">
                     <Calendar className="mr-2 h-4 w-4" />
-                    <span>Test Date: {formatDate(file.testDate)}</span>
+                    <span>Test Date: {file.testDate}</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-500 mb-2">
                     <Calendar className="mr-2 h-4 w-4" />
-                    <span>Upload Date: {formatDate(file.uploadDate)}</span>
+                    <span>Upload Date: {file.uploadDate}</span>
                   </div>
                   <div className="text-sm text-gray-500 mb-2">
                     <span>Source: {file.source === 'email' ? 'Email Attachment' : 'Manual Upload'}</span>
                   </div>
-                  {bloodTestResult && (
-                    <div className="text-sm mt-2">
-                      <p>WBC: {bloodTestResult.WBC}</p>
-                      <p>RBC: {bloodTestResult.RBC}</p>
-                      <p>HGB: {bloodTestResult.HGB}</p>
-                      <p>HCT: {bloodTestResult.HCT}</p>
-                    </div>
-                  )}
                 </CardContent>
-                <CardFooter className="flex flex-col space-y-2">
-                  <Button variant="outline" onClick={() => handleFileDownload(file.id!)} className="w-full">
+                <CardFooter>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => handleFileDownload(file.id!)} 
+                    className="w-full flex items-center justify-center"
+                  >
                     <Download className="mr-2 h-4 w-4" />
                     Download
                   </Button>
                 </CardFooter>
               </Card>
-            );
-          })}
+            ))}
         </div>
       )}
     </div>

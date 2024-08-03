@@ -87,60 +87,40 @@ def process_pdf(path):
 def log(message):
     print(message, file=sys.stderr, flush=True)
 
+def get_email_details(service, message_id):
+    try:
+        message = service.users().messages().get(userId='me', id=message_id).execute()
+        attachments = []
+        for part in message['payload']['parts']:
+            if part['filename']:
+                if 'data' in part['body']:
+                    data = part['body']['data']
+                else:
+                    att_id = part['body']['attachmentId']
+                    att = service.users().messages().attachments().get(userId='me', messageId=message_id, id=att_id).execute()
+                    data = att['data']
+                file_data = base64.urlsafe_b64decode(data.encode('UTF-8'))
+                attachments.append({
+                    'filename': part['filename'],
+                    'data': base64.b64encode(file_data).decode('utf-8')
+                })
+                print(f"Found attachment: {part['filename']}", file=sys.stderr)
+        return attachments
+    except Exception as e:
+        print(f"An error occurred while processing message {message_id}: {e}", file=sys.stderr)
+    return None
+
 def search_and_retrieve_emails(token):
     credentials = Credentials(token=token)
     service = build('gmail', 'v1', credentials=credentials)
     messages = search_emails(token)
-    pdf_paths = []
+    attachments = []
     for message in messages:
-        log(f"Retrieving details for Message ID: {message['id']}")
-        paths = get_email_details(service, message['id'], '')
-        if paths:
-            pdf_paths.extend(paths)
-    return pdf_paths
-
-def get_email_details(service, message_id, download_folder):
-    try:
-        # Fetch the email message
-        message = service.users().messages().get(userId='me', id=message_id, format='full').execute()
-        
-        # Get the message parts
-        parts = message['payload'].get('parts', [])
-        
-        # List to store paths of saved attachments
-        saved_attachments = []
-        
-        # Iterate over each part of the email
-        for part in parts:
-            if part['filename']:
-                # Check if the attachment data is directly available
-                data = part['body'].get('data', '')
-                
-                # If data is not directly available, fetch it using attachment ID
-                if not data:
-                    att_id = part['body']['attachmentId']
-                    att = service.users().messages().attachments().get(userId='me', messageId=message_id, id=att_id).execute()
-                    data = att['data']
-                
-                # Decode the attachment data
-                file_data = urlsafe_b64decode(data)
-                
-                # Save the attachment to the specified download folder
-                path = os.path.join(download_folder, part['filename'])
-                with open(path, 'wb') as f:
-                    f.write(file_data)
-                
-                log(f'Attachment {part["filename"]} saved to {path}')
-                
-                # Append the saved path to the list
-                saved_attachments.append(path)
-        
-        # Return the list of saved attachment paths
-        return saved_attachments
-    
-    except Exception as e:
-        print(f"An error occurred while retrieving the email details: {e}")
-        return None
+        email_attachments = get_email_details(service, message['id'])
+        if email_attachments:
+            attachments.extend(email_attachments)
+    print(f"Total attachments found: {len(attachments)}", file=sys.stderr)
+    return attachments
 
 def format_date(date_string):
     if not date_string:
@@ -265,21 +245,13 @@ if __name__ == "__main__":
         fernet = Fernet(derived_key)
 
         if token:
-            pdf_paths = search_and_retrieve_emails(token)
-            original_files = []
-            for path in pdf_paths:
-                with open(path, 'rb') as file:
-                    original_files.append({
-                        'filename': os.path.basename(path),
-                        'data': base64.b64encode(file.read()).decode('utf-8')
-                    })
+            email_attachments = search_and_retrieve_emails(token)
             print(json.dumps({
-                'originals': original_files
+                'attachments': email_attachments
             }))
         else:
             raise Exception("No valid token available.")
     except Exception as e:
-        log(f"Error: {str(e)}")
         print(json.dumps({
             'error': str(e)
-        }))
+        }), file=sys.stderr)
