@@ -19,7 +19,13 @@
     "jsx": "preserve",
     "baseUrl": ".", // Set the base URL to the root of your project
     "paths": {
-      "@/*": ["./lib/*"] // Correctly map all modules starting with '@' to the lib directory
+      
+      "@/lib*": ["./lib/*"], // Correctly map all modules starting with '@' to the lib directory
+      "@/utils/*": ["./app/utils/*"],
+      "@/hooks/*": ["./app/hooks/*"],
+      "@/types/*": ["./app/types/*"],
+      "@/data/*": ["./app/data/*"],
+      "@/components/*": ["./app/components/*"]
     },
     "plugins": [
       {

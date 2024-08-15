@@ -18,6 +18,7 @@ model User {
   lastName    String?  // Ensure this is optional in your DB
   imageUrl    String?  // Ensure this is optional in your DB
   clerkUserId String   @unique
+  encryptedUserKey String
   createdAt   DateTime @default(now()) @db.Timestamptz
   updatedAt   DateTime @updatedAt @db.Timestamptz
   deletedAt   DateTime? @db.Timestamptz

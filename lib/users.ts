@@ -8,13 +8,14 @@ const serializeUser = (user) => {
   };
 };
 
-export async function createUser(data: Partial<User>) {
+export async function createUser(data: Partial<User> & { encryptedUserKey: string }) {
   try {
     console.log('Creating user with data:', data);
     const user = await prisma.user.create({ 
       data: {
         ...data,
-        gmailAccessToken: data.gmailAccessToken || null, // Ensure gmailAccessToken is included
+        gmailAccessToken: data.gmailAccessToken || null,
+        encryptedUserKey: data.encryptedUserKey,
       } as User 
     });
     console.log('User created:', serializeUser(user));
@@ -40,7 +41,19 @@ export async function getUserById({
     const query = id ? { id: BigInt(id) } : { clerkUserId }
 
     const user = await prisma.user.findUnique({
-      where: query
+      where: query,
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        imageUrl: true,
+        clerkUserId: true,
+        encryptedUserKey: true,
+        gmailAccessToken: true,
+        createdAt: true,
+        updatedAt: true,
+      }
     })
     return { user: user ? serializeUser(user) : null }
   } catch (error) {

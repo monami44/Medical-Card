@@ -5,6 +5,7 @@ import { createUser, softDeleteUser } from 'lib/users'
 import { User } from '@prisma/client'
 import { NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
+import { generateUserKey, encryptUserKey } from 'lib/encryption';
 
 const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET
 
@@ -17,6 +18,10 @@ async function fetchGmailToken(userId: string) {
     }
     return oauthTokens[0].token;
   } catch (error) {
+    if (error.status === 404) {
+      console.log('User has not connected their Google account');
+      return null;
+    }
     console.error('Error fetching Gmail token:', error);
     return null;
   }
@@ -68,10 +73,9 @@ export async function POST(req: Request) {
 
   if (eventType === 'user.created') {
     const { id, email_addresses, first_name, last_name, image_url } = evt.data;
+    const primaryEmail = email_addresses.find(email => email.id === evt.data.primary_email_address_id);
 
-    console.log('User created event received:', { id, email_addresses, first_name, last_name, image_url });
-
-    if (!id || !email_addresses) {
+    if (!id || !primaryEmail) {
       console.error('Error occurred -- missing data');
       return NextResponse.json({ error: 'Error occurred -- missing data' }, { status: 400 });
     }
@@ -80,13 +84,17 @@ export async function POST(req: Request) {
       console.log('Fetching Gmail token for new user');
       const gmailAccessToken = await fetchGmailToken(id);
 
+      const userKey = generateUserKey();
+      const encryptedUserKey = encryptUserKey(userKey);
+
       const user = {
         clerkUserId: id,
-        email: email_addresses[0].email_address,
-        ...(first_name ? { firstName: first_name } : {}),
-        ...(last_name ? { lastName: last_name } : {}),
-        ...(image_url ? { imageUrl: image_url } : {}),
-        ...(gmailAccessToken ? { gmailAccessToken } : {}),
+        email: primaryEmail.email_address,
+        firstName: first_name || '',
+        lastName: last_name || '',
+        imageUrl: image_url,
+        encryptedUserKey,
+        gmailAccessToken,
       };
 
       console.log('Attempting to create user:', user);
