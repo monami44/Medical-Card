@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { getUserById } from 'lib/users';
-import { decryptUserKey, decryptData } from 'lib/encryption';
+import { decryptData } from 'lib/encryption';
 import { supabaseClient } from 'utils/supabaseClient';
 
 export async function GET(req: Request) {
@@ -39,8 +39,9 @@ export async function GET(req: Request) {
       return NextResponse.json({ data: null });
     }
 
-    const userKey = decryptUserKey(user.encryptedUserKey);
-    const decryptedData = decryptData(encryptedData.data, userKey);
+    console.log('Attempting to decrypt data');
+    const decryptedData = decryptData(encryptedData.data, user.encryptedUserKey);
+    console.log('Data decrypted successfully');
 
     return NextResponse.json({ data: JSON.parse(decryptedData) });
   } catch (error) {

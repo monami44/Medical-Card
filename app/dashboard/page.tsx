@@ -62,9 +62,20 @@ export default function Dashboard() {
         const decryptedResult = await decryptResponse.json();
         console.log('Decrypted result:', decryptedResult);
 
-        const sortedData = sortByDate(decryptedResult.data);
-        setData(sortedData);
-        setSelectedDate(sortedData[sortedData.length - 1]["Date & Time"]);
+        try {
+          const sortedData = sortByDate(decryptedResult.data);
+          setData(sortedData);
+          if (sortedData.length > 0 && sortedData[sortedData.length - 1].Date) {
+            setSelectedDate(sortedData[sortedData.length - 1].Date);
+          } else {
+            console.warn("No valid dates found in the data");
+            setSelectedDate(null);
+          }
+        } catch (error) {
+          console.error("Error sorting data:", error);
+          setError(`Failed to process data: ${error.message}`);
+        }
+
         setLoading(false);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -80,7 +91,7 @@ export default function Dashboard() {
     "WBC", "RBC", "HGB", "HCT", "MCV", "MCH"
   ]
 
-  const dates = data.map(item => item["Date & Time"]).reverse()
+  const dates = data.map(item => item.Date).reverse()
 
   if (loading) return <div className="w-screen h-screen flex items-center justify-center">Loading...</div>
   if (error) return <div className="w-screen h-screen flex items-center justify-center text-red-500">Error: {error}</div>
@@ -114,7 +125,7 @@ export default function Dashboard() {
                   }}
                 >
                   <XAxis 
-                    dataKey="Date & Time" 
+                    dataKey="Date" 
                     tickFormatter={formatDate}
                     angle={-45}
                     textAnchor="end"

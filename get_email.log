@@ -1878,3 +1878,3415 @@ INFO:root:Formatted date: 31/10/23
 INFO:root:Processed result 21
 INFO:root:List of dictionaries created with 22 items
 INFO:root:List of dictionaries transformation completed
+INFO:root:Environment variables loaded
+INFO:root:Environment variables loaded
+INFO:root:Supabase client created
+INFO:root:Supabase client created
+INFO:root:Language model initialized
+INFO:root:Fetching Gmail token...
+INFO:root:Language model initialized
+INFO:root:Fetching Gmail token...
+INFO:httpx:HTTP Request: GET https://dpyngjrtgkgtgdohcwgw.supabase.co/rest/v1/User?select=gmailAccessToken "HTTP/2 200 OK"
+INFO:root:Gmail token fetched successfully
+INFO:root:Searching and retrieving emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:httpx:HTTP Request: GET https://dpyngjrtgkgtgdohcwgw.supabase.co/rest/v1/User?select=gmailAccessToken "HTTP/2 200 OK"
+INFO:root:Searching emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:root:Gmail token fetched successfully
+INFO:root:Searching and retrieving emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:root:Searching emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:root:Found 1 emails matching the search criteria
+INFO:root:Getting details for email 190e454c6026a884
+INFO:root:Found 1 emails matching the search criteria
+INFO:root:Getting details for email 190e454c6026a884
+INFO:root:Found attachment: blood_test_report_row_2.pdf
+INFO:root:Found attachment: blood_test_report_row_2.pdf
+INFO:root:Found attachment: blood_test_report_row_1.pdf
+INFO:root:Found attachment: blood_test_report_row_1.pdf
+INFO:root:Found attachment: blood_test_report_row_3.pdf
+INFO:root:Found attachment: blood_test_report_row_3.pdf
+INFO:root:Found attachment: blood_test_report_row_5.pdf
+INFO:root:Found attachment: blood_test_report_row_5.pdf
+INFO:root:Found attachment: blood_test_report_row_4.pdf
+INFO:root:Found attachment: blood_test_report_row_4.pdf
+INFO:root:Found attachment: blood_test_report_row_8.pdf
+INFO:root:Found attachment: blood_test_report_row_8.pdf
+INFO:root:Found attachment: blood_test_report_row_7.pdf
+INFO:root:Found attachment: blood_test_report_row_7.pdf
+INFO:root:Found attachment: blood_test_report_row_9.pdf
+INFO:root:Found attachment: blood_test_report_row_9.pdf
+INFO:root:Found attachment: blood_test_report_row_6.pdf
+INFO:root:Found attachment: blood_test_report_row_6.pdf
+INFO:root:Found attachment: blood_test_report_row_10.pdf
+INFO:root:Found attachment: blood_test_report_row_10.pdf
+INFO:root:Found attachment: blood_test_report_row_11.pdf
+INFO:root:Found attachment: blood_test_report_row_11.pdf
+INFO:root:Found attachment: blood_test_report_row_12.pdf
+INFO:root:Found attachment: blood_test_report_row_12.pdf
+INFO:root:Found attachment: blood_test_report_row_14.pdf
+INFO:root:Found attachment: blood_test_report_row_15.pdf
+INFO:root:Found attachment: blood_test_report_row_13.pdf
+INFO:root:Found attachment: blood_test_report_row_14.pdf
+INFO:root:Found attachment: blood_test_report_row_16.pdf
+INFO:root:Found attachment: blood_test_report_row_15.pdf
+INFO:root:Found attachment: blood_test_report_row_17.pdf
+INFO:root:Found attachment: blood_test_report_row_13.pdf
+INFO:root:Found attachment: blood_test_report_row_16.pdf
+INFO:root:Found attachment: blood_test_report_row_18.pdf
+INFO:root:Found attachment: blood_test_report_row_17.pdf
+INFO:root:Found attachment: blood_test_report_row_20.pdf
+INFO:root:Found attachment: blood_test_report_row_18.pdf
+INFO:root:Found attachment: blood_test_report_row_20.pdf
+INFO:root:Found attachment: blood_test_report_row_19.pdf
+INFO:root:Found attachment: blood_test_report_row_19.pdf
+INFO:root:Found attachment: blood_test_report_row_22.pdf
+INFO:root:Found attachment: blood_test_report_row_22.pdf
+INFO:root:Found attachment: blood_test_report_row_21.pdf
+INFO:root:Retrieved 22 attachments for email 190e454c6026a884
+INFO:root:Total attachments found: 22
+INFO:root:Processing PDF: blood_test_report_row_2.pdf
+INFO:root:Found attachment: blood_test_report_row_21.pdf
+INFO:root:Retrieved 22 attachments for email 190e454c6026a884
+INFO:root:Total attachments found: 22
+INFO:root:Processing PDF: blood_test_report_row_2.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_2.pdf: Blood Test Report
+Date & Time: 30.04.2016 00:00
+WBC: 4.286755951
+RBC: 4.889857273
+HGB: 13.15990793
+H...
+INFO:root:Extracted text from PDF blood_test_report_row_2.pdf: Blood Test Report
+Date & Time: 30.04.2016 00:00
+WBC: 4.286755951
+RBC: 4.889857273
+HGB: 13.15990793
+H...
+INFO:root:Sending prompt to language model...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_2.pdf: {
+  "report_date": "2016-04-30T00:00:00",
+  "WBC": 4.286755951,
+  "RBC": 4.889857273,
+  "HGB": 13.15990793,
+  "HCT": 43.13479426,
+  "MCV": 97.31585517,
+  "MCH": 28.21010364,
+  "MCHC": 32.15099591,
+  "PLT": 388.0918414,
+  "LYM_percent": 32.35368383,
+  "MXD_percent": 7.911455825,
+  "NEUT_percent": 67.03665039,
+  "LYM_count": 1.075823846,
+  "MXD_count": 0.586308242,
+  "NEUT_count": 3.13957436,
+  "RDW_SD": 38.57815515,
+  "RDW_CV": 14.8903012,
+  "PDW": 15.44635379,
+  "MPV": 7.757542773,
+  "P_LCR": 18.68196073,
+  "PCT": 0.344349418
+}
+INFO:root:Received response from language model for blood_test_report_row_2.pdf
+INFO:root:Successfully processed blood_test_report_row_2.pdf
+INFO:root:Processing PDF: blood_test_report_row_1.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_1.pdf: Blood Test Report
+Date & Time: 31.10.2015 00:00
+WBC: 5.534220298
+RBC: 4.606864093
+HGB: 13.7191281
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_2.pdf: {
+  "report_date": "2016-04-30T00:00:00Z",
+  "WBC": 4.286755951,
+  "RBC": 4.889857273,
+  "HGB": 13.15990793,
+  "HCT": 43.13479426,
+  "MCV": 97.31585517,
+  "MCH": 28.21010364,
+  "MCHC": 32.15099591,
+  "PLT": 388.0918414,
+  "LYM_percent": 32.35368383,
+  "MXD_percent": 7.911455825,
+  "NEUT_percent": 67.03665039,
+  "LYM_count": 1.075823846,
+  "MXD_count": 0.586308242,
+  "NEUT_count": 3.13957436,
+  "RDW_SD": 38.57815515,
+  "RDW_CV": 14.8903012,
+  "PDW": 15.44635379,
+  "MPV": 7.757542773,
+  "P_LCR": 18.68196073,
+  "PCT": 0.344349418
+}
+INFO:root:Received response from language model for blood_test_report_row_2.pdf
+INFO:root:Successfully processed blood_test_report_row_2.pdf
+INFO:root:Processing PDF: blood_test_report_row_1.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_1.pdf: Blood Test Report
+Date & Time: 31.10.2015 00:00
+WBC: 5.534220298
+RBC: 4.606864093
+HGB: 13.7191281
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_1.pdf: {
+  "report_date": "2015-10-31T00:00:00",
+  "WBC": 5.534220298,
+  "RBC": 4.606864093,
+  "HGB": 13.7191281,
+  "HCT": 45.32366538,
+  "MCV": 96.20226762,
+  "MCH": 27.469977,
+  "MCHC": 34.10021568,
+  "PLT": 162.9590973,
+  "LYM_percent": 24.44148817,
+  "MXD_percent": 7.127807664,
+  "NEUT_percent": 43.16058978,
+  "LYM_count": 1.161591516,
+  "MXD_count": 0.722904538,
+  "NEUT_count": 3.20330125,
+  "RDW_SD": 41.64727254,
+  "RDW_CV": 13.53625919,
+  "PDW": 12.35020184,
+  "MPV": 9.447435158,
+  "P_LCR": 34.56591373,
+  "PCT": 0.1928091
+}
+INFO:root:Received response from language model for blood_test_report_row_1.pdf
+INFO:root:Successfully processed blood_test_report_row_1.pdf
+INFO:root:Processing PDF: blood_test_report_row_3.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_3.pdf: Blood Test Report
+Date & Time: 31.10.2016 00:00
+WBC: 9.277841169
+RBC: 3.893372251
+HGB: 14.54671221
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_1.pdf: {
+  "report_date": "2015-10-31T00:00:00",
+  "WBC": 5.534220298,
+  "RBC": 4.606864093,
+  "HGB": 13.7191281,
+  "HCT": 45.32366538,
+  "MCV": 96.20226762,
+  "MCH": 27.469977,
+  "MCHC": 34.10021568,
+  "PLT": 162.9590973,
+  "LYM_percent": 24.44148817,
+  "MXD_percent": 7.127807664,
+  "NEUT_percent": 43.16058978,
+  "LYM_count": 1.161591516,
+  "MXD_count": 0.722904538,
+  "NEUT_count": 3.20330125,
+  "RDW_SD": 41.64727254,
+  "RDW_CV": 13.53625919,
+  "PDW": 12.35020184,
+  "MPV": 9.447435158,
+  "P_LCR": 34.56591373,
+  "PCT": 0.1928091
+}
+INFO:root:Received response from language model for blood_test_report_row_1.pdf
+INFO:root:Successfully processed blood_test_report_row_1.pdf
+INFO:root:Processing PDF: blood_test_report_row_3.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_3.pdf: Blood Test Report
+Date & Time: 31.10.2016 00:00
+WBC: 9.277841169
+RBC: 3.893372251
+HGB: 14.54671221
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_3.pdf: {
+  "report_date": "2016-10-31T00:00:00",
+  "WBC": 9.277841169,
+  "RBC": 3.893372251,
+  "HGB": 14.54671221,
+  "HCT": 43.64712078,
+  "MCV": 92.43696435,
+  "MCH": 29.32710448,
+  "MCHC": 33.89242366,
+  "PLT": 209.3856297,
+  "LYM_percent": 25.20112125,
+  "MXD_percent": 6.883995165,
+  "NEUT_percent": 63.24957068,
+  "LYM_count": 1.06162741,
+  "MXD_count": 0.722852401,
+  "NEUT_count": 3.52342714,
+  "RDW_SD": 35.15385858,
+  "RDW_CV": 11.38961358,
+  "PDW": 10.63339791,
+  "MPV": 8.65336298,
+  "P_LCR": 20.92148763,
+  "PCT": 0.157815496
+}
+INFO:root:Received response from language model for blood_test_report_row_3.pdf
+INFO:root:Successfully processed blood_test_report_row_3.pdf
+INFO:root:Processing PDF: blood_test_report_row_5.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_5.pdf: Blood Test Report
+Date & Time: 31.10.2017 00:00
+WBC: 4.714719179
+RBC: 4.249200616
+HGB: 13.44887244
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_3.pdf: {
+  "report_date": "2016-10-31T00:00:00",
+  "WBC": 9.277841169,
+  "RBC": 3.893372251,
+  "HGB": 14.54671221,
+  "HCT": 43.64712078,
+  "MCV": 92.43696435,
+  "MCH": 29.32710448,
+  "MCHC": 33.89242366,
+  "PLT": 209.3856297,
+  "LYM_percent": 25.20112125,
+  "MXD_percent": 6.883995165,
+  "NEUT_percent": 63.24957068,
+  "LYM_count": 1.06162741,
+  "MXD_count": 0.722852401,
+  "NEUT_count": 3.52342714,
+  "RDW_SD": 35.15385858,
+  "RDW_CV": 11.38961358,
+  "PDW": 10.63339791,
+  "MPV": 8.65336298,
+  "P_LCR": 20.92148763,
+  "PCT": 0.157815496
+}
+INFO:root:Received response from language model for blood_test_report_row_3.pdf
+INFO:root:Successfully processed blood_test_report_row_3.pdf
+INFO:root:Processing PDF: blood_test_report_row_5.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_5.pdf: Blood Test Report
+Date & Time: 31.10.2017 00:00
+WBC: 4.714719179
+RBC: 4.249200616
+HGB: 13.44887244
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_5.pdf: {
+  "report_date": "2017-10-31T00:00:00",
+  "WBC": 4.714719179,
+  "RBC": 4.249200616,
+  "HGB": 13.44887244,
+  "HCT": 45.46770515,
+  "MCV": 89.769222,
+  "MCH": 28.04531597,
+  "MCHC": 33.24234556,
+  "PLT": 369.7605835,
+  "LYM_percent": 20.96788624,
+  "MXD_percent": 7.179032243,
+  "NEUT_percent": 55.7770949,
+  "LYM_count": 1.068314801,
+  "MXD_count": 0.703788074,
+  "NEUT_count": 3.358933567,
+  "RDW_SD": 41.39748336,
+  "RDW_CV": 14.35307853,
+  "PDW": 10.09794622,
+  "MPV": 8.494688455,
+  "P_LCR": 16.67469978,
+  "PCT": 0.327193778
+}
+INFO:root:Received response from language model for blood_test_report_row_5.pdf
+INFO:root:Successfully processed blood_test_report_row_5.pdf
+INFO:root:Processing PDF: blood_test_report_row_4.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_4.pdf: Blood Test Report
+Date & Time: 30.04.2017 00:00
+WBC: 9.224027847
+RBC: 5.056891214
+HGB: 14.64462102
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_4.pdf: {
+  "report_date": "2017-04-30T00:00:00",
+  "WBC": 9.224027847,
+  "RBC": 5.056891214,
+  "HGB": 14.64462102,
+  "HCT": 38.66863264,
+  "MCV": 98.91615716,
+  "MCH": 30.64110266,
+  "MCHC": 34.06573897,
+  "PLT": 321.7227177,
+  "LYM_percent": 24.35447713,
+  "MXD_percent": 6.894010309,
+  "NEUT_percent": 55.55054673,
+  "LYM_count": 0.924497088,
+  "MXD_count": 0.752361989,
+  "NEUT_count": 3.57902845,
+  "RDW_SD": 44.63507205,
+  "RDW_CV": 14.06569714,
+  "PDW": 14.78208323,
+  "MPV": 10.19070503,
+  "P_LCR": 34.8158393,
+  "PCT": 0.181831302
+}
+INFO:root:Received response from language model for blood_test_report_row_4.pdf
+INFO:root:Successfully processed blood_test_report_row_4.pdf
+INFO:root:Processing PDF: blood_test_report_row_8.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_8.pdf: Blood Test Report
+Date & Time: 11.05.2018 10:19
+WBC: 4.540695835
+RBC: 3.807271295
+HGB: 14.06775791
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_5.pdf: {
+  "report_date": "2017-10-31T00:00:00",
+  "WBC": 4.714719179,
+  "RBC": 4.249200616,
+  "HGB": 13.44887244,
+  "HCT": 45.46770515,
+  "MCV": 89.769222,
+  "MCH": 28.04531597,
+  "MCHC": 33.24234556,
+  "PLT": 369.7605835,
+  "LYM_percent": 20.96788624,
+  "MXD_percent": 7.179032243,
+  "NEUT_percent": 55.7770949,
+  "LYM_count": 1.068314801,
+  "MXD_count": 0.703788074,
+  "NEUT_count": 3.358933567,
+  "RDW_SD": 41.39748336,
+  "RDW_CV": 14.35307853,
+  "PDW": 10.09794622,
+  "MPV": 8.494688455,
+  "P_LCR": 16.67469978,
+  "PCT": 0.327193778
+}
+INFO:root:Received response from language model for blood_test_report_row_5.pdf
+INFO:root:Successfully processed blood_test_report_row_5.pdf
+INFO:root:Processing PDF: blood_test_report_row_4.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_4.pdf: Blood Test Report
+Date & Time: 30.04.2017 00:00
+WBC: 9.224027847
+RBC: 5.056891214
+HGB: 14.64462102
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_8.pdf: {
+  "report_date": "2018-11-05T10:19:00",
+  "WBC": 4.540695835,
+  "RBC": 3.807271295,
+  "HGB": 14.06775791,
+  "HCT": 44.38247176,
+  "MCV": 92.77365875,
+  "MCH": 31.32074492,
+  "MCHC": 35.18279766,
+  "PLT": 335.5595602,
+  "LYM_percent": 28.27083312,
+  "MXD_percent": 8.066390767,
+  "NEUT_percent": 55.52637708,
+  "LYM_count": 1.22389106,
+  "MXD_count": 0.607008484,
+  "NEUT_count": 3.13446539,
+  "RDW_SD": 44.60851541,
+  "RDW_CV": 11.63223997,
+  "PDW": 9.537275446,
+  "MPV": 83.564,
+  "P_LCR": 32.31514527,
+  "PCT": 0.158219558
+}
+INFO:root:Received response from language model for blood_test_report_row_8.pdf
+INFO:root:Successfully processed blood_test_report_row_8.pdf
+INFO:root:Processing PDF: blood_test_report_row_7.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_7.pdf: Blood Test Report
+Date & Time: 29.10.2018 10:20
+WBC: 5.001738927
+RBC: 4.246693708
+HGB: 12.53798766
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_7.pdf: {
+  "report_date": "2018-10-29T10:20:00",
+  "WBC": 5.001738927,
+  "RBC": 4.246693708,
+  "HGB": 12.53798766,
+  "HCT": 38.46830278,
+  "MCV": 81.18686004,
+  "MCH": 32.49823656,
+  "MCHC": 32.24888234,
+  "PLT": 343.6478345,
+  "LYM_percent": 39.42510959,
+  "MXD_percent": 9.906318149,
+  "NEUT_percent": 50.99608722,
+  "LYM_count": 1.193146026,
+  "MXD_count": 0.64807974,
+  "NEUT_count": 2.51650343,
+  "RDW_SD": 42.39147741,
+  "RDW_CV": 13.19355702,
+  "PDW": 14.38335842,
+  "MPV": 10.3133816,
+  "P_LCR": 19.64367812,
+  "PCT": 0.311781584
+}
+INFO:root:Received response from language model for blood_test_report_row_7.pdf
+INFO:root:Successfully processed blood_test_report_row_7.pdf
+INFO:root:Processing PDF: blood_test_report_row_9.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_9.pdf: Blood Test Report
+Date & Time: 11.12.2018 10:01
+WBC: 6.624344616
+RBC: 5.166684242
+HGB: 13.33925977
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_4.pdf: {
+  "report_date": "2017-04-30T00:00:00",
+  "WBC": 9.224027847,
+  "RBC": 5.056891214,
+  "HGB": 14.64462102,
+  "HCT": 38.66863264,
+  "MCV": 98.91615716,
+  "MCH": 30.64110266,
+  "MCHC": 34.06573897,
+  "PLT": 321.7227177,
+  "LYM_percent": 24.35447713,
+  "MXD_percent": 6.894010309,
+  "NEUT_percent": 55.55054673,
+  "LYM_count": 0.924497088,
+  "MXD_count": 0.752361989,
+  "NEUT_count": 3.57902845,
+  "RDW_SD": 44.63507205,
+  "RDW_CV": 14.06569714,
+  "PDW": 14.78208323,
+  "MPV": 10.19070503,
+  "P_LCR": 34.8158393,
+  "PCT": 0.181831302
+}
+INFO:root:Received response from language model for blood_test_report_row_4.pdf
+INFO:root:Successfully processed blood_test_report_row_4.pdf
+INFO:root:Processing PDF: blood_test_report_row_8.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_8.pdf: Blood Test Report
+Date & Time: 11.05.2018 10:19
+WBC: 4.540695835
+RBC: 3.807271295
+HGB: 14.06775791
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_9.pdf: {
+  "report_date": "2018-12-11T10:01:00",
+  "WBC": 6.624344616,
+  "RBC": 5.166684242,
+  "HGB": 13.33925977,
+  "HCT": 39.06566985,
+  "MCV": 81.06438667,
+  "MCH": 27.61022022,
+  "MCHC": 35.46089497,
+  "PLT": 361.550172,
+  "LYM_percent": 38.75938754,
+  "MXD_percent": 9.01560919,
+  "NEUT_percent": 68.32048663,
+  "LYM_count": 1.259228546,
+  "MXD_count": 0.751447725,
+  "NEUT_count": 3.06375592,
+  "RDW_SD": 35.71183792,
+  "RDW_CV": null,
+  "PDW": 16.73053874,
+  "MPV": 10.19566734,
+  "P_LCR": 24.21519158,
+  "PCT": 0.260424252
+}
+INFO:root:Received response from language model for blood_test_report_row_9.pdf
+INFO:root:Successfully processed blood_test_report_row_9.pdf
+INFO:root:Processing PDF: blood_test_report_row_6.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_6.pdf: Blood Test Report
+Date & Time: 30.04.2018 00:00
+WBC: 8.144232598
+RBC: 3.875768659
+HGB: 13.14262458
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_8.pdf: {
+  "report_date": "2018-11-05T10:19:00",
+  "WBC": 4.540695835,
+  "RBC": 3.807271295,
+  "HGB": 14.06775791,
+  "HCT": 44.38247176,
+  "MCV": 92.77365875,
+  "MCH": 31.32074492,
+  "MCHC": 35.18279766,
+  "PLT": 335.5595602,
+  "LYM_percent": 28.27083312,
+  "MXD_percent": 8.066390767,
+  "NEUT_percent": 55.52637708,
+  "LYM_count": 1.22389106,
+  "MXD_count": 0.607008484,
+  "NEUT_count": 3.13446539,
+  "RDW_SD": 44.60851541,
+  "RDW_CV": 11.63223997,
+  "PDW": 9.537275446,
+  "MPV": 83.564,
+  "P_LCR": 32.31514527,
+  "PCT": 0.158219558
+}
+INFO:root:Received response from language model for blood_test_report_row_8.pdf
+INFO:root:Successfully processed blood_test_report_row_8.pdf
+INFO:root:Processing PDF: blood_test_report_row_7.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_7.pdf: Blood Test Report
+Date & Time: 29.10.2018 10:20
+WBC: 5.001738927
+RBC: 4.246693708
+HGB: 12.53798766
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_6.pdf: {
+  "report_date": "2018-04-30T00:00:00",
+  "WBC": 8.144232598,
+  "RBC": 3.875768659,
+  "HGB": 13.14262458,
+  "HCT": 42.3436925,
+  "MCV": 97.29590161,
+  "MCH": 28.84946204,
+  "MCHC": 33.90027901,
+  "PLT": 183.9697009,
+  "LYM_percent": 25.25480527,
+  "MXD_percent": 5.28137427,
+  "NEUT_percent": 60.45624755,
+  "LYM_count": 1.017323703,
+  "MXD_count": 0.688103693,
+  "NEUT_count": 3.262191136,
+  "RDW_SD": 37.75915351,
+  "RDW_CV": 13.77240971,
+  "PDW": 11.34800033,
+  "MPV": 9.479921838,
+  "P_LCR": 19.78340939,
+  "PCT": 0.202201484
+}
+INFO:root:Received response from language model for blood_test_report_row_6.pdf
+INFO:root:Successfully processed blood_test_report_row_6.pdf
+INFO:root:Processing PDF: blood_test_report_row_10.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_10.pdf: Blood Test Report
+Date & Time: 19.12.2018 15:46
+WBC: 7.947661135
+RBC: 3.929587388
+HGB: 12.40447612
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_7.pdf: {
+  "report_date": "2018-10-29T10:20:00",
+  "WBC": 5.001738927,
+  "RBC": 4.246693708,
+  "HGB": 12.53798766,
+  "HCT": 38.46830278,
+  "MCV": 81.18686004,
+  "MCH": 32.49823656,
+  "MCHC": 32.24888234,
+  "PLT": 343.6478345,
+  "LYM_percent": 39.42510959,
+  "MXD_percent": 9.906318149,
+  "NEUT_percent": 50.99608722,
+  "LYM_count": 1.193146026,
+  "MXD_count": 0.64807974,
+  "NEUT_count": 2.51650343,
+  "RDW_SD": 42.39147741,
+  "RDW_CV": 13.19355702,
+  "PDW": 14.38335842,
+  "MPV": 10.3133816,
+  "P_LCR": 19.64367812,
+  "PCT": 0.311781584
+}
+INFO:root:Received response from language model for blood_test_report_row_7.pdf
+INFO:root:Successfully processed blood_test_report_row_7.pdf
+INFO:root:Processing PDF: blood_test_report_row_9.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_9.pdf: Blood Test Report
+Date & Time: 11.12.2018 10:01
+WBC: 6.624344616
+RBC: 5.166684242
+HGB: 13.33925977
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_10.pdf: {
+  "report_date": "2018-12-19T15:46:00",
+  "WBC": 7.947661135,
+  "RBC": 3.929587388,
+  "HGB": 12.40447612,
+  "HCT": 40.20685857,
+  "MCV": 87.81662652,
+  "MCH": 30.14507333,
+  "MCHC": 34.59147732,
+  "PLT": 299.140733,
+  "LYM_percent": 39.59259003,
+  "MXD_percent": 7.596996604,
+  "NEUT_percent": 65.75676809,
+  "LYM_count": 1.192562782,
+  "MXD_count": 0.680128357,
+  "NEUT_count": 3.126172685,
+  "RDW_SD": 41.17245392,
+  "RDW_CV": 13.62993449,
+  "PDW": 11.976443,
+  "MPV": 9.078075009,
+  "P_LCR": 33.14787607,
+  "PCT": 0.303515894
+}
+INFO:root:Received response from language model for blood_test_report_row_10.pdf
+INFO:root:Successfully processed blood_test_report_row_10.pdf
+INFO:root:Processing PDF: blood_test_report_row_11.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_11.pdf: Blood Test Report
+Date & Time: 01.09.2019 11:24
+WBC: 8.617791053
+RBC: 4.681088053
+HGB: 14.80966066
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_9.pdf: {
+  "report_date": "2018-12-11T10:01:00",
+  "WBC": 6.624344616,
+  "RBC": 5.166684242,
+  "HGB": 13.33925977,
+  "HCT": 39.06566985,
+  "MCV": 81.06438667,
+  "MCH": 27.61022022,
+  "MCHC": 35.46089497,
+  "PLT": 361.550172,
+  "LYM_percent": 38.75938754,
+  "MXD_percent": 9.01560919,
+  "NEUT_percent": 68.32048663,
+  "LYM_count": 1.259228546,
+  "MXD_count": 0.751447725,
+  "NEUT_count": 3.06375592,
+  "RDW_SD": 35.71183792,
+  "RDW_CV": null,
+  "PDW": 16.73053874,
+  "MPV": 10.19566734,
+  "P_LCR": 24.21519158,
+  "PCT": 0.260424252
+}
+INFO:root:Received response from language model for blood_test_report_row_9.pdf
+INFO:root:Successfully processed blood_test_report_row_9.pdf
+INFO:root:Processing PDF: blood_test_report_row_6.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_6.pdf: Blood Test Report
+Date & Time: 30.04.2018 00:00
+WBC: 8.144232598
+RBC: 3.875768659
+HGB: 13.14262458
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_11.pdf: {
+  "report_date": "2019-09-01T11:24:00",
+  "WBC": 8.617791053,
+  "RBC": 4.681088053,
+  "HGB": 14.80966066,
+  "HCT": 38.27773978,
+  "MCV": null,
+  "MCH": 29.9603393,
+  "MCHC": 32.98394493,
+  "PLT": 308.3494888,
+  "LYM_percent": 31.36521576,
+  "MXD_percent": 5.15668076,
+  "NEUT_percent": 63.15669489,
+  "LYM_count": 1.035003287,
+  "MXD_count": 0.684991429,
+  "NEUT_count": 3.362705696,
+  "RDW_SD": 38.63797292,
+  "RDW_CV": 12.99983402,
+  "PDW": 12.2596122,
+  "MPV": 9.470483075,
+  "P_LCR": 28.70793872,
+  "PCT": 0.17574266
+}
+INFO:root:Received response from language model for blood_test_report_row_11.pdf
+INFO:root:Successfully processed blood_test_report_row_11.pdf
+INFO:root:Processing PDF: blood_test_report_row_12.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_12.pdf: Blood Test Report
+Date & Time: 23.01.2019 11:15
+WBC: 5.171252875
+RBC: 4.494712165
+HGB: 13.43859492
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_12.pdf: {
+  "report_date": "2019-01-23T11:15:00",
+  "WBC": 5.171252875,
+  "RBC": 4.494712165,
+  "HGB": 13.43859492,
+  "HCT": 41.26452173,
+  "MCV": 88.08237359,
+  "MCH": 29.54754178,
+  "MCHC": 34.14356598,
+  "PLT": 159.8694937,
+  "LYM_percent": 31.36031141,
+  "MXD_percent": 9.543911392,
+  "NEUT_percent": 62.79218813,
+  "LYM_count": 0.97884547,
+  "MXD_count": 0.811389219,
+  "NEUT_count": 2.336804218,
+  "RDW_SD": 40.98829172,
+  "RDW_CV": 13.56289327,
+  "PDW": 9.893245658,
+  "MPV": 10.18335995,
+  "P_LCR": 32.83648853,
+  "PCT": 0.253680482
+}
+INFO:root:Received response from language model for blood_test_report_row_12.pdf
+INFO:root:Successfully processed blood_test_report_row_12.pdf
+INFO:root:Processing PDF: blood_test_report_row_14.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_14.pdf: Blood Test Report
+Date & Time: 23.01.2020 13:25
+WBC: 4.302450704
+RBC: 4.58761707
+HGB: 12.03394937
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_6.pdf: {
+  "report_date": "2018-04-30T00:00:00",
+  "WBC": 8.144232598,
+  "RBC": 3.875768659,
+  "HGB": 13.14262458,
+  "HCT": 42.3436925,
+  "MCV": 97.29590161,
+  "MCH": 28.84946204,
+  "MCHC": 33.90027901,
+  "PLT": 183.9697009,
+  "LYM_percent": 25.25480527,
+  "MXD_percent": 5.28137427,
+  "NEUT_percent": 60.45624755,
+  "LYM_count": 1.017323703,
+  "MXD_count": 0.688103693,
+  "NEUT_count": 3.262191136,
+  "RDW_SD": 37.75915351,
+  "RDW_CV": 13.77240971,
+  "PDW": 11.34800033,
+  "MPV": 9.479921838,
+  "P_LCR": 19.78340939,
+  "PCT": 0.202201484
+}
+INFO:root:Received response from language model for blood_test_report_row_6.pdf
+INFO:root:Successfully processed blood_test_report_row_6.pdf
+INFO:root:Processing PDF: blood_test_report_row_10.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_10.pdf: Blood Test Report
+Date & Time: 19.12.2018 15:46
+WBC: 7.947661135
+RBC: 3.929587388
+HGB: 12.40447612
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_14.pdf: {
+  "report_date": "2020-01-23T13:25:00",
+  "WBC": 4.302450704,
+  "RBC": 4.58761707,
+  "HGB": 12.03394937,
+  "HCT": 45.00864672,
+  "MCV": 95.51997089,
+  "MCH": 31.91484484,
+  "MCHC": 33.10719299,
+  "PLT": 323.4239244,
+  "LYM_percent": 34.07229174,
+  "MXD_percent": 9.481976162,
+  "NEUT_percent": 53.39218152,
+  "LYM_count": 1.261175136,
+  "MXD_count": 0.710720528,
+  "NEUT_count": 3.004209791,
+  "RDW_SD": 38.49573961,
+  "RDW_CV": 11.32236409,
+  "PDW": 11.74796747,
+  "MPV": 10.08354853,
+  "P_LCR": 24.84975424,
+  "PCT": 0.252201918
+}
+INFO:root:Received response from language model for blood_test_report_row_14.pdf
+INFO:root:Successfully processed blood_test_report_row_14.pdf
+INFO:root:Processing PDF: blood_test_report_row_15.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_15.pdf: Blood Test Report
+Date & Time: 01.09.2020  11:24
+WBC: 5.932640671
+RBC: 4.420228601
+HGB: 15.06678972
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_10.pdf: {
+  "report_date": "2018-12-19T15:46:00",
+  "WBC": 7.947661135,
+  "RBC": 3.929587388,
+  "HGB": 12.40447612,
+  "HCT": 40.20685857,
+  "MCV": 87.81662652,
+  "MCH": 30.14507333,
+  "MCHC": 34.59147732,
+  "PLT": 299.140733,
+  "LYM_percent": 39.59259003,
+  "MXD_percent": 7.596996604,
+  "NEUT_percent": 65.75676809,
+  "LYM_count": 1.192562782,
+  "MXD_count": 0.680128357,
+  "NEUT_count": 3.126172685,
+  "RDW_SD": 41.17245392,
+  "RDW_CV": 13.62993449,
+  "PDW": 11.976443,
+  "MPV": 9.078075009,
+  "P_LCR": 33.14787607,
+  "PCT": 0.303515894
+}
+INFO:root:Received response from language model for blood_test_report_row_10.pdf
+INFO:root:Successfully processed blood_test_report_row_10.pdf
+INFO:root:Processing PDF: blood_test_report_row_11.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_11.pdf: Blood Test Report
+Date & Time: 01.09.2019 11:24
+WBC: 8.617791053
+RBC: 4.681088053
+HGB: 14.80966066
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_15.pdf: {
+  "report_date": "2020-09-01T11:24:00",
+  "WBC": 5.932640671,
+  "RBC": 4.420228601,
+  "HGB": 15.06678972,
+  "HCT": 38.44965874,
+  "MCV": 97.27633326,
+  "MCH": 30.99260764,
+  "MCHC": 34.82540489,
+  "PLT": 329.7054427,
+  "LYM_percent": 28.78248771,
+  "MXD_percent": null,
+  "NEUT_percent": 59.4159735,
+  "LYM_count": 1.038486746,
+  "MXD_count": 0.76779316,
+  "NEUT_count": 2.985339754,
+  "RDW_SD": 41.8275115,
+  "RDW_CV": 12.21455013,
+  "PDW": 15.55459629,
+  "MPV": 7.486920424,
+  "P_LCR": 20.72082068,
+  "PCT": 0.171204024
+}
+INFO:root:Received response from language model for blood_test_report_row_15.pdf
+INFO:root:Successfully processed blood_test_report_row_15.pdf
+INFO:root:Processing PDF: blood_test_report_row_13.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_13.pdf: Blood Test Report
+Date & Time: 02.06.2019 10:32
+WBC: 9.67820707
+RBC: 5.151519862
+HGB: 13.26661504
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_11.pdf: {
+  "report_date": "2019-09-01T11:24:00",
+  "WBC": 8.617791053,
+  "RBC": 4.681088053,
+  "HGB": 14.80966066,
+  "HCT": 38.27773978,
+  "MCV": null,
+  "MCH": 29.9603393,
+  "MCHC": 32.98394493,
+  "PLT": 308.3494888,
+  "LYM_percent": 31.36521576,
+  "MXD_percent": 5.15668076,
+  "NEUT_percent": 63.15669489,
+  "LYM_count": 1.035003287,
+  "MXD_count": 0.684991429,
+  "NEUT_count": 3.362705696,
+  "RDW_SD": 38.63797292,
+  "RDW_CV": 12.99983402,
+  "PDW": 12.2596122,
+  "MPV": 9.470483075,
+  "P_LCR": 28.70793872,
+  "PCT": 0.17574266
+}
+INFO:root:Received response from language model for blood_test_report_row_11.pdf
+INFO:root:Successfully processed blood_test_report_row_11.pdf
+INFO:root:Processing PDF: blood_test_report_row_12.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_12.pdf: Blood Test Report
+Date & Time: 23.01.2019 11:15
+WBC: 5.171252875
+RBC: 4.494712165
+HGB: 13.43859492
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_12.pdf: {
+  "report_date": "2019-01-23T11:15:00",
+  "WBC": 5.171252875,
+  "RBC": 4.494712165,
+  "HGB": 13.43859492,
+  "HCT": 41.26452173,
+  "MCV": 88.08237359,
+  "MCH": 29.54754178,
+  "MCHC": 34.14356598,
+  "PLT": 159.8694937,
+  "LYM_percent": 31.36031141,
+  "MXD_percent": 9.543911392,
+  "NEUT_percent": 62.79218813,
+  "LYM_count": 0.97884547,
+  "MXD_count": 0.811389219,
+  "NEUT_count": 2.336804218,
+  "RDW_SD": 40.98829172,
+  "RDW_CV": 13.56289327,
+  "PDW": 9.893245658,
+  "MPV": 10.18335995,
+  "P_LCR": 32.83648853,
+  "PCT": 0.253680482
+}
+INFO:root:Received response from language model for blood_test_report_row_12.pdf
+INFO:root:Successfully processed blood_test_report_row_12.pdf
+INFO:root:Processing PDF: blood_test_report_row_14.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_14.pdf: Blood Test Report
+Date & Time: 23.01.2020 13:25
+WBC: 4.302450704
+RBC: 4.58761707
+HGB: 12.03394937
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_13.pdf: {
+  "report_date": "2019-06-02T10:32:00",
+  "WBC": 9.67820707,
+  "RBC": 5.151519862,
+  "HGB": 13.26661504,
+  "HCT": 39.12544705,
+  "MCV": 95.05311176,
+  "MCH": 27.4471495,
+  "MCHC": 33.52412751,
+  "PLT": 195.9116945,
+  "LYM_percent": 24.92256114,
+  "MXD_percent": 9.091527392,
+  "NEUT_percent": 44.56444518,
+  "LYM_count": 1.183237717,
+  "MXD_count": 0.744003643,
+  "NEUT_count": 2.941405928,
+  "RDW_SD": 42.07561464,
+  "RDW_CV": 14.67968179,
+  "PDW": 11.91325342,
+  "MPV": 7.763808903,
+  "P_LCR": 25.15842865,
+  "PCT": 0.196656124
+}
+INFO:root:Received response from language model for blood_test_report_row_13.pdf
+INFO:root:Successfully processed blood_test_report_row_13.pdf
+INFO:root:Processing PDF: blood_test_report_row_16.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_16.pdf: Blood Test Report
+Date & Time: 03.03.2021  11:15
+WBC: 7.357913573
+RBC: 4.806922489
+HGB: 12.63902171
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_16.pdf: {
+  "report_date": "2021-03-03T11:15:00",
+  "WBC": 7.357913573,
+  "RBC": 4.806922489,
+  "HGB": 12.63902171,
+  "HCT": 39.88251537,
+  "MCV": 86.46247715,
+  "MCH": 29.64258008,
+  "MCHC": 34.73020105,
+  "PLT": 216.1354231,
+  "LYM_percent": 24.38345742,
+  "MXD_percent": 5.265112187,
+  "NEUT_percent": 40.2405555,
+  "LYM_count": 1.29234042,
+  "MXD_count": 0.70535358,
+  "NEUT_count": 3.04099352,
+  "RDW_SD": 43.86849205,
+  "RDW_CV": 13.27966212,
+  "PDW": 9.993868909,
+  "MPV": 8.301449769,
+  "P_LCR": 30.63516431,
+  "PCT": 0.257746132
+}
+INFO:root:Received response from language model for blood_test_report_row_16.pdf
+INFO:root:Successfully processed blood_test_report_row_16.pdf
+INFO:root:Processing PDF: blood_test_report_row_17.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_17.pdf: Blood Test Report
+Date & Time: 30.09.2021  14:45
+WBC: 4.025706787
+RBC: 4.100595646
+HGB: 14.93625833
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_14.pdf: {
+  "report_date": "2020-01-23T13:25:00",
+  "WBC": 4.302450704,
+  "RBC": 4.58761707,
+  "HGB": 12.03394937,
+  "HCT": 45.00864672,
+  "MCV": 95.51997089,
+  "MCH": 31.91484484,
+  "MCHC": 33.10719299,
+  "PLT": 323.4239244,
+  "LYM_percent": 34.07229174,
+  "MXD_percent": 9.481976162,
+  "NEUT_percent": 53.39218152,
+  "LYM_count": 1.261175136,
+  "MXD_count": 0.710720528,
+  "NEUT_count": 3.004209791,
+  "RDW_SD": 38.49573961,
+  "RDW_CV": 11.32236409,
+  "PDW": 11.74796747,
+  "MPV": 10.08354853,
+  "P_LCR": 24.84975424,
+  "PCT": 0.252201918
+}
+INFO:root:Received response from language model for blood_test_report_row_14.pdf
+INFO:root:Successfully processed blood_test_report_row_14.pdf
+INFO:root:Processing PDF: blood_test_report_row_15.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_15.pdf: Blood Test Report
+Date & Time: 01.09.2020  11:24
+WBC: 5.932640671
+RBC: 4.420228601
+HGB: 15.06678972
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_17.pdf: {
+  "report_date": "2021-09-30T14:45:00",
+  "WBC": 4.025706787,
+  "RBC": 4.100595646,
+  "HGB": 14.93625833,
+  "HCT": 41.20333479,
+  "MCV": 91.12465557,
+  "MCH": 31.2815486,
+  "MCHC": 35.94843659,
+  "PLT": 362.7117913,
+  "LYM_percent": 23.88619277,
+  "MXD_percent": 8.111540264,
+  "NEUT_percent": 46.70474793,
+  "LYM_count": 1.24310739,
+  "MXD_count": 0.74340526,
+  "NEUT_count": 2.95718428,
+  "RDW_SD": 41.17145749,
+  "RDW_CV": 14.01869079,
+  "PDW": 12.86527322,
+  "MPV": 7.934540196,
+  "P_LCR": 19.06116558,
+  "PCT": 0.273312886
+}
+INFO:root:Received response from language model for blood_test_report_row_17.pdf
+INFO:root:Successfully processed blood_test_report_row_17.pdf
+INFO:root:Processing PDF: blood_test_report_row_18.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_18.pdf: Blood Test Report
+Date & Time: 31.03.2022  09:24
+WBC: 7.634310486
+RBC: 4.110071912
+HGB: 13.7975471
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_15.pdf: {
+  "report_date": "2020-09-01T11:24:00",
+  "WBC": 5.932640671,
+  "RBC": 4.420228601,
+  "HGB": 15.06678972,
+  "HCT": 38.44965874,
+  "MCV": 97.27633326,
+  "MCH": 30.99260764,
+  "MCHC": 34.82540489,
+  "PLT": 329.7054427,
+  "LYM_percent": 28.78248771,
+  "MXD_percent": null,
+  "NEUT_percent": 59.4159735,
+  "LYM_count": 1.038486746,
+  "MXD_count": 0.76779316,
+  "NEUT_count": 2.985339754,
+  "RDW_SD": 41.8275115,
+  "RDW_CV": 12.21455013,
+  "PDW": 15.55459629,
+  "MPV": 7.486920424,
+  "P_LCR": 20.72082068,
+  "PCT": 0.171204024
+}
+INFO:root:Received response from language model for blood_test_report_row_15.pdf
+INFO:root:Successfully processed blood_test_report_row_15.pdf
+INFO:root:Processing PDF: blood_test_report_row_13.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_13.pdf: Blood Test Report
+Date & Time: 02.06.2019 10:32
+WBC: 9.67820707
+RBC: 5.151519862
+HGB: 13.26661504
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_18.pdf: {
+  "report_date": "2022-03-31T09:24:00",
+  "WBC": 7.634310486,
+  "RBC": 4.110071912,
+  "HGB": 13.7975471,
+  "HCT": 38.58915616,
+  "MCV": 84.10469765,
+  "MCH": 31.9055489,
+  "MCHC": 35.20495261,
+  "PLT": 194.8849293,
+  "LYM_percent": 30.29018046,
+  "MXD_percent": 9.969490196,
+  "NEUT_percent": 64.88823484,
+  "LYM_count": 1.28637078,
+  "MXD_count": 0.6933137,
+  "NEUT_count": 3.14377735,
+  "RDW_SD": 46.24095076,
+  "RDW_CV": 12.79499642,
+  "PDW": 9.667014112,
+  "MPV": 9.775447203,
+  "P_LCR": 26.41639361,
+  "PCT": 0.233638791
+}
+INFO:root:Received response from language model for blood_test_report_row_18.pdf
+INFO:root:Successfully processed blood_test_report_row_18.pdf
+INFO:root:Processing PDF: blood_test_report_row_20.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_20.pdf: Blood Test Report
+Date & Time: 31.01.2023 10:30
+WBC: 8.468819741
+RBC: 3.855323174
+HGB: 13.50804629
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_13.pdf: {
+  "report_date": "2019-06-02T10:32:00",
+  "WBC": 9.67820707,
+  "RBC": 5.151519862,
+  "HGB": 13.26661504,
+  "HCT": 39.12544705,
+  "MCV": 95.05311176,
+  "MCH": 27.4471495,
+  "MCHC": 33.52412751,
+  "PLT": 195.9116945,
+  "LYM_percent": 24.92256114,
+  "MXD_percent": 9.091527392,
+  "NEUT_percent": 44.56444518,
+  "LYM_count": 1.183237717,
+  "MXD_count": 0.744003643,
+  "NEUT_count": 2.941405928,
+  "RDW_SD": 42.07561464,
+  "RDW_CV": 14.67968179,
+  "PDW": 11.91325342,
+  "MPV": 7.763808903,
+  "P_LCR": 25.15842865,
+  "PCT": 0.196656124
+}
+INFO:root:Received response from language model for blood_test_report_row_13.pdf
+INFO:root:Successfully processed blood_test_report_row_13.pdf
+INFO:root:Processing PDF: blood_test_report_row_16.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_16.pdf: Blood Test Report
+Date & Time: 03.03.2021  11:15
+WBC: 7.357913573
+RBC: 4.806922489
+HGB: 12.63902171
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_20.pdf: {
+  "report_date": "2023-01-31T10:30:00",
+  "WBC": 8.468819741,
+  "RBC": 3.855323174,
+  "HGB": 13.50804629,
+  "HCT": 37.15890157,
+  "MCV": 81.91019647,
+  "MCH": 27.74747496,
+  "MCHC": 34.82812084,
+  "PLT": 299.1818083,
+  "LYM_percent": 24.41432574,
+  "MXD_percent": 5.55877816,
+  "NEUT_percent": 49.18407447,
+  "LYM_count": 1.271468066,
+  "MXD_count": 0.712586656,
+  "NEUT_count": 3.118960367,
+  "RDW_SD": 42.76714719,
+  "RDW_CV": 11.55607662,
+  "PDW": 14.37659045,
+  "MPV": 9.487557311,
+  "P_LCR": 31.30943943,
+  "PCT": 0.227605816
+}
+INFO:root:Received response from language model for blood_test_report_row_20.pdf
+INFO:root:Successfully processed blood_test_report_row_20.pdf
+INFO:root:Processing PDF: blood_test_report_row_19.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_19.pdf: Blood Test Report
+Date & Time: 30.09.2022  09:15
+WBC: 4.233213472
+RBC: 4.073985983
+HGB: 13.953787
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_16.pdf: {
+  "report_date": "2021-03-03T11:15:00",
+  "WBC": 7.357913573,
+  "RBC": 4.806922489,
+  "HGB": 12.63902171,
+  "HCT": 39.88251537,
+  "MCV": 86.46247715,
+  "MCH": 29.64258008,
+  "MCHC": 34.73020105,
+  "PLT": 216.1354231,
+  "LYM_percent": 24.38345742,
+  "MXD_percent": 5.265112187,
+  "NEUT_percent": 40.2405555,
+  "LYM_count": 1.29234042,
+  "MXD_count": 0.70535358,
+  "NEUT_count": 3.04099352,
+  "RDW_SD": 43.86849205,
+  "RDW_CV": 13.27966212,
+  "PDW": 9.993868909,
+  "MPV": 8.301449769,
+  "P_LCR": 30.63516431,
+  "PCT": 0.257746132
+}
+INFO:root:Received response from language model for blood_test_report_row_16.pdf
+INFO:root:Successfully processed blood_test_report_row_16.pdf
+INFO:root:Processing PDF: blood_test_report_row_17.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_17.pdf: Blood Test Report
+Date & Time: 30.09.2021  14:45
+WBC: 4.025706787
+RBC: 4.100595646
+HGB: 14.93625833
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_19.pdf: {
+  "report_date": "2022-09-30T09:15:00",
+  "WBC": 4.233213472,
+  "RBC": 4.073985983,
+  "HGB": 13.953787,
+  "HCT": 40.26498086,
+  "MCV": 94.87420454,
+  "MCH": 32.07039435,
+  "MCHC": 34.8921095,
+  "PLT": 235.7161512,
+  "LYM_percent": 21.02282761,
+  "MXD_percent": 5.463582305,
+  "NEUT_percent": 59.88535362,
+  "LYM_count": 1.30756305,
+  "MXD_count": 0.71577447,
+  "NEUT_count": 3.02592989,
+  "RDW_SD": 41.40853819,
+  "RDW_CV": 11.72172153,
+  "PDW": 11.55392026,
+  "MPV": 8.277844049,
+  "P_LCR": 17.74027101,
+  "PCT": 0.150503554
+}
+INFO:root:Received response from language model for blood_test_report_row_19.pdf
+INFO:root:Successfully processed blood_test_report_row_19.pdf
+INFO:root:Processing PDF: blood_test_report_row_22.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_22.pdf: Blood Test Report
+Date & Time: 07.07.2024 10:30
+WBC: 6.508916272
+RBC: 4.82922186
+HGB: 12.80287104
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_22.pdf: {
+  "report_date": "2024-07-07T10:30:00",
+  "WBC": 6.508916272,
+  "RBC": 4.82922186,
+  "HGB": 12.80287104,
+  "HCT": 40.92164783,
+  "MCV": 89.12862592,
+  "MCH": 31.31683028,
+  "MCHC": 34.18491255,
+  "PLT": 400.0450004,
+  "LYM_percent": 24.24132476,
+  "MXD_percent": 6.358956206,
+  "NEUT_percent": 71.74978602,
+  "LYM_count": 1.295392621,
+  "MXD_count": 0.729023681,
+  "NEUT_count": 3.049334125,
+  "RDW_SD": 38.22658205,
+  "RDW_CV": 13.69231849,
+  "PDW": 14.35171433,
+  "MPV": 9.652567631,
+  "P_LCR": 39.25792047,
+  "PCT": 0.241076591
+}
+INFO:root:Received response from language model for blood_test_report_row_22.pdf
+INFO:root:Successfully processed blood_test_report_row_22.pdf
+INFO:root:Processing PDF: blood_test_report_row_21.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_21.pdf: Blood Test Report
+Date & Time: 31.10.2023 10:30
+WBC: 4.501161678
+RBC: 3.83401186
+HGB: 13.13844861
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_17.pdf: {
+  "report_date": "2021-09-30T14:45:00",
+  "WBC": 4.025706787,
+  "RBC": 4.100595646,
+  "HGB": 14.93625833,
+  "HCT": 41.20333479,
+  "MCV": 91.12465557,
+  "MCH": 31.2815486,
+  "MCHC": 35.94843659,
+  "PLT": 362.7117913,
+  "LYM_percent": 23.88619277,
+  "MXD_percent": 8.111540264,
+  "NEUT_percent": 46.70474793,
+  "LYM_count": 1.24310739,
+  "MXD_count": 0.74340526,
+  "NEUT_count": 2.95718428,
+  "RDW_SD": 41.17145749,
+  "RDW_CV": 14.01869079,
+  "PDW": 12.86527322,
+  "MPV": 7.934540196,
+  "P_LCR": 19.06116558,
+  "PCT": 0.273312886
+}
+INFO:root:Received response from language model for blood_test_report_row_17.pdf
+INFO:root:Successfully processed blood_test_report_row_17.pdf
+INFO:root:Processing PDF: blood_test_report_row_18.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_18.pdf: Blood Test Report
+Date & Time: 31.03.2022  09:24
+WBC: 7.634310486
+RBC: 4.110071912
+HGB: 13.7975471
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_21.pdf: {
+  "report_date": "2023-10-31T10:30:00",
+  "WBC": 4.501161678,
+  "RBC": 3.83401186,
+  "HGB": 13.13844861,
+  "HCT": 34.59503548,
+  "MCV": 84.14097441,
+  "MCH": 31.59917569,
+  "MCHC": 33.96669503,
+  "PLT": 181.3784904,
+  "LYM_percent": 27.9644778,
+  "MXD_percent": 5.655514519,
+  "NEUT_percent": 59.88602944,
+  "LYM_count": 1.278853921,
+  "MXD_count": 0.720538109,
+  "NEUT_count": 3.091900642,
+  "RDW_SD": 46.3281037,
+  "RDW_CV": 13.72417387,
+  "PDW": 13.06466122,
+  "MPV": 9.434200033,
+  "P_LCR": 39.28780352,
+  "PCT": 0.212335628
+}
+INFO:root:Received response from language model for blood_test_report_row_21.pdf
+INFO:root:Successfully processed blood_test_report_row_21.pdf
+INFO:root:Transforming results to list of dictionaries...
+INFO:root:Formatting date: 2016-04-30T00:00:00
+INFO:root:Formatted date: 30/04/16
+INFO:root:Processed result 0
+INFO:root:Formatting date: 2015-10-31T00:00:00
+INFO:root:Formatted date: 31/10/15
+INFO:root:Processed result 1
+INFO:root:Formatting date: 2016-10-31T00:00:00
+INFO:root:Formatted date: 31/10/16
+INFO:root:Processed result 2
+INFO:root:Formatting date: 2017-10-31T00:00:00
+INFO:root:Formatted date: 31/10/17
+INFO:root:Processed result 3
+INFO:root:Formatting date: 2017-04-30T00:00:00
+INFO:root:Formatted date: 30/04/17
+INFO:root:Processed result 4
+INFO:root:Formatting date: 2018-11-05T10:19:00
+INFO:root:Formatted date: 05/11/18
+INFO:root:Processed result 5
+INFO:root:Formatting date: 2018-10-29T10:20:00
+INFO:root:Formatted date: 29/10/18
+INFO:root:Processed result 6
+INFO:root:Formatting date: 2018-12-11T10:01:00
+INFO:root:Formatted date: 11/12/18
+INFO:root:Processed result 7
+INFO:root:Formatting date: 2018-04-30T00:00:00
+INFO:root:Formatted date: 30/04/18
+INFO:root:Processed result 8
+INFO:root:Formatting date: 2018-12-19T15:46:00
+INFO:root:Formatted date: 19/12/18
+INFO:root:Processed result 9
+INFO:root:Formatting date: 2019-09-01T11:24:00
+INFO:root:Formatted date: 01/09/19
+INFO:root:Processed result 10
+INFO:root:Formatting date: 2019-01-23T11:15:00
+INFO:root:Formatted date: 23/01/19
+INFO:root:Processed result 11
+INFO:root:Formatting date: 2020-01-23T13:25:00
+INFO:root:Formatted date: 23/01/20
+INFO:root:Processed result 12
+INFO:root:Formatting date: 2020-09-01T11:24:00
+INFO:root:Formatted date: 01/09/20
+INFO:root:Processed result 13
+INFO:root:Formatting date: 2019-06-02T10:32:00
+INFO:root:Formatted date: 02/06/19
+INFO:root:Processed result 14
+INFO:root:Formatting date: 2021-03-03T11:15:00
+INFO:root:Formatted date: 03/03/21
+INFO:root:Processed result 15
+INFO:root:Formatting date: 2021-09-30T14:45:00
+INFO:root:Formatted date: 30/09/21
+INFO:root:Processed result 16
+INFO:root:Formatting date: 2022-03-31T09:24:00
+INFO:root:Formatted date: 31/03/22
+INFO:root:Processed result 17
+INFO:root:Formatting date: 2023-01-31T10:30:00
+INFO:root:Formatted date: 31/01/23
+INFO:root:Processed result 18
+INFO:root:Formatting date: 2022-09-30T09:15:00
+INFO:root:Formatted date: 30/09/22
+INFO:root:Processed result 19
+INFO:root:Formatting date: 2024-07-07T10:30:00
+INFO:root:Formatted date: 07/07/24
+INFO:root:Processed result 20
+INFO:root:Formatting date: 2023-10-31T10:30:00
+INFO:root:Formatted date: 31/10/23
+INFO:root:Processed result 21
+INFO:root:List of dictionaries created with 22 items
+INFO:root:List of dictionaries transformation completed
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_18.pdf: {
+  "report_date": "2022-03-31T09:24:00",
+  "WBC": 7.634310486,
+  "RBC": 4.110071912,
+  "HGB": 13.7975471,
+  "HCT": 38.58915616,
+  "MCV": 84.10469765,
+  "MCH": 31.9055489,
+  "MCHC": 35.20495261,
+  "PLT": 194.8849293,
+  "LYM_percent": 30.29018046,
+  "MXD_percent": 9.969490196,
+  "NEUT_percent": 64.88823484,
+  "LYM_count": 1.28637078,
+  "MXD_count": 0.6933137,
+  "NEUT_count": 3.14377735,
+  "RDW_SD": 46.24095076,
+  "RDW_CV": 12.79499642,
+  "PDW": 9.667014112,
+  "MPV": 9.775447203,
+  "P_LCR": 26.41639361,
+  "PCT": 0.233638791
+}
+INFO:root:Received response from language model for blood_test_report_row_18.pdf
+INFO:root:Successfully processed blood_test_report_row_18.pdf
+INFO:root:Processing PDF: blood_test_report_row_20.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_20.pdf: Blood Test Report
+Date & Time: 31.01.2023 10:30
+WBC: 8.468819741
+RBC: 3.855323174
+HGB: 13.50804629
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_20.pdf: {
+  "report_date": "2023-01-31T10:30:00",
+  "WBC": 8.468819741,
+  "RBC": 3.855323174,
+  "HGB": 13.50804629,
+  "HCT": 37.15890157,
+  "MCV": 81.91019647,
+  "MCH": 27.74747496,
+  "MCHC": 34.82812084,
+  "PLT": 299.1818083,
+  "LYM_percent": 24.41432574,
+  "MXD_percent": 5.55877816,
+  "NEUT_percent": 49.18407447,
+  "LYM_count": 1.271468066,
+  "MXD_count": 0.712586656,
+  "NEUT_count": 3.118960367,
+  "RDW_SD": 42.76714719,
+  "RDW_CV": 11.55607662,
+  "PDW": 14.37659045,
+  "MPV": 9.487557311,
+  "P_LCR": 31.30943943,
+  "PCT": 0.227605816
+}
+INFO:root:Received response from language model for blood_test_report_row_20.pdf
+INFO:root:Successfully processed blood_test_report_row_20.pdf
+INFO:root:Processing PDF: blood_test_report_row_19.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_19.pdf: Blood Test Report
+Date & Time: 30.09.2022  09:15
+WBC: 4.233213472
+RBC: 4.073985983
+HGB: 13.953787
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_19.pdf: {
+  "report_date": "2022-09-30T09:15:00",
+  "WBC": 4.233213472,
+  "RBC": 4.073985983,
+  "HGB": 13.953787,
+  "HCT": 40.26498086,
+  "MCV": 94.87420454,
+  "MCH": 32.07039435,
+  "MCHC": 34.8921095,
+  "PLT": 235.7161512,
+  "LYM_percent": 21.02282761,
+  "MXD_percent": 5.463582305,
+  "NEUT_percent": 59.88535362,
+  "LYM_count": 1.30756305,
+  "MXD_count": 0.71577447,
+  "NEUT_count": 3.02592989,
+  "RDW_SD": 41.40853819,
+  "RDW_CV": 11.72172153,
+  "PDW": 11.55392026,
+  "MPV": 8.277844049,
+  "P_LCR": 17.74027101,
+  "PCT": 0.150503554
+}
+INFO:root:Received response from language model for blood_test_report_row_19.pdf
+INFO:root:Successfully processed blood_test_report_row_19.pdf
+INFO:root:Processing PDF: blood_test_report_row_22.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_22.pdf: Blood Test Report
+Date & Time: 07.07.2024 10:30
+WBC: 6.508916272
+RBC: 4.82922186
+HGB: 12.80287104
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_22.pdf: {
+  "report_date": "2024-07-07T10:30:00",
+  "WBC": 6.508916272,
+  "RBC": 4.82922186,
+  "HGB": 12.80287104,
+  "HCT": 40.92164783,
+  "MCV": 89.12862592,
+  "MCH": 31.31683028,
+  "MCHC": 34.18491255,
+  "PLT": 400.0450004,
+  "LYM_percent": 24.24132476,
+  "MXD_percent": 6.358956206,
+  "NEUT_percent": 71.74978602,
+  "LYM_count": 1.295392621,
+  "MXD_count": 0.729023681,
+  "NEUT_count": 3.049334125,
+  "RDW_SD": 38.22658205,
+  "RDW_CV": 13.69231849,
+  "PDW": 14.35171433,
+  "MPV": 9.652567631,
+  "P_LCR": 39.25792047,
+  "PCT": 0.241076591
+}
+INFO:root:Received response from language model for blood_test_report_row_22.pdf
+INFO:root:Successfully processed blood_test_report_row_22.pdf
+INFO:root:Processing PDF: blood_test_report_row_21.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_21.pdf: Blood Test Report
+Date & Time: 31.10.2023 10:30
+WBC: 4.501161678
+RBC: 3.83401186
+HGB: 13.13844861
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_21.pdf: {
+  "report_date": "2023-10-31T10:30:00",
+  "WBC": 4.501161678,
+  "RBC": 3.83401186,
+  "HGB": 13.13844861,
+  "HCT": 34.59503548,
+  "MCV": 84.14097441,
+  "MCH": 31.59917569,
+  "MCHC": 33.96669503,
+  "PLT": 181.3784904,
+  "LYM_percent": 27.9644778,
+  "MXD_percent": 5.655514519,
+  "NEUT_percent": 59.88602944,
+  "LYM_count": 1.278853921,
+  "MXD_count": 0.720538109,
+  "NEUT_count": 3.091900642,
+  "RDW_SD": 46.3281037,
+  "RDW_CV": 13.72417387,
+  "PDW": 13.06466122,
+  "MPV": 9.434200033,
+  "P_LCR": 39.28780352,
+  "PCT": 0.212335628
+}
+INFO:root:Received response from language model for blood_test_report_row_21.pdf
+INFO:root:Successfully processed blood_test_report_row_21.pdf
+INFO:root:Transforming results to list of dictionaries...
+INFO:root:Formatting date: 2016-04-30T00:00:00Z
+INFO:root:Formatted date: 30/04/16
+INFO:root:Processed result 0
+INFO:root:Formatting date: 2015-10-31T00:00:00
+INFO:root:Formatted date: 31/10/15
+INFO:root:Processed result 1
+INFO:root:Formatting date: 2016-10-31T00:00:00
+INFO:root:Formatted date: 31/10/16
+INFO:root:Processed result 2
+INFO:root:Formatting date: 2017-10-31T00:00:00
+INFO:root:Formatted date: 31/10/17
+INFO:root:Processed result 3
+INFO:root:Formatting date: 2017-04-30T00:00:00
+INFO:root:Formatted date: 30/04/17
+INFO:root:Processed result 4
+INFO:root:Formatting date: 2018-11-05T10:19:00
+INFO:root:Formatted date: 05/11/18
+INFO:root:Processed result 5
+INFO:root:Formatting date: 2018-10-29T10:20:00
+INFO:root:Formatted date: 29/10/18
+INFO:root:Processed result 6
+INFO:root:Formatting date: 2018-12-11T10:01:00
+INFO:root:Formatted date: 11/12/18
+INFO:root:Processed result 7
+INFO:root:Formatting date: 2018-04-30T00:00:00
+INFO:root:Formatted date: 30/04/18
+INFO:root:Processed result 8
+INFO:root:Formatting date: 2018-12-19T15:46:00
+INFO:root:Formatted date: 19/12/18
+INFO:root:Processed result 9
+INFO:root:Formatting date: 2019-09-01T11:24:00
+INFO:root:Formatted date: 01/09/19
+INFO:root:Processed result 10
+INFO:root:Formatting date: 2019-01-23T11:15:00
+INFO:root:Formatted date: 23/01/19
+INFO:root:Processed result 11
+INFO:root:Formatting date: 2020-01-23T13:25:00
+INFO:root:Formatted date: 23/01/20
+INFO:root:Processed result 12
+INFO:root:Formatting date: 2020-09-01T11:24:00
+INFO:root:Formatted date: 01/09/20
+INFO:root:Processed result 13
+INFO:root:Formatting date: 2019-06-02T10:32:00
+INFO:root:Formatted date: 02/06/19
+INFO:root:Processed result 14
+INFO:root:Formatting date: 2021-03-03T11:15:00
+INFO:root:Formatted date: 03/03/21
+INFO:root:Processed result 15
+INFO:root:Formatting date: 2021-09-30T14:45:00
+INFO:root:Formatted date: 30/09/21
+INFO:root:Processed result 16
+INFO:root:Formatting date: 2022-03-31T09:24:00
+INFO:root:Formatted date: 31/03/22
+INFO:root:Processed result 17
+INFO:root:Formatting date: 2023-01-31T10:30:00
+INFO:root:Formatted date: 31/01/23
+INFO:root:Processed result 18
+INFO:root:Formatting date: 2022-09-30T09:15:00
+INFO:root:Formatted date: 30/09/22
+INFO:root:Processed result 19
+INFO:root:Formatting date: 2024-07-07T10:30:00
+INFO:root:Formatted date: 07/07/24
+INFO:root:Processed result 20
+INFO:root:Formatting date: 2023-10-31T10:30:00
+INFO:root:Formatted date: 31/10/23
+INFO:root:Processed result 21
+INFO:root:List of dictionaries created with 22 items
+INFO:root:List of dictionaries transformation completed
+INFO:root:Environment variables loaded
+INFO:root:Environment variables loaded
+INFO:root:Supabase client created
+INFO:root:Supabase client created
+INFO:root:Language model initialized
+INFO:root:Fetching Gmail token...
+INFO:root:Language model initialized
+INFO:root:Fetching Gmail token...
+INFO:httpx:HTTP Request: GET https://dpyngjrtgkgtgdohcwgw.supabase.co/rest/v1/User?select=gmailAccessToken "HTTP/2 200 OK"
+INFO:root:Gmail token fetched successfully
+INFO:root:Searching and retrieving emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:httpx:HTTP Request: GET https://dpyngjrtgkgtgdohcwgw.supabase.co/rest/v1/User?select=gmailAccessToken "HTTP/2 200 OK"
+INFO:root:Searching emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:root:Gmail token fetched successfully
+INFO:root:Searching and retrieving emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:root:Searching emails...
+INFO:googleapiclient.discovery_cache:file_cache is only supported with oauth2client<4.0.0
+INFO:root:Found 1 emails matching the search criteria
+INFO:root:Getting details for email 190e454c6026a884
+INFO:root:Found 1 emails matching the search criteria
+INFO:root:Getting details for email 190e454c6026a884
+INFO:root:Found attachment: blood_test_report_row_2.pdf
+INFO:root:Found attachment: blood_test_report_row_2.pdf
+INFO:root:Found attachment: blood_test_report_row_1.pdf
+INFO:root:Found attachment: blood_test_report_row_1.pdf
+INFO:root:Found attachment: blood_test_report_row_3.pdf
+INFO:root:Found attachment: blood_test_report_row_3.pdf
+INFO:root:Found attachment: blood_test_report_row_5.pdf
+INFO:root:Found attachment: blood_test_report_row_5.pdf
+INFO:root:Found attachment: blood_test_report_row_4.pdf
+INFO:root:Found attachment: blood_test_report_row_4.pdf
+INFO:root:Found attachment: blood_test_report_row_8.pdf
+INFO:root:Found attachment: blood_test_report_row_7.pdf
+INFO:root:Found attachment: blood_test_report_row_9.pdf
+INFO:root:Found attachment: blood_test_report_row_6.pdf
+INFO:root:Found attachment: blood_test_report_row_8.pdf
+INFO:root:Found attachment: blood_test_report_row_10.pdf
+INFO:root:Found attachment: blood_test_report_row_7.pdf
+INFO:root:Found attachment: blood_test_report_row_11.pdf
+INFO:root:Found attachment: blood_test_report_row_9.pdf
+INFO:root:Found attachment: blood_test_report_row_6.pdf
+INFO:root:Found attachment: blood_test_report_row_12.pdf
+INFO:root:Found attachment: blood_test_report_row_10.pdf
+INFO:root:Found attachment: blood_test_report_row_14.pdf
+INFO:root:Found attachment: blood_test_report_row_11.pdf
+INFO:root:Found attachment: blood_test_report_row_12.pdf
+INFO:root:Found attachment: blood_test_report_row_15.pdf
+INFO:root:Found attachment: blood_test_report_row_14.pdf
+INFO:root:Found attachment: blood_test_report_row_13.pdf
+INFO:root:Found attachment: blood_test_report_row_15.pdf
+INFO:root:Found attachment: blood_test_report_row_16.pdf
+INFO:root:Found attachment: blood_test_report_row_13.pdf
+INFO:root:Found attachment: blood_test_report_row_17.pdf
+INFO:root:Found attachment: blood_test_report_row_16.pdf
+INFO:root:Found attachment: blood_test_report_row_18.pdf
+INFO:root:Found attachment: blood_test_report_row_17.pdf
+INFO:root:Found attachment: blood_test_report_row_18.pdf
+INFO:root:Found attachment: blood_test_report_row_20.pdf
+INFO:root:Found attachment: blood_test_report_row_20.pdf
+INFO:root:Found attachment: blood_test_report_row_19.pdf
+INFO:root:Found attachment: blood_test_report_row_19.pdf
+INFO:root:Found attachment: blood_test_report_row_22.pdf
+INFO:root:Found attachment: blood_test_report_row_22.pdf
+INFO:root:Found attachment: blood_test_report_row_21.pdf
+INFO:root:Found attachment: blood_test_report_row_21.pdf
+INFO:root:Retrieved 22 attachments for email 190e454c6026a884
+INFO:root:Retrieved 22 attachments for email 190e454c6026a884
+INFO:root:Total attachments found: 22
+INFO:root:Total attachments found: 22
+INFO:root:Processing PDF: blood_test_report_row_2.pdf
+INFO:root:Processing PDF: blood_test_report_row_2.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_2.pdf: Blood Test Report
+Date & Time: 30.04.2016 00:00
+WBC: 4.286755951
+RBC: 4.889857273
+HGB: 13.15990793
+H...
+INFO:root:Extracted text from PDF blood_test_report_row_2.pdf: Blood Test Report
+Date & Time: 30.04.2016 00:00
+WBC: 4.286755951
+RBC: 4.889857273
+HGB: 13.15990793
+H...
+INFO:root:Sending prompt to language model...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_2.pdf: {
+  "report_date": "2016-04-30T00:00:00",
+  "WBC": 4.286755951,
+  "RBC": 4.889857273,
+  "HGB": 13.15990793,
+  "HCT": 43.13479426,
+  "MCV": 97.31585517,
+  "MCH": 28.21010364,
+  "MCHC": 32.15099591,
+  "PLT": 388.0918414,
+  "LYM_percent": 32.35368383,
+  "MXD_percent": 7.911455825,
+  "NEUT_percent": 67.03665039,
+  "LYM_count": 1.075823846,
+  "MXD_count": 0.586308242,
+  "NEUT_count": 3.13957436,
+  "RDW_SD": 38.57815515,
+  "RDW_CV": 14.8903012,
+  "PDW": 15.44635379,
+  "MPV": 7.757542773,
+  "P_LCR": 18.68196073,
+  "PCT": 0.344349418
+}
+INFO:root:Received response from language model for blood_test_report_row_2.pdf
+INFO:root:Successfully processed blood_test_report_row_2.pdf
+INFO:root:Processing PDF: blood_test_report_row_1.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_1.pdf: Blood Test Report
+Date & Time: 31.10.2015 00:00
+WBC: 5.534220298
+RBC: 4.606864093
+HGB: 13.7191281
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_2.pdf: {
+  "report_date": "2016-04-30T00:00:00",
+  "WBC": 4.286755951,
+  "RBC": 4.889857273,
+  "HGB": 13.15990793,
+  "HCT": 43.13479426,
+  "MCV": 97.31585517,
+  "MCH": 28.21010364,
+  "MCHC": 32.15099591,
+  "PLT": 388.0918414,
+  "LYM_percent": 32.35368383,
+  "MXD_percent": 7.911455825,
+  "NEUT_percent": 67.03665039,
+  "LYM_count": 1.075823846,
+  "MXD_count": 0.586308242,
+  "NEUT_count": 3.13957436,
+  "RDW_SD": 38.57815515,
+  "RDW_CV": 14.8903012,
+  "PDW": 15.44635379,
+  "MPV": 7.757542773,
+  "P_LCR": 18.68196073,
+  "PCT": 0.344349418
+}
+INFO:root:Received response from language model for blood_test_report_row_2.pdf
+INFO:root:Successfully processed blood_test_report_row_2.pdf
+INFO:root:Processing PDF: blood_test_report_row_1.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_1.pdf: Blood Test Report
+Date & Time: 31.10.2015 00:00
+WBC: 5.534220298
+RBC: 4.606864093
+HGB: 13.7191281
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_1.pdf: {
+  "report_date": "2015-10-31T00:00:00",
+  "WBC": 5.534220298,
+  "RBC": 4.606864093,
+  "HGB": 13.7191281,
+  "HCT": 45.32366538,
+  "MCV": 96.20226762,
+  "MCH": 27.469977,
+  "MCHC": 34.10021568,
+  "PLT": 162.9590973,
+  "LYM_percent": 24.44148817,
+  "MXD_percent": 7.127807664,
+  "NEUT_percent": 43.16058978,
+  "LYM_count": 1.161591516,
+  "MXD_count": 0.722904538,
+  "NEUT_count": 3.20330125,
+  "RDW_SD": 41.64727254,
+  "RDW_CV": 13.53625919,
+  "PDW": 12.35020184,
+  "MPV": 9.447435158,
+  "P_LCR": 34.56591373,
+  "PCT": 0.1928091
+}
+INFO:root:Received response from language model for blood_test_report_row_1.pdf
+INFO:root:Successfully processed blood_test_report_row_1.pdf
+INFO:root:Processing PDF: blood_test_report_row_3.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_3.pdf: Blood Test Report
+Date & Time: 31.10.2016 00:00
+WBC: 9.277841169
+RBC: 3.893372251
+HGB: 14.54671221
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_1.pdf: {
+  "report_date": "2015-10-31T00:00:00",
+  "WBC": 5.534220298,
+  "RBC": 4.606864093,
+  "HGB": 13.7191281,
+  "HCT": 45.32366538,
+  "MCV": 96.20226762,
+  "MCH": 27.469977,
+  "MCHC": 34.10021568,
+  "PLT": 162.9590973,
+  "LYM_percent": 24.44148817,
+  "MXD_percent": 7.127807664,
+  "NEUT_percent": 43.16058978,
+  "LYM_count": 1.161591516,
+  "MXD_count": 0.722904538,
+  "NEUT_count": 3.20330125,
+  "RDW_SD": 41.64727254,
+  "RDW_CV": 13.53625919,
+  "PDW": 12.35020184,
+  "MPV": 9.447435158,
+  "P_LCR": 34.56591373,
+  "PCT": 0.1928091
+}
+INFO:root:Received response from language model for blood_test_report_row_1.pdf
+INFO:root:Successfully processed blood_test_report_row_1.pdf
+INFO:root:Processing PDF: blood_test_report_row_3.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_3.pdf: Blood Test Report
+Date & Time: 31.10.2016 00:00
+WBC: 9.277841169
+RBC: 3.893372251
+HGB: 14.54671221
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_3.pdf: {
+  "report_date": "2016-10-31T00:00:00",
+  "WBC": 9.277841169,
+  "RBC": 3.893372251,
+  "HGB": 14.54671221,
+  "HCT": 43.64712078,
+  "MCV": 92.43696435,
+  "MCH": 29.32710448,
+  "MCHC": 33.89242366,
+  "PLT": 209.3856297,
+  "LYM_percent": 25.20112125,
+  "MXD_percent": 6.883995165,
+  "NEUT_percent": 63.24957068,
+  "LYM_count": 1.06162741,
+  "MXD_count": 0.722852401,
+  "NEUT_count": 3.52342714,
+  "RDW_SD": 35.15385858,
+  "RDW_CV": 11.38961358,
+  "PDW": 10.63339791,
+  "MPV": 8.65336298,
+  "P_LCR": 20.92148763,
+  "PCT": 0.157815496
+}
+INFO:root:Received response from language model for blood_test_report_row_3.pdf
+INFO:root:Successfully processed blood_test_report_row_3.pdf
+INFO:root:Processing PDF: blood_test_report_row_5.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_5.pdf: Blood Test Report
+Date & Time: 31.10.2017 00:00
+WBC: 4.714719179
+RBC: 4.249200616
+HGB: 13.44887244
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_3.pdf: {
+  "report_date": "2016-10-31T00:00:00",
+  "WBC": 9.277841169,
+  "RBC": 3.893372251,
+  "HGB": 14.54671221,
+  "HCT": 43.64712078,
+  "MCV": 92.43696435,
+  "MCH": 29.32710448,
+  "MCHC": 33.89242366,
+  "PLT": 209.3856297,
+  "LYM_percent": 25.20112125,
+  "MXD_percent": 6.883995165,
+  "NEUT_percent": 63.24957068,
+  "LYM_count": 1.06162741,
+  "MXD_count": 0.722852401,
+  "NEUT_count": 3.52342714,
+  "RDW_SD": 35.15385858,
+  "RDW_CV": 11.38961358,
+  "PDW": 10.63339791,
+  "MPV": 8.65336298,
+  "P_LCR": 20.92148763,
+  "PCT": 0.157815496
+}
+INFO:root:Received response from language model for blood_test_report_row_3.pdf
+INFO:root:Successfully processed blood_test_report_row_3.pdf
+INFO:root:Processing PDF: blood_test_report_row_5.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_5.pdf: Blood Test Report
+Date & Time: 31.10.2017 00:00
+WBC: 4.714719179
+RBC: 4.249200616
+HGB: 13.44887244
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_5.pdf: {
+  "report_date": "2017-10-31T00:00:00",
+  "WBC": 4.714719179,
+  "RBC": 4.249200616,
+  "HGB": 13.44887244,
+  "HCT": 45.46770515,
+  "MCV": 89.769222,
+  "MCH": 28.04531597,
+  "MCHC": 33.24234556,
+  "PLT": 369.7605835,
+  "LYM_percent": 20.96788624,
+  "MXD_percent": 7.179032243,
+  "NEUT_percent": 55.7770949,
+  "LYM_count": 1.068314801,
+  "MXD_count": 0.703788074,
+  "NEUT_count": 3.358933567,
+  "RDW_SD": 41.39748336,
+  "RDW_CV": 14.35307853,
+  "PDW": 10.09794622,
+  "MPV": 8.494688455,
+  "P_LCR": 16.67469978,
+  "PCT": 0.327193778
+}
+INFO:root:Received response from language model for blood_test_report_row_5.pdf
+INFO:root:Successfully processed blood_test_report_row_5.pdf
+INFO:root:Processing PDF: blood_test_report_row_4.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_4.pdf: Blood Test Report
+Date & Time: 30.04.2017 00:00
+WBC: 9.224027847
+RBC: 5.056891214
+HGB: 14.64462102
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_5.pdf: {
+  "report_date": "2017-10-31T00:00:00",
+  "WBC": 4.714719179,
+  "RBC": 4.249200616,
+  "HGB": 13.44887244,
+  "HCT": 45.46770515,
+  "MCV": 89.769222,
+  "MCH": 28.04531597,
+  "MCHC": 33.24234556,
+  "PLT": 369.7605835,
+  "LYM_percent": 20.96788624,
+  "MXD_percent": 7.179032243,
+  "NEUT_percent": 55.7770949,
+  "LYM_count": 1.068314801,
+  "MXD_count": 0.703788074,
+  "NEUT_count": 3.358933567,
+  "RDW_SD": 41.39748336,
+  "RDW_CV": 14.35307853,
+  "PDW": 10.09794622,
+  "MPV": 8.494688455,
+  "P_LCR": 16.67469978,
+  "PCT": 0.327193778
+}
+INFO:root:Received response from language model for blood_test_report_row_5.pdf
+INFO:root:Successfully processed blood_test_report_row_5.pdf
+INFO:root:Processing PDF: blood_test_report_row_4.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_4.pdf: Blood Test Report
+Date & Time: 30.04.2017 00:00
+WBC: 9.224027847
+RBC: 5.056891214
+HGB: 14.64462102
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_4.pdf: {
+  "report_date": "2017-04-30T00:00:00",
+  "WBC": 9.224027847,
+  "RBC": 5.056891214,
+  "HGB": 14.64462102,
+  "HCT": 38.66863264,
+  "MCV": 98.91615716,
+  "MCH": 30.64110266,
+  "MCHC": 34.06573897,
+  "PLT": 321.7227177,
+  "LYM_percent": 24.35447713,
+  "MXD_percent": 6.894010309,
+  "NEUT_percent": 55.55054673,
+  "LYM_count": 0.924497088,
+  "MXD_count": 0.752361989,
+  "NEUT_count": 3.57902845,
+  "RDW_SD": 44.63507205,
+  "RDW_CV": 14.06569714,
+  "PDW": 14.78208323,
+  "MPV": 10.19070503,
+  "P_LCR": 34.8158393,
+  "PCT": 0.181831302
+}
+INFO:root:Received response from language model for blood_test_report_row_4.pdf
+INFO:root:Successfully processed blood_test_report_row_4.pdf
+INFO:root:Processing PDF: blood_test_report_row_8.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_8.pdf: Blood Test Report
+Date & Time: 11.05.2018 10:19
+WBC: 4.540695835
+RBC: 3.807271295
+HGB: 14.06775791
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_4.pdf: {
+  "report_date": "2017-04-30T00:00:00Z",
+  "WBC": 9.224027847,
+  "RBC": 5.056891214,
+  "HGB": 14.64462102,
+  "HCT": 38.66863264,
+  "MCV": 98.91615716,
+  "MCH": 30.64110266,
+  "MCHC": 34.06573897,
+  "PLT": 321.7227177,
+  "LYM_percent": 24.35447713,
+  "MXD_percent": 6.894010309,
+  "NEUT_percent": 55.55054673,
+  "LYM_count": 0.924497088,
+  "MXD_count": 0.752361989,
+  "NEUT_count": 3.57902845,
+  "RDW_SD": 44.63507205,
+  "RDW_CV": 14.06569714,
+  "PDW": 14.78208323,
+  "MPV": 10.19070503,
+  "P_LCR": 34.8158393,
+  "PCT": 0.181831302
+}
+INFO:root:Received response from language model for blood_test_report_row_4.pdf
+INFO:root:Successfully processed blood_test_report_row_4.pdf
+INFO:root:Processing PDF: blood_test_report_row_8.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_8.pdf: Blood Test Report
+Date & Time: 11.05.2018 10:19
+WBC: 4.540695835
+RBC: 3.807271295
+HGB: 14.06775791
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_8.pdf: {
+  "report_date": "2018-11-05T10:19:00",
+  "WBC": 4.540695835,
+  "RBC": 3.807271295,
+  "HGB": 14.06775791,
+  "HCT": 44.38247176,
+  "MCV": 92.77365875,
+  "MCH": 31.32074492,
+  "MCHC": 35.18279766,
+  "PLT": 335.5595602,
+  "LYM_percent": 28.27083312,
+  "MXD_percent": 8.066390767,
+  "NEUT_percent": 55.52637708,
+  "LYM_count": 1.22389106,
+  "MXD_count": 0.607008484,
+  "NEUT_count": 3.13446539,
+  "RDW_SD": 44.60851541,
+  "RDW_CV": 11.63223997,
+  "PDW": 9.537275446,
+  "MPV": 83.564,
+  "P_LCR": 32.31514527,
+  "PCT": 0.158219558
+}
+INFO:root:Received response from language model for blood_test_report_row_8.pdf
+INFO:root:Successfully processed blood_test_report_row_8.pdf
+INFO:root:Processing PDF: blood_test_report_row_7.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_7.pdf: Blood Test Report
+Date & Time: 29.10.2018 10:20
+WBC: 5.001738927
+RBC: 4.246693708
+HGB: 12.53798766
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_8.pdf: {
+  "report_date": "2018-05-11T10:19:00",
+  "WBC": 4.540695835,
+  "RBC": 3.807271295,
+  "HGB": 14.06775791,
+  "HCT": 44.38247176,
+  "MCV": 92.77365875,
+  "MCH": 31.32074492,
+  "MCHC": 35.18279766,
+  "PLT": 335.5595602,
+  "LYM_percent": 28.27083312,
+  "MXD_percent": 8.066390767,
+  "NEUT_percent": 55.52637708,
+  "LYM_count": 1.22389106,
+  "MXD_count": 0.607008484,
+  "NEUT_count": 3.13446539,
+  "RDW_SD": 44.60851541,
+  "RDW_CV": 11.63223997,
+  "PDW": 9.537275446,
+  "MPV": 83.564,
+  "P_LCR": 32.31514527,
+  "PCT": 0.158219558
+}
+INFO:root:Received response from language model for blood_test_report_row_8.pdf
+INFO:root:Successfully processed blood_test_report_row_8.pdf
+INFO:root:Processing PDF: blood_test_report_row_7.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_7.pdf: Blood Test Report
+Date & Time: 29.10.2018 10:20
+WBC: 5.001738927
+RBC: 4.246693708
+HGB: 12.53798766
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_7.pdf: {
+  "report_date": "2018-10-29T10:20:00",
+  "WBC": 5.001738927,
+  "RBC": 4.246693708,
+  "HGB": 12.53798766,
+  "HCT": 38.46830278,
+  "MCV": 81.18686004,
+  "MCH": 32.49823656,
+  "MCHC": 32.24888234,
+  "PLT": 343.6478345,
+  "LYM_percent": 39.42510959,
+  "MXD_percent": 9.906318149,
+  "NEUT_percent": 50.99608722,
+  "LYM_count": 1.193146026,
+  "MXD_count": 0.64807974,
+  "NEUT_count": 2.51650343,
+  "RDW_SD": 42.39147741,
+  "RDW_CV": 13.19355702,
+  "PDW": 14.38335842,
+  "MPV": 10.3133816,
+  "P_LCR": 19.64367812,
+  "PCT": 0.311781584
+}
+INFO:root:Received response from language model for blood_test_report_row_7.pdf
+INFO:root:Successfully processed blood_test_report_row_7.pdf
+INFO:root:Processing PDF: blood_test_report_row_9.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_9.pdf: Blood Test Report
+Date & Time: 11.12.2018 10:01
+WBC: 6.624344616
+RBC: 5.166684242
+HGB: 13.33925977
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_9.pdf: {
+  "report_date": "2018-12-11T10:01:00",
+  "WBC": 6.624344616,
+  "RBC": 5.166684242,
+  "HGB": 13.33925977,
+  "HCT": 39.06566985,
+  "MCV": 81.06438667,
+  "MCH": 27.61022022,
+  "MCHC": 35.46089497,
+  "PLT": 361.550172,
+  "LYM_percent": 38.75938754,
+  "MXD_percent": 9.01560919,
+  "NEUT_percent": 68.32048663,
+  "LYM_count": 1.259228546,
+  "MXD_count": 0.751447725,
+  "NEUT_count": 3.06375592,
+  "RDW_SD": 35.71183792,
+  "RDW_CV": null,
+  "PDW": 16.73053874,
+  "MPV": 10.19566734,
+  "P_LCR": 24.21519158,
+  "PCT": 0.260424252
+}
+INFO:root:Received response from language model for blood_test_report_row_9.pdf
+INFO:root:Successfully processed blood_test_report_row_9.pdf
+INFO:root:Processing PDF: blood_test_report_row_6.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_6.pdf: Blood Test Report
+Date & Time: 30.04.2018 00:00
+WBC: 8.144232598
+RBC: 3.875768659
+HGB: 13.14262458
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_6.pdf: {
+  "report_date": "2018-04-30T00:00:00",
+  "WBC": 8.144232598,
+  "RBC": 3.875768659,
+  "HGB": 13.14262458,
+  "HCT": 42.3436925,
+  "MCV": 97.29590161,
+  "MCH": 28.84946204,
+  "MCHC": 33.90027901,
+  "PLT": 183.9697009,
+  "LYM_percent": 25.25480527,
+  "MXD_percent": 5.28137427,
+  "NEUT_percent": 60.45624755,
+  "LYM_count": 1.017323703,
+  "MXD_count": 0.688103693,
+  "NEUT_count": 3.262191136,
+  "RDW_SD": 37.75915351,
+  "RDW_CV": 13.77240971,
+  "PDW": 11.34800033,
+  "MPV": 9.479921838,
+  "P_LCR": 19.78340939,
+  "PCT": 0.202201484
+}
+INFO:root:Received response from language model for blood_test_report_row_6.pdf
+INFO:root:Successfully processed blood_test_report_row_6.pdf
+INFO:root:Processing PDF: blood_test_report_row_10.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_10.pdf: Blood Test Report
+Date & Time: 19.12.2018 15:46
+WBC: 7.947661135
+RBC: 3.929587388
+HGB: 12.40447612
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_10.pdf: {
+  "report_date": "2018-12-19T15:46:00",
+  "WBC": 7.947661135,
+  "RBC": 3.929587388,
+  "HGB": 12.40447612,
+  "HCT": 40.20685857,
+  "MCV": 87.81662652,
+  "MCH": 30.14507333,
+  "MCHC": 34.59147732,
+  "PLT": 299.140733,
+  "LYM_percent": 39.59259003,
+  "MXD_percent": 7.596996604,
+  "NEUT_percent": 65.75676809,
+  "LYM_count": 1.192562782,
+  "MXD_count": 0.680128357,
+  "NEUT_count": 3.126172685,
+  "RDW_SD": 41.17245392,
+  "RDW_CV": 13.62993449,
+  "PDW": 11.976443,
+  "MPV": 9.078075009,
+  "P_LCR": 33.14787607,
+  "PCT": 0.303515894
+}
+INFO:root:Received response from language model for blood_test_report_row_10.pdf
+INFO:root:Successfully processed blood_test_report_row_10.pdf
+INFO:root:Processing PDF: blood_test_report_row_11.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_11.pdf: Blood Test Report
+Date & Time: 01.09.2019 11:24
+WBC: 8.617791053
+RBC: 4.681088053
+HGB: 14.80966066
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_11.pdf: {
+  "report_date": "2019-09-01T11:24:00",
+  "WBC": 8.617791053,
+  "RBC": 4.681088053,
+  "HGB": 14.80966066,
+  "HCT": 38.27773978,
+  "MCV": null,
+  "MCH": 29.9603393,
+  "MCHC": 32.98394493,
+  "PLT": 308.3494888,
+  "LYM_percent": 31.36521576,
+  "MXD_percent": 5.15668076,
+  "NEUT_percent": 63.15669489,
+  "LYM_count": 1.035003287,
+  "MXD_count": 0.684991429,
+  "NEUT_count": 3.362705696,
+  "RDW_SD": 38.63797292,
+  "RDW_CV": 12.99983402,
+  "PDW": 12.2596122,
+  "MPV": 9.470483075,
+  "P_LCR": 28.70793872,
+  "PCT": 0.17574266
+}
+INFO:root:Received response from language model for blood_test_report_row_11.pdf
+INFO:root:Successfully processed blood_test_report_row_11.pdf
+INFO:root:Processing PDF: blood_test_report_row_12.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_12.pdf: Blood Test Report
+Date & Time: 23.01.2019 11:15
+WBC: 5.171252875
+RBC: 4.494712165
+HGB: 13.43859492
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_12.pdf: {
+  "report_date": "2019-01-23T11:15:00",
+  "WBC": 5.171252875,
+  "RBC": 4.494712165,
+  "HGB": 13.43859492,
+  "HCT": 41.26452173,
+  "MCV": 88.08237359,
+  "MCH": 29.54754178,
+  "MCHC": 34.14356598,
+  "PLT": 159.8694937,
+  "LYM_percent": 31.36031141,
+  "MXD_percent": 9.543911392,
+  "NEUT_percent": 62.79218813,
+  "LYM_count": 0.97884547,
+  "MXD_count": 0.811389219,
+  "NEUT_count": 2.336804218,
+  "RDW_SD": 40.98829172,
+  "RDW_CV": 13.56289327,
+  "PDW": 9.893245658,
+  "MPV": 10.18335995,
+  "P_LCR": 32.83648853,
+  "PCT": 0.253680482
+}
+INFO:root:Received response from language model for blood_test_report_row_12.pdf
+INFO:root:Successfully processed blood_test_report_row_12.pdf
+INFO:root:Processing PDF: blood_test_report_row_14.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_14.pdf: Blood Test Report
+Date & Time: 23.01.2020 13:25
+WBC: 4.302450704
+RBC: 4.58761707
+HGB: 12.03394937
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_7.pdf: {
+  "report_date": "2018-10-29T10:20:00",
+  "WBC": 5.001738927,
+  "RBC": 4.246693708,
+  "HGB": 12.53798766,
+  "HCT": 38.46830278,
+  "MCV": 81.18686004,
+  "MCH": 32.49823656,
+  "MCHC": 32.24888234,
+  "PLT": 343.6478345,
+  "LYM_percent": 39.42510959,
+  "MXD_percent": 9.906318149,
+  "NEUT_percent": 50.99608722,
+  "LYM_count": 1.193146026,
+  "MXD_count": 0.64807974,
+  "NEUT_count": 2.51650343,
+  "RDW_SD": 42.39147741,
+  "RDW_CV": 13.19355702,
+  "PDW": 14.38335842,
+  "MPV": 10.3133816,
+  "P_LCR": 19.64367812,
+  "PCT": 0.311781584
+}
+INFO:root:Received response from language model for blood_test_report_row_7.pdf
+INFO:root:Successfully processed blood_test_report_row_7.pdf
+INFO:root:Processing PDF: blood_test_report_row_9.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_9.pdf: Blood Test Report
+Date & Time: 11.12.2018 10:01
+WBC: 6.624344616
+RBC: 5.166684242
+HGB: 13.33925977
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_9.pdf: {
+  "report_date": "2018-12-11T10:01:00",
+  "WBC": 6.624344616,
+  "RBC": 5.166684242,
+  "HGB": 13.33925977,
+  "HCT": 39.06566985,
+  "MCV": 81.06438667,
+  "MCH": 27.61022022,
+  "MCHC": 35.46089497,
+  "PLT": 361.550172,
+  "LYM_percent": 38.75938754,
+  "MXD_percent": 9.01560919,
+  "NEUT_percent": 68.32048663,
+  "LYM_count": 1.259228546,
+  "MXD_count": 0.751447725,
+  "NEUT_count": 3.06375592,
+  "RDW_SD": 35.71183792,
+  "RDW_CV": null,
+  "PDW": 16.73053874,
+  "MPV": 10.19566734,
+  "P_LCR": 24.21519158,
+  "PCT": 0.260424252
+}
+INFO:root:Received response from language model for blood_test_report_row_9.pdf
+INFO:root:Successfully processed blood_test_report_row_9.pdf
+INFO:root:Processing PDF: blood_test_report_row_6.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_6.pdf: Blood Test Report
+Date & Time: 30.04.2018 00:00
+WBC: 8.144232598
+RBC: 3.875768659
+HGB: 13.14262458
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_6.pdf: {
+  "report_date": "2018-04-30T00:00:00",
+  "WBC": 8.144232598,
+  "RBC": 3.875768659,
+  "HGB": 13.14262458,
+  "HCT": 42.3436925,
+  "MCV": 97.29590161,
+  "MCH": 28.84946204,
+  "MCHC": 33.90027901,
+  "PLT": 183.9697009,
+  "LYM_percent": 25.25480527,
+  "MXD_percent": 5.28137427,
+  "NEUT_percent": 60.45624755,
+  "LYM_count": 1.017323703,
+  "MXD_count": 0.688103693,
+  "NEUT_count": 3.262191136,
+  "RDW_SD": 37.75915351,
+  "RDW_CV": 13.77240971,
+  "PDW": 11.34800033,
+  "MPV": 9.479921838,
+  "P_LCR": 19.78340939,
+  "PCT": 0.202201484
+}
+INFO:root:Received response from language model for blood_test_report_row_6.pdf
+INFO:root:Successfully processed blood_test_report_row_6.pdf
+INFO:root:Processing PDF: blood_test_report_row_10.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_10.pdf: Blood Test Report
+Date & Time: 19.12.2018 15:46
+WBC: 7.947661135
+RBC: 3.929587388
+HGB: 12.40447612
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_14.pdf: {
+  "report_date": "2020-01-23T13:25:00",
+  "WBC": 4.302450704,
+  "RBC": 4.58761707,
+  "HGB": 12.03394937,
+  "HCT": 45.00864672,
+  "MCV": 95.51997089,
+  "MCH": 31.91484484,
+  "MCHC": 33.10719299,
+  "PLT": 323.4239244,
+  "LYM_percent": 34.07229174,
+  "MXD_percent": 9.481976162,
+  "NEUT_percent": 53.39218152,
+  "LYM_count": 1.261175136,
+  "MXD_count": 0.710720528,
+  "NEUT_count": 3.004209791,
+  "RDW_SD": 38.49573961,
+  "RDW_CV": 11.32236409,
+  "PDW": 11.74796747,
+  "MPV": 10.08354853,
+  "P_LCR": 24.84975424,
+  "PCT": 0.252201918
+}
+INFO:root:Received response from language model for blood_test_report_row_14.pdf
+INFO:root:Successfully processed blood_test_report_row_14.pdf
+INFO:root:Processing PDF: blood_test_report_row_15.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_15.pdf: Blood Test Report
+Date & Time: 01.09.2020  11:24
+WBC: 5.932640671
+RBC: 4.420228601
+HGB: 15.06678972
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_10.pdf: {
+  "report_date": "2018-12-19T15:46:00",
+  "WBC": 7.947661135,
+  "RBC": 3.929587388,
+  "HGB": 12.40447612,
+  "HCT": 40.20685857,
+  "MCV": 87.81662652,
+  "MCH": 30.14507333,
+  "MCHC": 34.59147732,
+  "PLT": 299.140733,
+  "LYM_percent": 39.59259003,
+  "MXD_percent": 7.596996604,
+  "NEUT_percent": 65.75676809,
+  "LYM_count": 1.192562782,
+  "MXD_count": 0.680128357,
+  "NEUT_count": 3.126172685,
+  "RDW_SD": 41.17245392,
+  "RDW_CV": 13.62993449,
+  "PDW": 11.976443,
+  "MPV": 9.078075009,
+  "P_LCR": 33.14787607,
+  "PCT": 0.303515894
+}
+INFO:root:Received response from language model for blood_test_report_row_10.pdf
+INFO:root:Successfully processed blood_test_report_row_10.pdf
+INFO:root:Processing PDF: blood_test_report_row_11.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_11.pdf: Blood Test Report
+Date & Time: 01.09.2019 11:24
+WBC: 8.617791053
+RBC: 4.681088053
+HGB: 14.80966066
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_15.pdf: {
+  "report_date": "2020-09-01T11:24:00",
+  "WBC": 5.932640671,
+  "RBC": 4.420228601,
+  "HGB": 15.06678972,
+  "HCT": 38.44965874,
+  "MCV": 97.27633326,
+  "MCH": 30.99260764,
+  "MCHC": 34.82540489,
+  "PLT": 329.7054427,
+  "LYM_percent": 28.78248771,
+  "MXD_percent": null,
+  "NEUT_percent": 59.4159735,
+  "LYM_count": 1.038486746,
+  "MXD_count": 0.76779316,
+  "NEUT_count": 2.985339754,
+  "RDW_SD": 41.8275115,
+  "RDW_CV": 12.21455013,
+  "PDW": 15.55459629,
+  "MPV": 7.486920424,
+  "P_LCR": 20.72082068,
+  "PCT": 0.171204024
+}
+INFO:root:Received response from language model for blood_test_report_row_15.pdf
+INFO:root:Successfully processed blood_test_report_row_15.pdf
+INFO:root:Processing PDF: blood_test_report_row_13.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_13.pdf: Blood Test Report
+Date & Time: 02.06.2019 10:32
+WBC: 9.67820707
+RBC: 5.151519862
+HGB: 13.26661504
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_11.pdf: {
+  "report_date": "2019-09-01T11:24:00",
+  "WBC": 8.617791053,
+  "RBC": 4.681088053,
+  "HGB": 14.80966066,
+  "HCT": 38.27773978,
+  "MCV": null,
+  "MCH": 29.9603393,
+  "MCHC": 32.98394493,
+  "PLT": 308.3494888,
+  "LYM_percent": 31.36521576,
+  "MXD_percent": 5.15668076,
+  "NEUT_percent": 63.15669489,
+  "LYM_count": 1.035003287,
+  "MXD_count": 0.684991429,
+  "NEUT_count": 3.362705696,
+  "RDW_SD": 38.63797292,
+  "RDW_CV": 12.99983402,
+  "PDW": 12.2596122,
+  "MPV": 9.470483075,
+  "P_LCR": 28.70793872,
+  "PCT": 0.17574266
+}
+INFO:root:Received response from language model for blood_test_report_row_11.pdf
+INFO:root:Successfully processed blood_test_report_row_11.pdf
+INFO:root:Processing PDF: blood_test_report_row_12.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_12.pdf: Blood Test Report
+Date & Time: 23.01.2019 11:15
+WBC: 5.171252875
+RBC: 4.494712165
+HGB: 13.43859492
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_12.pdf: {
+  "report_date": "2019-01-23T11:15:00",
+  "WBC": 5.171252875,
+  "RBC": 4.494712165,
+  "HGB": 13.43859492,
+  "HCT": 41.26452173,
+  "MCV": 88.08237359,
+  "MCH": 29.54754178,
+  "MCHC": 34.14356598,
+  "PLT": 159.8694937,
+  "LYM_percent": 31.36031141,
+  "MXD_percent": 9.543911392,
+  "NEUT_percent": 62.79218813,
+  "LYM_count": 0.97884547,
+  "MXD_count": 0.811389219,
+  "NEUT_count": 2.336804218,
+  "RDW_SD": 40.98829172,
+  "RDW_CV": 13.56289327,
+  "PDW": 9.893245658,
+  "MPV": 10.18335995,
+  "P_LCR": 32.83648853,
+  "PCT": 0.253680482
+}
+INFO:root:Received response from language model for blood_test_report_row_12.pdf
+INFO:root:Successfully processed blood_test_report_row_12.pdf
+INFO:root:Processing PDF: blood_test_report_row_14.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_14.pdf: Blood Test Report
+Date & Time: 23.01.2020 13:25
+WBC: 4.302450704
+RBC: 4.58761707
+HGB: 12.03394937
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_13.pdf: {
+  "report_date": "2019-06-02T10:32:00",
+  "WBC": 9.67820707,
+  "RBC": 5.151519862,
+  "HGB": 13.26661504,
+  "HCT": 39.12544705,
+  "MCV": 95.05311176,
+  "MCH": 27.4471495,
+  "MCHC": 33.52412751,
+  "PLT": 195.9116945,
+  "LYM_percent": 24.92256114,
+  "MXD_percent": 9.091527392,
+  "NEUT_percent": 44.56444518,
+  "LYM_count": 1.183237717,
+  "MXD_count": 0.744003643,
+  "NEUT_count": 2.941405928,
+  "RDW_SD": 42.07561464,
+  "RDW_CV": 14.67968179,
+  "PDW": 11.91325342,
+  "MPV": 7.763808903,
+  "P_LCR": 25.15842865,
+  "PCT": 0.196656124
+}
+INFO:root:Received response from language model for blood_test_report_row_13.pdf
+INFO:root:Successfully processed blood_test_report_row_13.pdf
+INFO:root:Processing PDF: blood_test_report_row_16.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_16.pdf: Blood Test Report
+Date & Time: 03.03.2021  11:15
+WBC: 7.357913573
+RBC: 4.806922489
+HGB: 12.63902171
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_16.pdf: {
+  "report_date": "2021-03-03T11:15:00",
+  "WBC": 7.357913573,
+  "RBC": 4.806922489,
+  "HGB": 12.63902171,
+  "HCT": 39.88251537,
+  "MCV": 86.46247715,
+  "MCH": 29.64258008,
+  "MCHC": 34.73020105,
+  "PLT": 216.1354231,
+  "LYM_percent": 24.38345742,
+  "MXD_percent": 5.265112187,
+  "NEUT_percent": 40.2405555,
+  "LYM_count": 1.29234042,
+  "MXD_count": 0.70535358,
+  "NEUT_count": 3.04099352,
+  "RDW_SD": 43.86849205,
+  "RDW_CV": 13.27966212,
+  "PDW": 9.993868909,
+  "MPV": 8.301449769,
+  "P_LCR": 30.63516431,
+  "PCT": 0.257746132
+}
+INFO:root:Received response from language model for blood_test_report_row_16.pdf
+INFO:root:Successfully processed blood_test_report_row_16.pdf
+INFO:root:Processing PDF: blood_test_report_row_17.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_17.pdf: Blood Test Report
+Date & Time: 30.09.2021  14:45
+WBC: 4.025706787
+RBC: 4.100595646
+HGB: 14.93625833
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_17.pdf: {
+  "report_date": "2021-09-30T14:45:00",
+  "WBC": 4.025706787,
+  "RBC": 4.100595646,
+  "HGB": 14.93625833,
+  "HCT": 41.20333479,
+  "MCV": 91.12465557,
+  "MCH": 31.2815486,
+  "MCHC": 35.94843659,
+  "PLT": 362.7117913,
+  "LYM_percent": 23.88619277,
+  "MXD_percent": 8.111540264,
+  "NEUT_percent": 46.70474793,
+  "LYM_count": 1.24310739,
+  "MXD_count": 0.74340526,
+  "NEUT_count": 2.95718428,
+  "RDW_SD": 41.17145749,
+  "RDW_CV": 14.01869079,
+  "PDW": 12.86527322,
+  "MPV": 7.934540196,
+  "P_LCR": 19.06116558,
+  "PCT": 0.273312886
+}
+INFO:root:Received response from language model for blood_test_report_row_17.pdf
+INFO:root:Successfully processed blood_test_report_row_17.pdf
+INFO:root:Processing PDF: blood_test_report_row_18.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_18.pdf: Blood Test Report
+Date & Time: 31.03.2022  09:24
+WBC: 7.634310486
+RBC: 4.110071912
+HGB: 13.7975471
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_18.pdf: {
+  "report_date": "2022-03-31T09:24:00",
+  "WBC": 7.634310486,
+  "RBC": 4.110071912,
+  "HGB": 13.7975471,
+  "HCT": 38.58915616,
+  "MCV": 84.10469765,
+  "MCH": 31.9055489,
+  "MCHC": 35.20495261,
+  "PLT": 194.8849293,
+  "LYM_percent": 30.29018046,
+  "MXD_percent": 9.969490196,
+  "NEUT_percent": 64.88823484,
+  "LYM_count": 1.28637078,
+  "MXD_count": 0.6933137,
+  "NEUT_count": 3.14377735,
+  "RDW_SD": 46.24095076,
+  "RDW_CV": 12.79499642,
+  "PDW": 9.667014112,
+  "MPV": 9.775447203,
+  "P_LCR": 26.41639361,
+  "PCT": 0.233638791
+}
+INFO:root:Received response from language model for blood_test_report_row_18.pdf
+INFO:root:Successfully processed blood_test_report_row_18.pdf
+INFO:root:Processing PDF: blood_test_report_row_20.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_20.pdf: Blood Test Report
+Date & Time: 31.01.2023 10:30
+WBC: 8.468819741
+RBC: 3.855323174
+HGB: 13.50804629
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_14.pdf: {
+  "report_date": "2020-01-23T13:25:00",
+  "WBC": 4.302450704,
+  "RBC": 4.58761707,
+  "HGB": 12.03394937,
+  "HCT": 45.00864672,
+  "MCV": 95.51997089,
+  "MCH": 31.91484484,
+  "MCHC": 33.10719299,
+  "PLT": 323.4239244,
+  "LYM_percent": 34.07229174,
+  "MXD_percent": 9.481976162,
+  "NEUT_percent": 53.39218152,
+  "LYM_count": 1.261175136,
+  "MXD_count": 0.710720528,
+  "NEUT_count": 3.004209791,
+  "RDW_SD": 38.49573961,
+  "RDW_CV": 11.32236409,
+  "PDW": 11.74796747,
+  "MPV": 10.08354853,
+  "P_LCR": 24.84975424,
+  "PCT": 0.252201918
+}
+INFO:root:Received response from language model for blood_test_report_row_14.pdf
+INFO:root:Successfully processed blood_test_report_row_14.pdf
+INFO:root:Processing PDF: blood_test_report_row_15.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_15.pdf: Blood Test Report
+Date & Time: 01.09.2020  11:24
+WBC: 5.932640671
+RBC: 4.420228601
+HGB: 15.06678972
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_20.pdf: {
+  "report_date": "2023-01-31T10:30:00",
+  "WBC": 8.468819741,
+  "RBC": 3.855323174,
+  "HGB": 13.50804629,
+  "HCT": 37.15890157,
+  "MCV": 81.91019647,
+  "MCH": 27.74747496,
+  "MCHC": 34.82812084,
+  "PLT": 299.1818083,
+  "LYM_percent": 24.41432574,
+  "MXD_percent": 5.55877816,
+  "NEUT_percent": 49.18407447,
+  "LYM_count": 1.271468066,
+  "MXD_count": 0.712586656,
+  "NEUT_count": 3.118960367,
+  "RDW_SD": 42.76714719,
+  "RDW_CV": 11.55607662,
+  "PDW": 14.37659045,
+  "MPV": 9.487557311,
+  "P_LCR": 31.30943943,
+  "PCT": 0.227605816
+}
+INFO:root:Received response from language model for blood_test_report_row_20.pdf
+INFO:root:Successfully processed blood_test_report_row_20.pdf
+INFO:root:Processing PDF: blood_test_report_row_19.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_19.pdf: Blood Test Report
+Date & Time: 30.09.2022  09:15
+WBC: 4.233213472
+RBC: 4.073985983
+HGB: 13.953787
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_15.pdf: {
+  "report_date": "2020-09-01T11:24:00",
+  "WBC": 5.932640671,
+  "RBC": 4.420228601,
+  "HGB": 15.06678972,
+  "HCT": 38.44965874,
+  "MCV": 97.27633326,
+  "MCH": 30.99260764,
+  "MCHC": 34.82540489,
+  "PLT": 329.7054427,
+  "LYM_percent": 28.78248771,
+  "MXD_percent": null,
+  "NEUT_percent": 59.4159735,
+  "LYM_count": 1.038486746,
+  "MXD_count": 0.76779316,
+  "NEUT_count": 2.985339754,
+  "RDW_SD": 41.8275115,
+  "RDW_CV": 12.21455013,
+  "PDW": 15.55459629,
+  "MPV": 7.486920424,
+  "P_LCR": 20.72082068,
+  "PCT": 0.171204024
+}
+INFO:root:Received response from language model for blood_test_report_row_15.pdf
+INFO:root:Successfully processed blood_test_report_row_15.pdf
+INFO:root:Processing PDF: blood_test_report_row_13.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_13.pdf: Blood Test Report
+Date & Time: 02.06.2019 10:32
+WBC: 9.67820707
+RBC: 5.151519862
+HGB: 13.26661504
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_19.pdf: {
+  "report_date": "2022-09-30T09:15:00",
+  "WBC": 4.233213472,
+  "RBC": 4.073985983,
+  "HGB": 13.953787,
+  "HCT": 40.26498086,
+  "MCV": 94.87420454,
+  "MCH": 32.07039435,
+  "MCHC": 34.8921095,
+  "PLT": 235.7161512,
+  "LYM_percent": 21.02282761,
+  "MXD_percent": 5.463582305,
+  "NEUT_percent": 59.88535362,
+  "LYM_count": 1.30756305,
+  "MXD_count": 0.71577447,
+  "NEUT_count": 3.02592989,
+  "RDW_SD": 41.40853819,
+  "RDW_CV": 11.72172153,
+  "PDW": 11.55392026,
+  "MPV": 8.277844049,
+  "P_LCR": 17.74027101,
+  "PCT": 0.150503554
+}
+INFO:root:Received response from language model for blood_test_report_row_19.pdf
+INFO:root:Successfully processed blood_test_report_row_19.pdf
+INFO:root:Processing PDF: blood_test_report_row_22.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_22.pdf: Blood Test Report
+Date & Time: 07.07.2024 10:30
+WBC: 6.508916272
+RBC: 4.82922186
+HGB: 12.80287104
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_22.pdf: {
+  "report_date": "2024-07-07T10:30:00",
+  "WBC": 6.508916272,
+  "RBC": 4.82922186,
+  "HGB": 12.80287104,
+  "HCT": 40.92164783,
+  "MCV": 89.12862592,
+  "MCH": 31.31683028,
+  "MCHC": 34.18491255,
+  "PLT": 400.0450004,
+  "LYM_percent": 24.24132476,
+  "MXD_percent": 6.358956206,
+  "NEUT_percent": 71.74978602,
+  "LYM_count": 1.295392621,
+  "MXD_count": 0.729023681,
+  "NEUT_count": 3.049334125,
+  "RDW_SD": 38.22658205,
+  "RDW_CV": 13.69231849,
+  "PDW": 14.35171433,
+  "MPV": 9.652567631,
+  "P_LCR": 39.25792047,
+  "PCT": 0.241076591
+}
+INFO:root:Received response from language model for blood_test_report_row_22.pdf
+INFO:root:Successfully processed blood_test_report_row_22.pdf
+INFO:root:Processing PDF: blood_test_report_row_21.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_21.pdf: Blood Test Report
+Date & Time: 31.10.2023 10:30
+WBC: 4.501161678
+RBC: 3.83401186
+HGB: 13.13844861
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_13.pdf: {
+  "report_date": "2019-06-02T10:32:00",
+  "WBC": 9.67820707,
+  "RBC": 5.151519862,
+  "HGB": 13.26661504,
+  "HCT": 39.12544705,
+  "MCV": 95.05311176,
+  "MCH": 27.4471495,
+  "MCHC": 33.52412751,
+  "PLT": 195.9116945,
+  "LYM_percent": 24.92256114,
+  "MXD_percent": 9.091527392,
+  "NEUT_percent": 44.56444518,
+  "LYM_count": 1.183237717,
+  "MXD_count": 0.744003643,
+  "NEUT_count": 2.941405928,
+  "RDW_SD": 42.07561464,
+  "RDW_CV": 14.67968179,
+  "PDW": 11.91325342,
+  "MPV": 7.763808903,
+  "P_LCR": 25.15842865,
+  "PCT": 0.196656124
+}
+INFO:root:Received response from language model for blood_test_report_row_13.pdf
+INFO:root:Successfully processed blood_test_report_row_13.pdf
+INFO:root:Processing PDF: blood_test_report_row_16.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_16.pdf: Blood Test Report
+Date & Time: 03.03.2021  11:15
+WBC: 7.357913573
+RBC: 4.806922489
+HGB: 12.63902171
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_16.pdf: {
+  "report_date": "2021-03-03T11:15:00",
+  "WBC": 7.357913573,
+  "RBC": 4.806922489,
+  "HGB": 12.63902171,
+  "HCT": 39.88251537,
+  "MCV": 86.46247715,
+  "MCH": 29.64258008,
+  "MCHC": 34.73020105,
+  "PLT": 216.1354231,
+  "LYM_percent": 24.38345742,
+  "MXD_percent": 5.265112187,
+  "NEUT_percent": 40.2405555,
+  "LYM_count": 1.29234042,
+  "MXD_count": 0.70535358,
+  "NEUT_count": 3.04099352,
+  "RDW_SD": 43.86849205,
+  "RDW_CV": 13.27966212,
+  "PDW": 9.993868909,
+  "MPV": 8.301449769,
+  "P_LCR": 30.63516431,
+  "PCT": 0.257746132
+}
+INFO:root:Received response from language model for blood_test_report_row_16.pdf
+INFO:root:Successfully processed blood_test_report_row_16.pdf
+INFO:root:Processing PDF: blood_test_report_row_17.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_17.pdf: Blood Test Report
+Date & Time: 30.09.2021  14:45
+WBC: 4.025706787
+RBC: 4.100595646
+HGB: 14.93625833
+...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_21.pdf: {
+  "report_date": "2023-10-31T10:30:00",
+  "WBC": 4.501161678,
+  "RBC": 3.83401186,
+  "HGB": 13.13844861,
+  "HCT": 34.59503548,
+  "MCV": 84.14097441,
+  "MCH": 31.59917569,
+  "MCHC": 33.96669503,
+  "PLT": 181.3784904,
+  "LYM_percent": 27.9644778,
+  "MXD_percent": 5.655514519,
+  "NEUT_percent": 59.88602944,
+  "LYM_count": 1.278853921,
+  "MXD_count": 0.720538109,
+  "NEUT_count": 3.091900642,
+  "RDW_SD": 46.3281037,
+  "RDW_CV": 13.72417387,
+  "PDW": 13.06466122,
+  "MPV": 9.434200033,
+  "P_LCR": 39.28780352,
+  "PCT": 0.212335628
+}
+INFO:root:Received response from language model for blood_test_report_row_21.pdf
+INFO:root:Successfully processed blood_test_report_row_21.pdf
+INFO:root:Transforming results to list of dictionaries...
+INFO:root:Formatting date: 2016-04-30T00:00:00
+INFO:root:Formatted date: 30/04/16
+INFO:root:Processed result 0
+INFO:root:Formatting date: 2015-10-31T00:00:00
+INFO:root:Formatted date: 31/10/15
+INFO:root:Processed result 1
+INFO:root:Formatting date: 2016-10-31T00:00:00
+INFO:root:Formatted date: 31/10/16
+INFO:root:Processed result 2
+INFO:root:Formatting date: 2017-10-31T00:00:00
+INFO:root:Formatted date: 31/10/17
+INFO:root:Processed result 3
+INFO:root:Formatting date: 2017-04-30T00:00:00
+INFO:root:Formatted date: 30/04/17
+INFO:root:Processed result 4
+INFO:root:Formatting date: 2018-11-05T10:19:00
+INFO:root:Formatted date: 05/11/18
+INFO:root:Processed result 5
+INFO:root:Formatting date: 2018-10-29T10:20:00
+INFO:root:Formatted date: 29/10/18
+INFO:root:Processed result 6
+INFO:root:Formatting date: 2018-12-11T10:01:00
+INFO:root:Formatted date: 11/12/18
+INFO:root:Processed result 7
+INFO:root:Formatting date: 2018-04-30T00:00:00
+INFO:root:Formatted date: 30/04/18
+INFO:root:Processed result 8
+INFO:root:Formatting date: 2018-12-19T15:46:00
+INFO:root:Formatted date: 19/12/18
+INFO:root:Processed result 9
+INFO:root:Formatting date: 2019-09-01T11:24:00
+INFO:root:Formatted date: 01/09/19
+INFO:root:Processed result 10
+INFO:root:Formatting date: 2019-01-23T11:15:00
+INFO:root:Formatted date: 23/01/19
+INFO:root:Processed result 11
+INFO:root:Formatting date: 2020-01-23T13:25:00
+INFO:root:Formatted date: 23/01/20
+INFO:root:Processed result 12
+INFO:root:Formatting date: 2020-09-01T11:24:00
+INFO:root:Formatted date: 01/09/20
+INFO:root:Processed result 13
+INFO:root:Formatting date: 2019-06-02T10:32:00
+INFO:root:Formatted date: 02/06/19
+INFO:root:Processed result 14
+INFO:root:Formatting date: 2021-03-03T11:15:00
+INFO:root:Formatted date: 03/03/21
+INFO:root:Processed result 15
+INFO:root:Formatting date: 2021-09-30T14:45:00
+INFO:root:Formatted date: 30/09/21
+INFO:root:Processed result 16
+INFO:root:Formatting date: 2022-03-31T09:24:00
+INFO:root:Formatted date: 31/03/22
+INFO:root:Processed result 17
+INFO:root:Formatting date: 2023-01-31T10:30:00
+INFO:root:Formatted date: 31/01/23
+INFO:root:Processed result 18
+INFO:root:Formatting date: 2022-09-30T09:15:00
+INFO:root:Formatted date: 30/09/22
+INFO:root:Processed result 19
+INFO:root:Formatting date: 2024-07-07T10:30:00
+INFO:root:Formatted date: 07/07/24
+INFO:root:Processed result 20
+INFO:root:Formatting date: 2023-10-31T10:30:00
+INFO:root:Formatted date: 31/10/23
+INFO:root:Processed result 21
+INFO:root:List of dictionaries created with 22 items
+INFO:root:List of dictionaries transformation completed
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_17.pdf: {
+  "report_date": "2021-09-30T14:45:00",
+  "WBC": 4.025706787,
+  "RBC": 4.100595646,
+  "HGB": 14.93625833,
+  "HCT": 41.20333479,
+  "MCV": 91.12465557,
+  "MCH": 31.2815486,
+  "MCHC": 35.94843659,
+  "PLT": 362.7117913,
+  "LYM_percent": 23.88619277,
+  "MXD_percent": 8.111540264,
+  "NEUT_percent": 46.70474793,
+  "LYM_count": 1.24310739,
+  "MXD_count": 0.74340526,
+  "NEUT_count": 2.95718428,
+  "RDW_SD": 41.17145749,
+  "RDW_CV": 14.01869079,
+  "PDW": 12.86527322,
+  "MPV": 7.934540196,
+  "P_LCR": 19.06116558,
+  "PCT": 0.273312886
+}
+INFO:root:Received response from language model for blood_test_report_row_17.pdf
+INFO:root:Successfully processed blood_test_report_row_17.pdf
+INFO:root:Processing PDF: blood_test_report_row_18.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_18.pdf: Blood Test Report
+Date & Time: 31.03.2022  09:24
+WBC: 7.634310486
+RBC: 4.110071912
+HGB: 13.7975471
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_18.pdf: {
+  "report_date": "2022-03-31T09:24:00",
+  "WBC": 7.634310486,
+  "RBC": 4.110071912,
+  "HGB": 13.7975471,
+  "HCT": 38.58915616,
+  "MCV": 84.10469765,
+  "MCH": 31.9055489,
+  "MCHC": 35.20495261,
+  "PLT": 194.8849293,
+  "LYM_percent": 30.29018046,
+  "MXD_percent": 9.969490196,
+  "NEUT_percent": 64.88823484,
+  "LYM_count": 1.28637078,
+  "MXD_count": 0.6933137,
+  "NEUT_count": 3.14377735,
+  "RDW_SD": 46.24095076,
+  "RDW_CV": 12.79499642,
+  "PDW": 9.667014112,
+  "MPV": 9.775447203,
+  "P_LCR": 26.41639361,
+  "PCT": 0.233638791
+}
+INFO:root:Received response from language model for blood_test_report_row_18.pdf
+INFO:root:Successfully processed blood_test_report_row_18.pdf
+INFO:root:Processing PDF: blood_test_report_row_20.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_20.pdf: Blood Test Report
+Date & Time: 31.01.2023 10:30
+WBC: 8.468819741
+RBC: 3.855323174
+HGB: 13.50804629
+H...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_20.pdf: {
+  "report_date": "2023-01-31T10:30:00",
+  "WBC": 8.468819741,
+  "RBC": 3.855323174,
+  "HGB": 13.50804629,
+  "HCT": 37.15890157,
+  "MCV": 81.91019647,
+  "MCH": 27.74747496,
+  "MCHC": 34.82812084,
+  "PLT": 299.1818083,
+  "LYM_percent": 24.41432574,
+  "MXD_percent": 5.55877816,
+  "NEUT_percent": 49.18407447,
+  "LYM_count": 1.271468066,
+  "MXD_count": 0.712586656,
+  "NEUT_count": 3.118960367,
+  "RDW_SD": 42.76714719,
+  "RDW_CV": 11.55607662,
+  "PDW": 14.37659045,
+  "MPV": 9.487557311,
+  "P_LCR": 31.30943943,
+  "PCT": 0.227605816
+}
+INFO:root:Received response from language model for blood_test_report_row_20.pdf
+INFO:root:Successfully processed blood_test_report_row_20.pdf
+INFO:root:Processing PDF: blood_test_report_row_19.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_19.pdf: Blood Test Report
+Date & Time: 30.09.2022  09:15
+WBC: 4.233213472
+RBC: 4.073985983
+HGB: 13.953787
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_19.pdf: {
+  "report_date": "2022-09-30T09:15:00",
+  "WBC": 4.233213472,
+  "RBC": 4.073985983,
+  "HGB": 13.953787,
+  "HCT": 40.26498086,
+  "MCV": 94.87420454,
+  "MCH": 32.07039435,
+  "MCHC": 34.8921095,
+  "PLT": 235.7161512,
+  "LYM_percent": 21.02282761,
+  "MXD_percent": 5.463582305,
+  "NEUT_percent": 59.88535362,
+  "LYM_count": 1.30756305,
+  "MXD_count": 0.71577447,
+  "NEUT_count": 3.02592989,
+  "RDW_SD": 41.40853819,
+  "RDW_CV": 11.72172153,
+  "PDW": 11.55392026,
+  "MPV": 8.277844049,
+  "P_LCR": 17.74027101,
+  "PCT": 0.150503554
+}
+INFO:root:Received response from language model for blood_test_report_row_19.pdf
+INFO:root:Successfully processed blood_test_report_row_19.pdf
+INFO:root:Processing PDF: blood_test_report_row_22.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_22.pdf: Blood Test Report
+Date & Time: 07.07.2024 10:30
+WBC: 6.508916272
+RBC: 4.82922186
+HGB: 12.80287104
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_22.pdf: {
+  "report_date": "2024-07-07T10:30:00",
+  "WBC": 6.508916272,
+  "RBC": 4.82922186,
+  "HGB": 12.80287104,
+  "HCT": 40.92164783,
+  "MCV": 89.12862592,
+  "MCH": 31.31683028,
+  "MCHC": 34.18491255,
+  "PLT": 400.0450004,
+  "LYM_percent": 24.24132476,
+  "MXD_percent": 6.358956206,
+  "NEUT_percent": 71.74978602,
+  "LYM_count": 1.295392621,
+  "MXD_count": 0.729023681,
+  "NEUT_count": 3.049334125,
+  "RDW_SD": 38.22658205,
+  "RDW_CV": 13.69231849,
+  "PDW": 14.35171433,
+  "MPV": 9.652567631,
+  "P_LCR": 39.25792047,
+  "PCT": 0.241076591
+}
+INFO:root:Received response from language model for blood_test_report_row_22.pdf
+INFO:root:Successfully processed blood_test_report_row_22.pdf
+INFO:root:Processing PDF: blood_test_report_row_21.pdf
+INFO:root:Extracted text from PDF blood_test_report_row_21.pdf: Blood Test Report
+Date & Time: 31.10.2023 10:30
+WBC: 4.501161678
+RBC: 3.83401186
+HGB: 13.13844861
+HC...
+INFO:root:Sending prompt to language model...
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:LLM response for blood_test_report_row_21.pdf: {
+  "report_date": "2023-10-31T10:30:00",
+  "WBC": 4.501161678,
+  "RBC": 3.83401186,
+  "HGB": 13.13844861,
+  "HCT": 34.59503548,
+  "MCV": 84.14097441,
+  "MCH": 31.59917569,
+  "MCHC": 33.96669503,
+  "PLT": 181.3784904,
+  "LYM_percent": 27.9644778,
+  "MXD_percent": 5.655514519,
+  "NEUT_percent": 59.88602944,
+  "LYM_count": 1.278853921,
+  "MXD_count": 0.720538109,
+  "NEUT_count": 3.091900642,
+  "RDW_SD": 46.3281037,
+  "RDW_CV": 13.72417387,
+  "PDW": 13.06466122,
+  "MPV": 9.434200033,
+  "P_LCR": 39.28780352,
+  "PCT": 0.212335628
+}
+INFO:root:Received response from language model for blood_test_report_row_21.pdf
+INFO:root:Successfully processed blood_test_report_row_21.pdf
+INFO:root:Transforming results to list of dictionaries...
+INFO:root:Formatting date: 2016-04-30T00:00:00
+INFO:root:Formatted date: 30/04/16
+INFO:root:Processed result 0
+INFO:root:Formatting date: 2015-10-31T00:00:00
+INFO:root:Formatted date: 31/10/15
+INFO:root:Processed result 1
+INFO:root:Formatting date: 2016-10-31T00:00:00
+INFO:root:Formatted date: 31/10/16
+INFO:root:Processed result 2
+INFO:root:Formatting date: 2017-10-31T00:00:00
+INFO:root:Formatted date: 31/10/17
+INFO:root:Processed result 3
+INFO:root:Formatting date: 2017-04-30T00:00:00Z
+INFO:root:Formatted date: 30/04/17
+INFO:root:Processed result 4
+INFO:root:Formatting date: 2018-05-11T10:19:00
+INFO:root:Formatted date: 11/05/18
+INFO:root:Processed result 5
+INFO:root:Formatting date: 2018-10-29T10:20:00
+INFO:root:Formatted date: 29/10/18
+INFO:root:Processed result 6
+INFO:root:Formatting date: 2018-12-11T10:01:00
+INFO:root:Formatted date: 11/12/18
+INFO:root:Processed result 7
+INFO:root:Formatting date: 2018-04-30T00:00:00
+INFO:root:Formatted date: 30/04/18
+INFO:root:Processed result 8
+INFO:root:Formatting date: 2018-12-19T15:46:00
+INFO:root:Formatted date: 19/12/18
+INFO:root:Processed result 9
+INFO:root:Formatting date: 2019-09-01T11:24:00
+INFO:root:Formatted date: 01/09/19
+INFO:root:Processed result 10
+INFO:root:Formatting date: 2019-01-23T11:15:00
+INFO:root:Formatted date: 23/01/19
+INFO:root:Processed result 11
+INFO:root:Formatting date: 2020-01-23T13:25:00
+INFO:root:Formatted date: 23/01/20
+INFO:root:Processed result 12
+INFO:root:Formatting date: 2020-09-01T11:24:00
+INFO:root:Formatted date: 01/09/20
+INFO:root:Processed result 13
+INFO:root:Formatting date: 2019-06-02T10:32:00
+INFO:root:Formatted date: 02/06/19
+INFO:root:Processed result 14
+INFO:root:Formatting date: 2021-03-03T11:15:00
+INFO:root:Formatted date: 03/03/21
+INFO:root:Processed result 15
+INFO:root:Formatting date: 2021-09-30T14:45:00
+INFO:root:Formatted date: 30/09/21
+INFO:root:Processed result 16
+INFO:root:Formatting date: 2022-03-31T09:24:00
+INFO:root:Formatted date: 31/03/22
+INFO:root:Processed result 17
+INFO:root:Formatting date: 2023-01-31T10:30:00
+INFO:root:Formatted date: 31/01/23
+INFO:root:Processed result 18
+INFO:root:Formatting date: 2022-09-30T09:15:00
+INFO:root:Formatted date: 30/09/22
+INFO:root:Processed result 19
+INFO:root:Formatting date: 2024-07-07T10:30:00
+INFO:root:Formatted date: 07/07/24
+INFO:root:Processed result 20
+INFO:root:Formatting date: 2023-10-31T10:30:00
+INFO:root:Formatted date: 31/10/23
+INFO:root:Processed result 21
+INFO:root:List of dictionaries created with 22 items
+INFO:root:List of dictionaries transformation completed

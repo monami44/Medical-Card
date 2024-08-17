@@ -24,10 +24,10 @@ export const formatDate = (dateString: string) => {
 
 export const sortByDate = (data: BloodTestResult[]) => {
   return data.sort((a, b) => {
-    const dateA = new Date(a["Date & Time"].split(" ")[0].split(".").reverse().join("-"))
-    const dateB = new Date(b["Date & Time"].split(" ")[0].split(".").reverse().join("-"))
-    return dateA.getTime() - dateB.getTime() // Ascending order for line chart
-  })
+    const dateA = new Date(a.Date.split(".").reverse().join("-"));
+    const dateB = new Date(b.Date.split(".").reverse().join("-"));
+    return dateA.getTime() - dateB.getTime();
+  });
 }
 
 export const calculateQuantile = (value: number, min: number, max: number) => {
