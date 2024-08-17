@@ -33,7 +33,7 @@ export async function POST() {
     const processedData = JSON.parse(stdout);
     console.log('Processed data from Python script:', processedData);
 
-    // Encrypt the processed data
+    // Encrypt the processed data and raw attachments
     try {
       if (!processedData.bloodTestResults || processedData.bloodTestResults.length === 0) {
         console.log('No blood test results to encrypt');
@@ -43,9 +43,16 @@ export async function POST() {
       console.log('Encrypting blood test results:', JSON.stringify(processedData.bloodTestResults).substring(0, 200));
       const encryptedBloodTestResults = encryptData(JSON.stringify(processedData.bloodTestResults), user.encryptedUserKey);
 
+      const encryptedAttachments = processedData.rawAttachments.map(attachment => ({
+        filename: attachment.filename,
+        data: encryptData(attachment.data, user.encryptedUserKey),
+        testDate: attachment.testDate // Added this line
+      }));
+
       // Return the encrypted data to the client
       return NextResponse.json({
-        bloodTestResults: encryptedBloodTestResults
+        bloodTestResults: encryptedBloodTestResults,
+        rawAttachments: encryptedAttachments
       });
     } catch (encryptionError) {
       console.error('Encryption error:', encryptionError);

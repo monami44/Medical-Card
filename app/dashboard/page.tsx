@@ -12,7 +12,7 @@ import RadarChartComponent from '@/components/RadarChartComponent'
 import DateDropdown from '@/components/DateDropdown'
 import { CustomDot } from '@/components/CustomDot'
 import { useAuth } from '@clerk/nextjs'
-import { storeProcessedData, getBloodTestResults } from '@/utils/indexedDB'
+import { storeProcessedData, getBloodTestResults, getAttachments, storeAttachments } from '@/utils/indexedDB'
 
 
 
@@ -32,8 +32,9 @@ export default function Dashboard() {
         setLoading(true);
         // Try to get encrypted data from IndexedDB
         let encryptedData = await getBloodTestResults();
+        let storedAttachments = await getAttachments();
 
-        if (!encryptedData) {
+        if (!encryptedData || storedAttachments.length === 0) {
           // If not in IndexedDB, fetch from server
           const token = await getToken();
           const response = await fetch('/api/process-emails', {
@@ -43,8 +44,17 @@ export default function Dashboard() {
           if (!response.ok) throw new Error('Failed to fetch data');
           const result = await response.json();
           encryptedData = result.bloodTestResults;
-          // Store in IndexedDB for future use
+          // Store blood test results in IndexedDB
           await storeProcessedData(encryptedData);
+          // Store attachments in IndexedDB if they exist
+          if (result.rawAttachments) {
+            const attachmentsToStore = result.rawAttachments.map(attachment => ({
+              filename: attachment.filename,
+              data: attachment.data,
+              testDate: attachment.testDate
+            }));
+            await storeAttachments(attachmentsToStore);
+          }
         }
 
         // Decrypt the data

@@ -1,18 +1,20 @@
 import { BloodTestResult } from '@/types/BloodTestResult';
 import { normalRanges, NormalRangeKey } from '@/data/normalRanges';
-import Papa from 'papaparse';
 
 
-
-
-
-export const formatDate = (dateString: string) => {
-  let date;
-  if (dateString.includes("/")) {
-    const [day, month, year] = dateString.split("/")
-    date = new Date(2000 + parseInt(year), parseInt(month) - 1, parseInt(day))
+export const formatDate = (input: string | Date) => {
+  let date: Date;
+  if (input instanceof Date) {
+    date = input;
+  } else if (typeof input === 'string') {
+    if (input.includes("/")) {
+      const [day, month, year] = input.split("/")
+      date = new Date(2000 + parseInt(year), parseInt(month) - 1, parseInt(day))
+    } else {
+      date = new Date(input.split(" ")[0].split(".").reverse().join("-"))
+    }
   } else {
-    date = new Date(dateString.split(" ")[0].split(".").reverse().join("-"))
+    return "Invalid Date";
   }
 
   if (isNaN(date.getTime())) {

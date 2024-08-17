@@ -12,7 +12,7 @@ import json
 from datetime import datetime
 import sys
 import base64
-import tempfile
+import asyncio
 import traceback
 import logging
 
@@ -56,51 +56,6 @@ def search_emails(token):
     logging.info(f"Found {len(messages)} emails matching the search criteria")
     return messages
 
-def process_pdf(file_data, filename):
-    logging.info(f"Processing PDF: {filename}")
-    try:
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
-            temp_file.write(file_data)
-            temp_file_path = temp_file.name
-
-        document = fitz.open(temp_file_path)
-        text = ""
-        for page in document:
-            text += page.get_text()
-
-        logging.info(f"Extracted text from PDF {filename}: {text[:100]}...")  # Print first 100 characters
-
-        prompt = f"""
-        The following is a block of text extracted from a blood test report. Extract the relevant blood test results and the date of the report. Structure them according to the following schema:
-
-        {BloodTestResults.schema_json(indent=2)}
-
-        Please do not specify that data is in JSON format.
-
-        Text:
-        {text}
-
-        Structured Results:
-        """
-
-        logging.info("Sending prompt to language model...")
-        response = llm.invoke(prompt)
-        logging.info(f"LLM response for {filename}: {response.content}")
-        logging.info(f"Received response from language model for {filename}")
-
-        extracted_data = json.loads(response.content)
-        
-        for key, value in extracted_data.items():
-            if isinstance(value, bytes):
-                extracted_data[key] = value.decode('utf-8', errors='replace')
-
-        os.unlink(temp_file_path)  # Delete the temporary file
-        logging.info(f"Successfully processed {filename}")
-        return extracted_data
-    except Exception as e:
-        logging.error(f"An error occurred while processing the PDF {filename}: {e}")
-        return None
-
 def get_email_details(service, message_id):
     logging.info(f"Getting details for email {message_id}")
     try:
@@ -117,7 +72,7 @@ def get_email_details(service, message_id):
                 file_data = base64.urlsafe_b64decode(data.encode('UTF-8'))
                 attachments.append({
                     'filename': part['filename'],
-                    'data': file_data
+                    'data': base64.b64encode(file_data).decode('utf-8')  # Encode as base64 string
                 })
                 logging.info(f"Found attachment: {part['filename']}")
         logging.info(f"Retrieved {len(attachments)} attachments for email {message_id}")
@@ -212,20 +167,117 @@ def transform_results_to_list_of_dicts(results):
     logging.info("List of dictionaries transformation completed")
     return processed_data
 
+async def process_pdf(file_data, filename):
+    logging.info(f"Processing PDF: {filename}")
+    try:
+        # Process PDF data in memory
+        document = fitz.open(stream=file_data, filetype="pdf")
+        text = ""
+        for page in document:
+            text += page.get_text()
+
+        logging.info(f"Extracted text from PDF {filename}: {text[:100]}...")  # Print first 100 characters
+
+        prompt = f"""
+        The following is a block of text extracted from a blood test report. Extract the relevant blood test results and the date of the report. Structure them according to the following schema:
+
+        {BloodTestResults.schema_json(indent=2)}
+
+        Please do not specify that data is in JSON format.
+
+        Text:
+        {text}
+
+        Structured Results:
+        """
+
+        logging.info("Sending prompt to language model...")
+        response = llm.invoke(prompt)
+        logging.info(f"LLM response for {filename}: {response.content}")
+        logging.info(f"Received response from language model for {filename}")
+
+        extracted_data = json.loads(response.content)
+        
+        for key, value in extracted_data.items():
+            if isinstance(value, bytes):
+                extracted_data[key] = value.decode('utf-8', errors='replace')
+
+        logging.info(f"Successfully processed {filename}")
+        return extracted_data
+    except Exception as e:
+        logging.error(f"An error occurred while processing the PDF {filename}: {e}")
+        return None
+
+async def process_attachments():
+    tasks = []
+    for attachment in email_attachments:
+        task = process_pdf(base64.b64decode(attachment['data']), attachment['filename'])
+        tasks.append(task)
+    processed_pdfs = await asyncio.gather(*tasks)
+    
+    for i, attachment in enumerate(email_attachments):
+        raw_attachments.append({
+            'filename': attachment['filename'],
+            'data': attachment['data'],
+            'testDate': processed_pdfs[i].get('report_date') if processed_pdfs[i] else None
+        })
+    return processed_pdfs
+
+async def process_single_file(file_data, filename):
+    logging.info(f"Processing single file: {filename}")
+    try:
+        processed_pdf = await process_pdf(file_data, filename)
+        if processed_pdf:
+            raw_attachment = {
+                'filename': filename,
+                'data': base64.b64encode(file_data).decode('utf-8'),
+                'testDate': processed_pdf.get('report_date')
+            }
+            return [processed_pdf], [raw_attachment]
+        return [], []
+    except Exception as e:
+        logging.error(f"An error occurred while processing the file {filename}: {e}")
+        return [], []
+
 # Main execution
 if __name__ == "__main__":
     try:
-        token = fetch_gmail_token()
-        if token:
-            email_attachments = search_and_retrieve_emails(token)
-            results = []
-            for attachment in email_attachments:
-                result = process_pdf(attachment['data'], attachment['filename'])
-                if result:
-                    results.append(result)
-            processed_results = transform_results_to_list_of_dicts(results)
-            print(json.dumps({"bloodTestResults": processed_results}))
+        if len(sys.argv) > 2:  # Check if file data is provided as an argument
+            # Single file processing
+            filename = sys.argv[1]
+            file_data = base64.b64decode(sys.argv[2])
+            
+            loop = asyncio.get_event_loop()
+            processed_pdf = loop.run_until_complete(process_pdf(file_data, filename))
+            
+            if processed_pdf:
+                results = [processed_pdf]
+                raw_attachments = [{
+                    'filename': filename,
+                    'data': base64.b64encode(file_data).decode('utf-8'),
+                    'testDate': processed_pdf.get('report_date')
+                }]
+            else:
+                results = []
+                raw_attachments = []
         else:
-            print(json.dumps({"error": "No valid token available.", "bloodTestResults": []}))
+            # Email processing (existing code)
+            token = fetch_gmail_token()
+            if not token:
+                raise ValueError("No valid token available.")
+            email_attachments = search_and_retrieve_emails(token)
+            raw_attachments = []
+            
+            loop = asyncio.get_event_loop()
+            processed_pdfs = loop.run_until_complete(process_attachments())
+            
+            results = [pdf for pdf in processed_pdfs if pdf is not None]
+        
+        processed_results = transform_results_to_list_of_dicts(results)
+        
+        print(json.dumps({
+            "bloodTestResults": processed_results,
+            "rawAttachments": raw_attachments
+        }))
     except Exception as e:
-        print(json.dumps({"error": str(e), "bloodTestResults": []}))
+        print(json.dumps({"error": str(e), "bloodTestResults": [], "rawAttachments": []}))

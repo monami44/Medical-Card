@@ -26,6 +26,9 @@ const Header: React.FC = async () => {
         )}
         {userId && (
           <>
+            <Link href="/my-data" className="text-black hover:text-gray-700">
+              My Data
+            </Link>
             <Link href="/profile" className="text-black hover:text-gray-700">
               Profile
             </Link>
