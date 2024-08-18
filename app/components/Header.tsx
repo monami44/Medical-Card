@@ -1,10 +1,17 @@
+"use client";
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { UserButton, auth } from '@clerk/nextjs';
+import { UserButton, useAuth } from '@clerk/nextjs';
+import { usePathname } from 'next/navigation';
 
-const Header: React.FC = async () => {
-  const { userId } = await auth();
+const Header: React.FC = () => {
+  const { userId, isLoaded } = useAuth();
+  const pathname = usePathname();
+
+  if (!isLoaded) {
+    return null; // or a loading spinner
+  }
 
   return (
     <header className="p-5 flex justify-between items-center bg-white shadow-sm">
@@ -26,9 +33,15 @@ const Header: React.FC = async () => {
         )}
         {userId && (
           <>
-            <Link href="/my-data" className="text-black hover:text-gray-700">
-              My Data
-            </Link>
+            {pathname === '/dashboard' ? (
+              <Link href="/my-data" className="text-black hover:text-gray-700">
+                My Data
+              </Link>
+            ) : (
+              <Link href="/dashboard" className="text-black hover:text-gray-700">
+                Dashboard
+              </Link>
+            )}
             <Link href="/profile" className="text-black hover:text-gray-700">
               Profile
             </Link>

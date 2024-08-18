@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Button } from "@/lib/components/ui/button";
 import { storeProcessedData, storeAttachments } from '@/utils/indexedDB';
+import { getBloodTestResults } from '@/utils/indexedDB';
 
 interface FileUploadProps {
   onFileUpload?: (file: File) => void;
@@ -16,6 +17,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload, onUploadComplete 
       formData.append('file', file);
 
       try {
+        // Fetch existing encrypted data from IndexedDB
+        const existingEncryptedData = await getBloodTestResults();
+        formData.append('existingData', existingEncryptedData || '');
+
         const response = await fetch('/api/process-upload', {
           method: 'POST',
           body: formData,
@@ -27,13 +32,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload, onUploadComplete 
 
         const result = await response.json();
 
+        // Store the new combined encrypted data
+        await storeProcessedData(result.bloodTestResults);
+
         // Store only the new attachments
         await storeAttachments(result.rawAttachments);
-
-        // Store the new blood test results
-        if (result.bloodTestResults) {
-          await storeProcessedData(result.bloodTestResults);
-        }
 
         onUploadComplete();
       } catch (error) {
