@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^4.31.3",
     "@clerk/themes": "^1.7.17",
     "@prisma/client": "^5.16.2",
+    "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@supabase/supabase-js": "^2.44.3",

@@ -10,6 +10,7 @@ export default authMiddleware({
     '/api/hello',
     '/api/users',
     '/api/gmail',
+    '/api/chat',
   ] as const,
 });
 

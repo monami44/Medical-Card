@@ -2,25 +2,36 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// Update the datasource to use PostgreSQL with Supabase
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL") // Connection URL for general queries with connection pooling
-  directUrl = env("DIRECT_URL")   // Direct connection URL for migrations
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-// Define your models here
 model User {
-  id          BigInt   @id @default(autoincrement()) @db.BigInt
-  email       String   @unique
-  gmailAccessToken String @unique   // New field for storing the Gmail access token
-  firstName   String?  // Ensure this is optional in your DB
-  lastName    String?  // Ensure this is optional in your DB
-  imageUrl    String?  // Ensure this is optional in your DB
-  clerkUserId String   @unique
+  id               BigInt    @id @default(autoincrement())
+  email            String    @unique
+  gmailAccessToken String    @unique
+  firstName        String?
+  lastName         String?
+  imageUrl         String?
+  clerkUserId      String    @unique
   encryptedUserKey String
-  createdAt   DateTime @default(now()) @db.Timestamptz
-  updatedAt   DateTime @updatedAt @db.Timestamptz
-  deletedAt   DateTime? @db.Timestamptz
+  createdAt        DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime  @updatedAt @db.Timestamptz(6)
+  deletedAt        DateTime? @db.Timestamptz(6)
 }
 
+model BloodTestData {
+  id          BigInt                 @id @default(autoincrement())
+  clerkUserId String?
+  content     String
+  embedding   Unsupported("vector")?
+  metadata    Json?
+  accessType  String?                @default("user")
+  createdAt   DateTime?              @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime?              @default(now()) @updatedAt @db.Timestamptz(6)
+
+  @@index([clerkUserId])
+  @@index([accessType])
+}
