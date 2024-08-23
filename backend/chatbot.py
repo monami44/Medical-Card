@@ -170,9 +170,9 @@ class MedicalChatbot:
         
         self.blood_test_results = load_user_data(clerk_user_id, blood_test_results)
         if self.blood_test_results:
-            logging.info(f"Loaded {len(self.blood_test_results)} blood test results")
+            logging.info(f"Loaded {len(self.blood_test_results)} blood test results from email/file")
         else:
-            logging.info("No blood test results available")
+            logging.info("No blood test results available from email/file")
 
         existing_conversation = retrieve_conversation(clerk_user_id)
         if existing_conversation:
@@ -192,9 +192,9 @@ class MedicalChatbot:
         template = """
         You are a medical assistant specializing in blood test analysis. Use the following pieces of context, the patient's blood test results, and the conversation history to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 
-        Context: {context}
+        Context from database: {context}
 
-        Patient's Blood Test Results:
+        Patient's Blood Test Results from email/file:
         {blood_test_results}
 
         Conversation History:
@@ -213,7 +213,7 @@ class MedicalChatbot:
             {
                 "context": lambda x: retrieval_chain.invoke({"input": x["question"]})["answer"],
                 "question": lambda x: x["question"],
-                "blood_test_results": lambda x: json.dumps(self.blood_test_results, indent=2) if self.blood_test_results else "No blood test results available",
+                "blood_test_results": lambda x: json.dumps(self.blood_test_results, indent=2) if self.blood_test_results else "No blood test results available from email/file",
                 "history": lambda x: self.get_conversation_history(),
             }
             | self.prompt
@@ -230,10 +230,8 @@ class MedicalChatbot:
     def process_message(self, message: str) -> str:
         logging.info(f"Processing message: {message}")
         try:
-            blood_test_results_str = json.dumps(self.blood_test_results, indent=2) if self.blood_test_results else "No blood test results available"
             response = self.qa_chain.invoke({
                 "question": message,
-                "blood_test_results": blood_test_results_str
             })
             logging.info(f"Generated response: {response[:100]}...")  # Log first 100 chars
             

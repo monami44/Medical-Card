@@ -32,7 +32,7 @@ def chunk_and_embed_reference_book(text: str) -> List[Dict]:
     chunks = openai_text_splitter.create_documents([text])
     
     embedded_chunks = []
-    for i, chunk in enumerate(chunks):
+    for chunk in chunks:
         vector = hf_embeddings.embed_query(chunk.page_content)
         embedded_chunks.append({
             "content": chunk.page_content,
@@ -43,7 +43,7 @@ def chunk_and_embed_reference_book(text: str) -> List[Dict]:
     
     return embedded_chunks
 
-def upsert_to_db(chunks: List[Dict]):
+def insert_to_db(chunks: List[Dict]):
     current_time = datetime.utcnow().isoformat()
     for chunk in chunks:
         chunk["createdAt"] = current_time
@@ -52,10 +52,10 @@ def upsert_to_db(chunks: List[Dict]):
             chunk["embedding"] = chunk["embedding"].tolist() if hasattr(chunk["embedding"], "tolist") else chunk["embedding"]
     
     try:
-        response = supabase.table("BloodTestData").upsert(chunks).execute()
-        logging.info(f"Upserted {len(chunks)} chunks successfully")
+        supabase.table("BloodTestData").insert(chunks).execute()
+        logging.info(f"Inserted {len(chunks)} chunks successfully")
     except Exception as e:
-        logging.error(f"Error during upsert: {str(e)}")
+        logging.error(f"Error during insert: {str(e)}")
         raise
 
 def load_reference_book(file_path: str):
@@ -73,7 +73,8 @@ def load_reference_book(file_path: str):
         
         # Chunk and embed the content
         chunks = chunk_and_embed_reference_book(content)
-        upsert_to_db(chunks)
+        
+        insert_to_db(chunks)
         logging.info(f"Reference book loaded and stored. Created {len(chunks)} chunks.")
     except Exception as e:
         logging.error(f"Error loading PDF: {str(e)}")

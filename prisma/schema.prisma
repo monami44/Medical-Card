@@ -23,14 +23,14 @@ model User {
 }
 
 model BloodTestData {
-  id          BigInt                 @id @default(autoincrement())
+  id          BigInt   @id @default(autoincrement())
   clerkUserId String?
   content     String
-  embedding   Unsupported("vector")?
+  embedding   Unsupported("vector(384)")
   metadata    Json?
-  accessType  String?                @default("user")
-  createdAt   DateTime?              @default(now()) @db.Timestamptz(6)
-  updatedAt   DateTime?              @default(now()) @updatedAt @db.Timestamptz(6)
+  accessType  String   @default("user")
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime @default(now()) @updatedAt @db.Timestamptz(6)
 
   @@index([clerkUserId])
   @@index([accessType])

@@ -49,7 +49,6 @@ def upsert_to_db(chunks: List[Dict], clerk_user_id: str):
         chunk["updatedAt"] = current_time
     try:
         supabase.table("BloodTestData").upsert(chunks).execute()
-        print(f"Successfully upserted {len(chunks)} chunks to BloodTestData")
     except Exception as e:
         print(f"Error upserting to BloodTestData: {str(e)}")
 
@@ -57,7 +56,6 @@ def load_conversation_history(conversation: List[Dict], clerk_user_id: str):
     try:
         embedded_messages = [embed_conversation_message(message) for message in conversation]
         upsert_to_db(embedded_messages, clerk_user_id)
-        print(f"Conversation history loaded and stored. Processed {len(embedded_messages)} messages.")
     except Exception as e:
         print(f"Error loading conversation history: {str(e)}")
 

@@ -47,20 +47,15 @@ const ChatPage: React.FC = () => {
         }
 
         const data = await response.json();
-        if (data.error) {
-          throw new Error(data.error);
-        }
-        
-        const botResponse = data.message.trim();
         setMessages((prevMessages) => [
           ...prevMessages,
-          { content: botResponse, type: 'bot' },
+          { content: data.message, type: 'bot' },
         ]);
       } catch (error) {
         console.error('Error sending message:', error);
         setMessages((prevMessages) => [
           ...prevMessages,
-          { content: `Error: ${error.message}. Please try again.`, type: 'bot' },
+          { content: 'Sorry, there was an error processing your message.', type: 'bot' },
         ]);
       } finally {
         setIsLoading(false);
@@ -82,27 +77,24 @@ const ChatPage: React.FC = () => {
       <div className="bg-red-600 p-4 text-white font-bold text-xl">
         Medical Chatbot
       </div>
-      <ScrollArea className="flex-grow px-4">
-        <div className="py-4 space-y-4">
-          {messages.map((message, index) => (
-            <div key={index} className={`flex ${
-              message.type === 'user' ? 'justify-end' : 'justify-start'
-            }`}>
-              <div className={`max-w-[70%] p-3 rounded-lg ${
-                message.type === 'user' ? 'bg-red-100' : 'bg-gray-200'
+      <div className="flex-grow overflow-hidden">
+        <ScrollArea className="h-full px-4">
+          <div className="py-4 space-y-4">
+            {messages.map((message, index) => (
+              <div key={index} className={`flex ${
+                message.type === 'user' ? 'justify-end' : 'justify-start'
               }`}>
-                {message.content.split('\n').map((line, i) => (
-                  <React.Fragment key={i}>
-                    {line}
-                    {i < message.content.split('\n').length - 1 && <br />}
-                  </React.Fragment>
-                ))}
+                <div className={`max-w-[70%] p-3 rounded-lg ${
+                  message.type === 'user' ? 'bg-red-100' : 'bg-gray-200'
+                }`}>
+                  {message.content}
+                </div>
               </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-      </ScrollArea>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        </ScrollArea>
+      </div>
       <div className="p-4 border-t bg-white">
         <form onSubmit={sendMessage} className="flex space-x-2">
           <Input
