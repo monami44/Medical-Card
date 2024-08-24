@@ -253,6 +253,23 @@ class MedicalChatbot:
             error_message = "I'm sorry, but I encountered an error while processing your message. Please try again later."
             return error_message  # Return the error message instead of printing it
 
+    def generate_health_analysis(self) -> str:
+        logging.info("Generating health analysis")
+        try:
+            analysis_prompt = """
+            Using the provided blood test results {blood_test_results}, analyze each parameter and assess the overall health condition of the user. Compare the most recent blood test results with the previous two to evaluate the progression of each parameter. Identify any values that fall outside the normal reference range and highlight any concerning trends or significant changes over time. If any parameters show an anomaly, deteriorating trend, or critical value that may indicate a potential health risk, recommend that the user consult a healthcare professional. Please use the context provided in {context} to consider any relevant medical history or conditions that might influence the interpretation of the results.
+            """
+            
+            response = self.qa_chain.invoke({
+                "question": analysis_prompt,
+            })
+            logging.info(f"Generated health analysis: {response[:100]}...")  # Log first 100 chars
+            return response
+        except Exception as e:
+            logging.error(f"Error generating health analysis: {e}")
+            error_message = "I'm sorry, but I encountered an error while generating the health analysis. Please try again later."
+            return error_message
+
 def get_blood_test_results(clerk_user_id):
     try:
         # Run the get_email.py script and capture its output
@@ -278,9 +295,10 @@ def main():
         sys.exit(1)
 
     clerk_user_id = sys.argv[1]
-    user_question = sys.argv[2]
+    request_type = sys.argv[2]
 
-    # Get blood test results from get_email.py
+    logging.info(f"Request type: {request_type}")
+
     blood_test_results = get_blood_test_results(clerk_user_id)
 
     try:
@@ -288,9 +306,16 @@ def main():
         chatbot = MedicalChatbot(clerk_user_id, blood_test_results)
         logging.info("Medical Chatbot initialized successfully")
 
-        # Process the user's question and print the response
-        response = chatbot.process_message(user_question)
-        print(response)  # This will be captured by the API route
+        if request_type == "health_analysis":
+            logging.info("Generating health analysis")
+            response = chatbot.generate_health_analysis()
+            logging.info("Health analysis generated")
+        else:
+            user_question = " ".join(sys.argv[2:])
+            logging.info(f"Processing user question: {user_question}")
+            response = chatbot.process_message(user_question)
+
+        print(f"HEALTH_ANALYSIS_START\n{response}\nHEALTH_ANALYSIS_END")
     except Exception as e:
         logging.error(f"Error in main execution: {e}")
         print(f"An error occurred: {e}")

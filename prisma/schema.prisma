@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DIRECT_URL")
 }
 
 model User {
@@ -34,4 +33,13 @@ model BloodTestData {
 
   @@index([clerkUserId])
   @@index([accessType])
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  userId      String
+  status      String
+  result      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
